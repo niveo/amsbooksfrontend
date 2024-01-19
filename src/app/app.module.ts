@@ -31,6 +31,8 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { LivroModule } from './pages/livro/livro.module';
 
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { TagModule } from './pages/tag/tag.module';
+import { CategoriaModule } from './pages/categoria/categoria.module';
 
 
 registerLocaleData(pt);
@@ -59,6 +61,8 @@ registerLocaleData(en);
     NzLayoutModule,
 
     LivroModule,
+    TagModule,
+    CategoriaModule,
 
     AuthModule.forRoot({
       ...environment.auth,

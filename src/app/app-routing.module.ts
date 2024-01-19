@@ -15,10 +15,10 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/livro',
+    redirectTo: '/livros',
   },
   {
-    path: 'livro',
+    path: 'livros',
     loadChildren: () =>
       import('./pages/livro/livro.module').then((m) => m.LivroModule),
     data: { preload: true },
