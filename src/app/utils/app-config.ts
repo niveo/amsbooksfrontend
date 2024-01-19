@@ -8,8 +8,7 @@ export interface IConfigToken {
   imageKitUrlEndPoint: string;
   imageKitAuthenticationEndpoint: string;
 
-  imageKitUrlEndPointCatalogo: string;
-  imageKitUrlEndPointCatalogos: string;
+  imageKitUrlEndPointLivros: string; 
 }
 export const APP_CONFIG = new InjectionToken<IConfigToken>(
   'Application config'

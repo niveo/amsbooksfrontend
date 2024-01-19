@@ -15,8 +15,13 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    console.log(this.conf.apiUri + req.url);
+
+    let userid = sessionStorage.getItem('USER_ID');
+
     const dupReq = req.clone({
-      setHeaders: { userid: sessionStorage.getItem('USER_ID') },
+      url: this.conf.apiUri + req.url,
+      //setHeaders: { userid: userid  },
     });
     return next.handle(dupReq);
   }

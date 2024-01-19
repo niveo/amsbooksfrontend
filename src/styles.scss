@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
-.fx-display-flex {
+.fx-d-flex {
   @include fx-border-box;
   display: flex;
 }
@@ -19,12 +19,12 @@
 }
 
 .fx-row {
-  @extend .fx-display-flex;
+  @extend .fx-d-flex;
   flex-direction: row;
 }
 
 .fx-column {
-  @extend .fx-display-flex;
+  @extend .fx-d-flex;
   flex-direction: column;
 }
 
@@ -33,7 +33,7 @@
   //flex: 1 1 0%;
   flex: 1 1 1e-9px;
 }
-
+ 
 .fx-aic {
   align-items: center;
 }

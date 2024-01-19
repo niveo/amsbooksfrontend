@@ -14,8 +14,14 @@ import { ErrorComponent } from './pages/error/error.component';
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
     pathMatch: 'full',
+    redirectTo: '/livro',
+  },
+  {
+    path: 'livro',
+    loadChildren: () =>
+      import('./pages/livro/livro.module').then((m) => m.LivroModule),
+    data: { preload: true },
   },
   {
     path: 'error',

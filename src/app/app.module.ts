@@ -5,9 +5,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { pt_BR, en_US, NZ_I18N } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import pt from '@angular/common/locales/pt';
 import en from '@angular/common/locales/en';
+
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,6 +23,15 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
 import { HttpsRequestInterceptor } from './interceptors/requests.interceptor';
 import { APP_CONFIG } from './utils/app-config';
+import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
+import { DEFAULT_TIMEOUT } from './common/tokens';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { LivroModule } from './pages/livro/livro.module';
+
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+
 
 registerLocaleData(pt);
 registerLocaleData(en);
@@ -37,11 +47,18 @@ registerLocaleData(en);
     FontAwesomeModule,
     ErrorComponent,
     PageNotFoundComponent,
+    CommonModule,
 
     NzMenuModule,
     NzButtonModule,
     NzAvatarModule,
     NzToolTipModule,
+    NzListModule,
+    NzCardModule,
+    NzGridModule,
+    NzLayoutModule,
+
+    LivroModule,
 
     AuthModule.forRoot({
       ...environment.auth,
@@ -52,6 +69,7 @@ registerLocaleData(en);
   ],
   providers: [
     { provide: APP_CONFIG, useValue: environment },
+    { provide: DEFAULT_TIMEOUT, useValue: 30000 },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,
@@ -62,10 +80,12 @@ registerLocaleData(en);
       useClass: HttpsRequestInterceptor,
       multi: true,
     },
+    { provide: HTTP_INTERCEPTORS, useClass: TimeoutInterceptor, multi: true },
     {
       provide: Window,
       useValue: window,
     },
+    { provide: LOCALE_ID, useValue: 'en_US' },
     {
       provide: NZ_I18N,
       useFactory: () => {
