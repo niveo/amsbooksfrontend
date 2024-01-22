@@ -3,15 +3,15 @@
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item (click)="visualizarPage('livros')">
-        <fa-icon [icon]="faBook"></fa-icon>
+        <span nz-icon nzType="book" nzTheme="outline"></span>
         <span>Livros</span>
       </li>
-      <li nz-menu-item (click)="visualizarPage('categorias')"> 
-        <fa-icon [icon]="faList"></fa-icon>
+      <li nz-menu-item (click)="visualizarPage('categorias')">
+        <span nz-icon nzType="unordered-list" nzTheme="outline"></span>
         <span>Categorias</span>
       </li>
-      <li nz-menu-item (click)="visualizarPage('tags')"> 
-        <fa-icon [icon]="faTags"></fa-icon>
+      <li nz-menu-item (click)="visualizarPage('tags')">
+        <span nz-icon nzType="tags" nzTheme="outline"></span>
         <span>Tags</span>
       </li>
     </ul>

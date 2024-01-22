@@ -1,27 +1,27 @@
-<nz-list nzGrid style="width: 100%">
-  <div nz-row [nzGutter]="16">
-    @for(livro of livros$ | async; track livro.id){
-    <div nz-col>
-      <nz-list-item>
-        <nz-card
-          style="width: 100%"
-          class="pd-5"
-          nzHoverable
-          [nzCover]="coverTemplate"
-          (click)="detalharLivro(livro)"
-        >
-          <nz-card-meta
-            [nzTitle]="livro.titulo"
-            [nzDescription]="livro.autor"
-          ></nz-card-meta>
-        </nz-card>
-        <ng-template #coverTemplate>
-          <div class="fx-w fx-d-flex" style="justify-content: center">
-            <imagem-component [src]="livro.capaUrl" />
-          </div>
-        </ng-template>
-      </nz-list-item>
+<div class="ovh wf">
+  <nz-list nzGrid class="wf">
+    <div nz-row [nzGutter]="16">
+      <div nz-col *cdkVirtualFor="let livro of livros$ | async">
+        <nz-list-item>
+          <nz-card
+            class="pd-5 wf"
+            nzHoverable
+            [nzCover]="coverTemplate"
+            (click)="detalharLivro(livro)"
+          >
+            <nz-card-meta
+              [nzTitle]="livro.titulo"
+              [nzDescription]="livro.autor"
+            ></nz-card-meta>
+            {{ livro.id }}
+          </nz-card>
+          <ng-template #coverTemplate>
+            <div class="fx-w fx-d-flex" style="justify-content: center">
+              <imagem-component [src]="livro.capaUrl" />
+            </div>
+          </ng-template>
+        </nz-list-item>
+      </div>
     </div>
-    }
-  </div>
-</nz-list>
+  </nz-list>
+</div>

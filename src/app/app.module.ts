@@ -12,8 +12,6 @@ import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './pages/home/home.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ErrorComponent } from './pages/error/error.component';
 import { PageNotFoundComponent } from './pages/notfound/page-not-found.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -33,24 +31,30 @@ import { LivroModule } from './pages/livro/livro.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { TagModule } from './pages/tag/tag.module';
 import { CategoriaModule } from './pages/categoria/categoria.module';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
+import {
+  BookOutline,
+  UnorderedListOutline,
+  TagsOutline
+} from '@ant-design/icons-angular/icons';
 
 registerLocaleData(pt);
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FontAwesomeModule,
     ErrorComponent,
     PageNotFoundComponent,
     CommonModule,
 
+    NzIconModule.forRoot([BookOutline, UnorderedListOutline, TagsOutline]),
     NzMenuModule,
     NzButtonModule,
     NzAvatarModule,

@@ -13,10 +13,11 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NivelLeituraPipe } from 'src/app/pipes';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
-  declarations: [LivroListaComponent, LivroDetalheComponent],
-  exports: [LivroListaComponent],
+  declarations: [LivroListaComponent, LivroDetalheComponent ],
+  exports: [],
   imports: [
     CommonModule,
     NzListModule,

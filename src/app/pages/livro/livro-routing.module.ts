@@ -19,6 +19,7 @@ const lisvroDetalheResolver: ResolveFn<any> = (
   );
 };
 
+
 const routes: Routes = [
   {
     path: '',

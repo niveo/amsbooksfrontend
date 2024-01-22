@@ -14,6 +14,17 @@ export class LivroService {
     return this.http.get<any[]>('/livros').pipe(catchError(handleError));
   }
 
+  getAll2(pageSize, page) {
+    return this.http
+      .get<any[]>('/livros', {
+        params: {
+          pagesize: pageSize,
+          page: page
+        },
+      })
+      .pipe(catchError(handleError));
+  }
+
   getLivroDetalhe(id: number) {
     return this.http.get<any>('/livros/' + id).pipe(catchError(handleError));
   }
