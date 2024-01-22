@@ -1,15 +1,7 @@
 <nz-list nzGrid style="width: 100%">
   <div nz-row [nzGutter]="16">
     @for(livro of livros$ | async; track livro.id){
-    <div
-      nz-col
-      [nzXXl]="8"
-      [nzXl]="4"
-      [nzLg]="6"
-      [nzMd]="6"
-      [nzSm]="12"
-      [nzXs]="24"
-    >
+    <div nz-col>
       <nz-list-item>
         <nz-card
           style="width: 100%"
@@ -24,16 +16,8 @@
           ></nz-card-meta>
         </nz-card>
         <ng-template #coverTemplate>
-          <div class="fx-w fx-d-flex" style="justify-content: center;">
-            <imagem-component
-              [src]="
-                config.imageKitUrlEndPointLivros +
-                'livros' +
-                '/' +
-                livro.id +
-                '.jpg'
-              "
-            />
+          <div class="fx-w fx-d-flex" style="justify-content: center">
+            <imagem-component [src]="livro.capaUrl" />
           </div>
         </ng-template>
       </nz-list-item>

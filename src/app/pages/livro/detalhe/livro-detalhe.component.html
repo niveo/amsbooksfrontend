@@ -1,40 +1,48 @@
-<div class="fx-row">
-  <div>
-    <imagem-component
-      [src]="
-        config.imageKitUrlEndPointLivros + 'livros' + '/' + livro.id + '.jpg'
-      "
-    />
-  </div>
-  <div class="fx-column fx-flex pd-10">
-    <h1>
-      {{ livro.titulo }}
-    </h1>
-    <div class="fx-row" style="align-items: center;">
-      @if(livro.categoria){
+<div class="fx-column">
+  <nz-page-header
+    class="site-page-header"
+    (nzBack)="onBack()"
+    nzBackIcon
+    [nzTitle]="livro.titulo"
+    [nzSubtitle]="livro.autor.nome"
+    [nzBackIcon]="tplIconBack"
+  ></nz-page-header>
+
+  <ng-template #tplIconBack>
+    <fa-icon [icon]="faArrowLeft"></fa-icon>
+  </ng-template>
+
+  <div class="fx-row fx-flex">
+    <div>
+      <imagem-component [src]="livro.capaUrl" />
+    </div>
+    <div class="fx-column fx-flex pd-10">
+      <div class="fx-row" style="align-items: center">
+        @if(livro.categoria){
         <button nz-button nzSize="large" nzType="dashed">
           {{ livro.categoria?.nome }}
         </button>
-      }
-      <div class="fx-flex"></div>
-      <div class="fx-row gap-5">
-        <span>Idioma: </span>
-        {{ livro.idioma?.nome }}
-      </div>
-    </div>
-    <p>
-      {{ livro.descritivo }}
-    </p>
-    @if(livro.tags){
-    <div>
-      <div class="fx-row wf" style="flex-wrap: wrap">
-        @for(tag of livro.tags; track tag.id){
-        <nz-tag nzMode="checkable" (click)="visualizarLivrosTag(tag)">{{
-          tag.nome
-        }}</nz-tag>
         }
+        <div class="fx-flex"></div>
+        <div class="fx-row gap-5">
+          <span>Idioma: </span>
+          {{ livro.idioma?.nome }}
+        </div>
       </div>
+      <p>
+        {{ livro.descritivo }}
+      </p>
+      @if(livro.tags){
+      <div>
+        <div class="fx-row wf" style="flex-wrap: wrap">
+          @for(tag of livro.tags; track tag.id){
+          <nz-tag nzMode="checkable" (click)="visualizarLivrosTag(tag)">{{
+            tag.nome
+          }}</nz-tag>
+          }
+        </div>
+      </div>
+      }
     </div>
-    }
   </div>
 </div>

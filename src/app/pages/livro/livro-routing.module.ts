@@ -25,7 +25,7 @@ const routes: Routes = [
     component: LivroListaComponent,
   },
   {
-    path: 'detalhe/:id',
+    path: ':id',
     component: LivroDetalheComponent,
     resolve: {
       data: lisvroDetalheResolver,

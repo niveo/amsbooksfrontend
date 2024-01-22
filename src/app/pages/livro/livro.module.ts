@@ -11,6 +11,8 @@ import { LivroDetalheComponent } from './detalhe/livro-detalhe.component';
 import { ImagemComponent } from 'src/app/componentes/imagem.component';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NivelLeituraPipe } from 'src/app/pipes';
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [LivroListaComponent, LivroDetalheComponent],
@@ -23,9 +25,11 @@ import { NivelLeituraPipe } from 'src/app/pipes';
     NzTagModule,
     NzToolTipModule,
     NzButtonModule,
+    FontAwesomeModule,
     ImagemComponent,
     LivroRoutingModule,
     NivelLeituraPipe,
+    NzPageHeaderModule
   ],
 })
 export class LivroModule {}

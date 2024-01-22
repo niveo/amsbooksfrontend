@@ -23,6 +23,6 @@ export class LivroListaComponent implements OnInit {
   }
 
   detalharLivro(livro) {
-    this.router.navigate(['livro/detalhe/' + livro.id]);
+    this.router.navigate(['livros/' + livro.id]);
   }
 }
