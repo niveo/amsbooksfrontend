@@ -7,6 +7,7 @@ import { ROTA_LIVROS } from 'src/app/common/constantes';
 @Component({
   selector: 'app-livro-detalhe-component',
   templateUrl: './livro-detalhe.component.html',
+  styleUrl: './livro-detalhe.component.scss',
 })
 export class LivroDetalheComponent {
   livro: any;

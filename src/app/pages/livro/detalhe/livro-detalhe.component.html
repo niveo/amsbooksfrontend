@@ -4,11 +4,8 @@
     (nzBack)="onBack()"
     nzBackIcon
     [nzTitle]="livro.titulo"
-    [nzSubtitle]="livro.autor.nome" 
+    [nzSubtitle]="livro.autor.nome"
   ></nz-page-header>
-
- 
-
   <div class="fx-row fx-flex">
     <div>
       <imagem-component [src]="livro.capaUrl" />
@@ -16,7 +13,12 @@
     <div class="fx-column fx-flex pd-10">
       <div class="fx-row" style="align-items: center">
         @if(livro.categoria){
-        <button nz-button nzSize="large" nzType="dashed" (click)="visualizarLivrosCategoria(livro.categoria)">
+        <button
+          nz-button
+          nzSize="large"
+          nzType="dashed"
+          (click)="visualizarLivrosCategoria(livro.categoria)"
+        >
           {{ livro.categoria.nome }}
         </button>
         }
