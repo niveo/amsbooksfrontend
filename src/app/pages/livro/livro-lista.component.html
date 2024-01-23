@@ -1,6 +1,5 @@
 <div class="ovh wf">
   <nz-list nzGrid class="wf">
-    {{count}}
     <div
       nz-row
       [nzGutter]="16"
@@ -9,6 +8,8 @@
       [infiniteScrollUpDistance]="scrollUpDistance"
       [infiniteScrollThrottle]="throttle"
       (scrolled)="onScrollDown()"
+      style="justify-content: center"
+      class="pd-5"
     >
       @for(livro of livros; track livro.id){
       <nz-list-item>
@@ -22,7 +23,6 @@
             [nzTitle]="livro.titulo"
             [nzDescription]="livro.autor.nome"
           ></nz-card-meta>
-          {{ livro.id }}
         </nz-card>
         <ng-template #coverTemplate>
           <div class="fx-w fx-d-flex" style="justify-content: center">

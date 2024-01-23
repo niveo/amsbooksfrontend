@@ -15,24 +15,26 @@ nz-sider {
   left: 0;
 }
 
-.right-layout {
-  margin-left: 200px;
-}
-
 nz-header {
-  background: #fff;
-  padding: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  align-items: center;
+  box-sizing: border-box;
+  flex-direction: row;
+  display: flex;
+  gap: 8px;
 }
 
 nz-content {
-  margin: 24px 16px 0;
-  overflow: initial;
+  padding: 0 50px;
+  margin-top: 64px;
 }
 
 .inner-content {
-  padding: 24px;
   background: #fff;
-  text-align: center;
+  padding: 24px;
+  min-height: 380px;
 }
 
 nz-footer {

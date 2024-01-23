@@ -33,10 +33,15 @@ import { TagModule } from './pages/tag/tag.module';
 import { CategoriaModule } from './pages/categoria/categoria.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
+import { OverlayModule } from '@angular/cdk/overlay';
+
 import {
   BookOutline,
   UnorderedListOutline,
-  TagsOutline
+  TagsOutline,
+  MenuOutline,
+  HomeOutline,
+  UserOutline,
 } from '@ant-design/icons-angular/icons';
 
 registerLocaleData(pt);
@@ -54,7 +59,14 @@ registerLocaleData(en);
     PageNotFoundComponent,
     CommonModule,
 
-    NzIconModule.forRoot([BookOutline, UnorderedListOutline, TagsOutline]),
+    NzIconModule.forRoot([
+      BookOutline,
+      UnorderedListOutline,
+      TagsOutline,
+      MenuOutline,
+      HomeOutline,
+      UserOutline,
+    ]),
     NzMenuModule,
     NzButtonModule,
     NzAvatarModule,
@@ -67,6 +79,8 @@ registerLocaleData(en);
     LivroModule,
     TagModule,
     CategoriaModule,
+
+    OverlayModule,
 
     AuthModule.forRoot({
       ...environment.auth,

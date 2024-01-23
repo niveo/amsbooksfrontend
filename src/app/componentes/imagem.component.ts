@@ -8,7 +8,7 @@ import { NzImageModule } from 'ng-zorro-antd/image';
     [attr.width]="width"
     [attr.height]="height"
     [nzFallback]="fallback"
-    [nzSrc]="src"
+
     [nzDisablePreview]="true"
   />`,
   standalone: true,
