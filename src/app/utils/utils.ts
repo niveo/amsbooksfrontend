@@ -1,3 +1,5 @@
+import { HttpParams } from "@angular/common/http";
+
 export function formatFileSize(bytes: any, si = false, dp = 2) {
   const thresh = si ? 1000 : 1024;
 
@@ -20,4 +22,24 @@ export function formatFileSize(bytes: any, si = false, dp = 2) {
   );
 
   return bytes.toFixed(dp) + ' ' + units[u];
+}
+
+export function carregarParametros(paramsObject: any): HttpParams | any {
+  if (!paramsObject) return undefined;
+  if (paramsObject instanceof Object) {
+    let params = new HttpParams();
+    const obj = paramsObject;
+    for (const key in obj) {
+      if (Object.hasOwn(obj, key)) {
+        if (obj[key] != undefined) {
+          params = params.set(key, obj[key]);
+        }
+      }
+    }
+    return params;
+  } else {
+    if (paramsObject instanceof HttpParams) {
+      return paramsObject;
+    }
+  }
 }

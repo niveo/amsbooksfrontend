@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
 import { LivroService } from 'src/app/services/livro.service';
 import { APP_CONFIG, IConfigToken } from 'src/app/utils/app-config';
 
@@ -10,7 +9,14 @@ import { APP_CONFIG, IConfigToken } from 'src/app/utils/app-config';
   styleUrls: ['./livro-lista.component.scss'],
 })
 export class LivroListaComponent implements OnInit {
-  livros$!: Observable<any[]>;
+  livros: any[] = [];
+  count: number;
+  page: number = 0;
+  pageSize: number = 10;
+
+  scrollDistance = 1;
+  scrollUpDistance = 2;
+  throttle = 300;
 
   constructor(
     private router: Router,
@@ -19,15 +25,37 @@ export class LivroListaComponent implements OnInit {
     @Inject(APP_CONFIG) readonly config: IConfigToken
   ) {}
 
-  ngOnInit(): void {
-    console.log(this.route.params);
+  get pageLimit() {
+    return Math.round(this.count / this.pageSize);
+  }
 
-    this.livros$ = this.livroService.getAll();
+  ngOnInit(): void {
+    this.carregarRegistros();
+  }
+
+  private carregarRegistros() {
+    this.route.paramMap.subscribe((params) => {
+      const obs = {};
+      params.keys.forEach((key) => {
+        obs[key] = params.get(key);
+      });
+      this.livroService
+        .getAll(this.pageSize, this.page, obs)
+        .subscribe((response) => {
+          this.livros.push(...response.results);
+          this.count = response.count;
+        });
+    });
   }
 
   detalharLivro(livro) {
     this.router.navigate(['livros/' + livro.id]);
   }
-}
 
-//https://dev.to/krivanek06/angular-infinite-scrolling-2jab
+  onScrollDown() {
+    if (this.page <= this.pageLimit) {
+      this.page++;
+      this.carregarRegistros();
+    }
+  }
+}

@@ -1,27 +1,36 @@
 <div class="ovh wf">
   <nz-list nzGrid class="wf">
-    <div nz-row [nzGutter]="16">
-      <div nz-col *cdkVirtualFor="let livro of livros$ | async">
-        <nz-list-item>
-          <nz-card
-            class="pd-5 wf"
-            nzHoverable
-            [nzCover]="coverTemplate"
-            (click)="detalharLivro(livro)"
-          >
-            <nz-card-meta
-              [nzTitle]="livro.titulo"
-              [nzDescription]="livro.autor"
-            ></nz-card-meta>
-            {{ livro.id }}
-          </nz-card>
-          <ng-template #coverTemplate>
-            <div class="fx-w fx-d-flex" style="justify-content: center">
-              <imagem-component [src]="livro.capaUrl" />
-            </div>
-          </ng-template>
-        </nz-list-item>
-      </div>
+    {{count}}
+    <div
+      nz-row
+      [nzGutter]="16"
+      infinite-scroll
+      [infiniteScrollDistance]="scrollDistance"
+      [infiniteScrollUpDistance]="scrollUpDistance"
+      [infiniteScrollThrottle]="throttle"
+      (scrolled)="onScrollDown()"
+    >
+      @for(livro of livros; track livro.id){
+      <nz-list-item>
+        <nz-card
+          class="pd-5 wf"
+          nzHoverable
+          [nzCover]="coverTemplate"
+          (click)="detalharLivro(livro)"
+        >
+          <nz-card-meta
+            [nzTitle]="livro.titulo"
+            [nzDescription]="livro.autor.nome"
+          ></nz-card-meta>
+          {{ livro.id }}
+        </nz-card>
+        <ng-template #coverTemplate>
+          <div class="fx-w fx-d-flex" style="justify-content: center">
+            <imagem-component [src]="livro.capaUrl" />
+          </div>
+        </ng-template>
+      </nz-list-item>
+      }
     </div>
   </nz-list>
 </div>

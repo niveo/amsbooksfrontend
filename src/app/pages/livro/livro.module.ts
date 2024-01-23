@@ -12,11 +12,11 @@ import { ImagemComponent } from 'src/app/componentes/imagem.component';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NivelLeituraPipe } from 'src/app/pipes';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ScrollingModule } from '@angular/cdk/scrolling';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { ArrowLeftOutline } from '@ant-design/icons-angular/icons';
 @NgModule({
-  declarations: [LivroListaComponent, LivroDetalheComponent ],
+  declarations: [LivroListaComponent, LivroDetalheComponent],
   exports: [],
   imports: [
     CommonModule,
@@ -26,11 +26,12 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     NzTagModule,
     NzToolTipModule,
     NzButtonModule,
-    FontAwesomeModule,
+    InfiniteScrollModule,
     ImagemComponent,
     LivroRoutingModule,
+    NzIconModule.forChild([ArrowLeftOutline]),
     NivelLeituraPipe,
-    NzPageHeaderModule
+    NzPageHeaderModule,
   ],
 })
 export class LivroModule {}
