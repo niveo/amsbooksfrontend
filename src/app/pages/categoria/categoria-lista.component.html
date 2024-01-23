@@ -1,5 +1,5 @@
 <nz-list nzGrid style="width: 100%">
-  <div nz-row [nzGutter]="16" class="gutter-row">
+  <div nz-row [nzGutter]="6" class="gutter-row">
     @for(categoria of categorias$ | async; track categoria.id){
     <div nz-col [nzSpan]="24 / 4">
       <nz-list-item (click)="visualizarLivrosCategoria(categoria)">
