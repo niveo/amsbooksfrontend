@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CategoriaService } from '../../services';
 import { APP_CONFIG, IConfigToken } from 'src/app/utils/app-config';
+import { ROTA_LIVROS } from 'src/app/common/constantes';
 
 @Component({
   selector: 'app-categoria-lista-component',
@@ -21,7 +22,7 @@ export class CategoriaListaComponent implements OnInit {
     this.categorias$ = this.categoriaService.getAll();
   }
 
-  listarListrosCategoria(categoria) {
-    this.router.navigate(['/livros', { categoria: categoria.id }]);
+  visualizarLivrosCategoria(categoria) {
+    this.router.navigate([ROTA_LIVROS, { categoria: categoria.id }]);
   }
 }

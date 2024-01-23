@@ -4,13 +4,10 @@
     (nzBack)="onBack()"
     nzBackIcon
     [nzTitle]="livro.titulo"
-    [nzSubtitle]="livro.autor.nome"
-    [nzBackIcon]="tplIconBack"
+    [nzSubtitle]="livro.autor.nome" 
   ></nz-page-header>
 
-  <ng-template #tplIconBack>
-    <fa-icon [icon]="faArrowLeft"></fa-icon>
-  </ng-template>
+ 
 
   <div class="fx-row fx-flex">
     <div>
@@ -19,8 +16,8 @@
     <div class="fx-column fx-flex pd-10">
       <div class="fx-row" style="align-items: center">
         @if(livro.categoria){
-        <button nz-button nzSize="large" nzType="dashed">
-          {{ livro.categoria?.nome }}
+        <button nz-button nzSize="large" nzType="dashed" (click)="visualizarLivrosCategoria(livro.categoria)">
+          {{ livro.categoria.nome }}
         </button>
         }
         <div class="fx-flex"></div>

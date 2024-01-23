@@ -2,8 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TagService } from '../../services';
-import { APP_CONFIG, IConfigToken } from 'src/app/utils/app-config';
-import { faSearch, faClose } from '@fortawesome/free-solid-svg-icons';
+import { APP_CONFIG, IConfigToken } from 'src/app/utils/app-config'; 
+import { ROTA_LIVROS } from 'src/app/common/constantes';
 
 @Component({
   selector: 'app-tag-tag-component',
@@ -12,8 +12,6 @@ import { faSearch, faClose } from '@fortawesome/free-solid-svg-icons';
 })
 export class TagListaComponent implements OnInit {
   categorias$!: Observable<any[]>;
-  faSearch = faSearch;
-  faClose = faClose;
   inputValue: string | null = null;
 
   constructor(
@@ -26,7 +24,7 @@ export class TagListaComponent implements OnInit {
     this.categorias$ = this.tagService.getAll();
   }
 
-  listarListrosTag(tag) {
-    this.router.navigate(['/livros', { tag: tag.id }]);
+  visualizarLivrosTag(tag) {
+    this.router.navigate([ROTA_LIVROS, { tag: tag.id }]);
   }
 }

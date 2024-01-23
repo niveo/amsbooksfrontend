@@ -2,7 +2,7 @@
   <div nz-row [nzGutter]="16" class="gutter-row">
     @for(categoria of categorias$ | async; track categoria.id){
     <div nz-col [nzSpan]="24 / 4">
-      <nz-list-item (click)="listarListrosCategoria(categoria)">
+      <nz-list-item (click)="visualizarLivrosCategoria(categoria)">
         @if(categoria.contalivros){
         <nz-ribbon [nzText]="categoria.contalivros">
           <ng-container
