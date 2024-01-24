@@ -6,12 +6,12 @@
     [nzTitle]="livro.titulo"
     [nzSubtitle]="livro.autor.nome"
   ></nz-page-header>
-  <div class="fx-row fx-flex">
+  <div class="content">
     <div>
       <imagem-component [src]="livro.capaUrl" />
     </div>
-    <div class="fx-column fx-flex pd-10">
-      <div class="fx-row" style="align-items: center">
+    <div class="fx-column fx-flex pd-10" style="flex-wrap: wrap">
+      <div class="fx-row" style="align-items: center; flex-wrap: wrap">
         @if(livro.categoria){
         <button
           nz-button

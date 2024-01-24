@@ -1,4 +1,14 @@
 :host {
-    padding: 10px;
-    display: flex;
-  }
+  padding: 10px;
+  display: flex;
+}
+
+.content {
+  gap: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.content-card {
+  padding-top: 10px;
+}

@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core';
 import { NzImageModule } from 'ng-zorro-antd/image';
-
+//[nzSrc]="src"
 @Component({
   selector: 'imagem-component',
   template: `<img
@@ -8,7 +8,7 @@ import { NzImageModule } from 'ng-zorro-antd/image';
     [attr.width]="width"
     [attr.height]="height"
     [nzFallback]="fallback"
-
+    
     [nzDisablePreview]="true"
   />`,
   standalone: true,

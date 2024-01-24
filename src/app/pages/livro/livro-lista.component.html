@@ -1,38 +1,32 @@
 <div class="ovh wf">
-  <nz-list nzGrid class="wf">
-    <div
-      nz-row
-      [nzGutter]="16"
-      infinite-scroll
-      [infiniteScrollDistance]="scrollDistance"
-      [infiniteScrollUpDistance]="scrollUpDistance"
-      [infiniteScrollThrottle]="throttle"
-      (scrolled)="onScrollDown()"
-      style="justify-content: center"
-      class="pd-5"
-    >
-      @for(livro of livros; track livro.id){
-      <div nz-col>
-        <nz-list-item>
-          <nz-card
-            class="pd-5 wf"
-            nzHoverable
-            [nzCover]="coverTemplate"
-            (click)="detalharLivro(livro)"
-          >
-            <nz-card-meta
-              [nzTitle]="livro.titulo"
-              [nzDescription]="livro.autor.nome"
-            ></nz-card-meta>
-          </nz-card>
-          <ng-template #coverTemplate>
-            <div class="fx-w fx-d-flex" style="justify-content: center">
-              <imagem-component [src]="livro.capaUrl" />
-            </div>
-          </ng-template>
-        </nz-list-item>
-      </div>
-      }
+  <div
+    infinite-scroll
+    [infiniteScrollDistance]="scrollDistance"
+    [infiniteScrollUpDistance]="scrollUpDistance"
+    [infiniteScrollThrottle]="throttle"
+    (scrolled)="onScrollDown()"
+    class="content"
+  >
+    @for(livro of livros; track livro.id){
+    <div class="">
+      <nz-card class="content-card"
+        nzHoverable
+        [nzCover]="coverTemplate"
+        (click)="detalharLivro(livro)"
+      >
+        <nz-card-meta
+          [nzTitle]="livro.titulo"
+          [nzDescription]="livro.autor.nome"
+        ></nz-card-meta>
+      </nz-card>
+      <ng-template #coverTemplate>
+        <div class="fx-w fx-d-flex" style="justify-content: center">
+          <imagem-component [src]="livro.capaUrl" />
+        </div>
+      </ng-template>
     </div>
-  </nz-list>
+    } @empty {
+    <nz-empty></nz-empty>
+    }
+  </div>
 </div>

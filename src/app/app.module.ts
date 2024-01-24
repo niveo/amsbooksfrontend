@@ -23,9 +23,6 @@ import { HttpsRequestInterceptor } from './interceptors/requests.interceptor';
 import { APP_CONFIG } from './utils/app-config';
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
 import { DEFAULT_TIMEOUT } from './common/tokens';
-import { NzListModule } from 'ng-zorro-antd/list';
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzGridModule } from 'ng-zorro-antd/grid';
 import { LivroModule } from './pages/livro/livro.module';
 
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -70,10 +67,7 @@ registerLocaleData(en);
     NzMenuModule,
     NzButtonModule,
     NzAvatarModule,
-    NzToolTipModule,
-    NzListModule,
-    NzCardModule,
-    NzGridModule,
+    NzToolTipModule,   
     NzLayoutModule,
 
     LivroModule,

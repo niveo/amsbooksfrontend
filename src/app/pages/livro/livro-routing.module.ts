@@ -9,6 +9,8 @@ import {
 import { LivroListaComponent } from './livro-lista.component';
 import { LivroDetalheComponent } from './detalhe/livro-detalhe.component';
 import { LivroService } from 'src/app/services/livro.service';
+import { LivroLeituraComponent } from './leitura/livro-leitura.component';
+import { AuthGuard } from '@auth0/auth0-angular';
 
 const lisvroDetalheResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,
@@ -18,7 +20,6 @@ const lisvroDetalheResolver: ResolveFn<any> = (
     Number(route.paramMap.get('id')!)
   );
 };
-
 
 const routes: Routes = [
   {
@@ -31,6 +32,14 @@ const routes: Routes = [
     resolve: {
       data: lisvroDetalheResolver,
     },
+  },
+  {
+    path: 'leitura/:id',
+    component: LivroLeituraComponent,
+    resolve: {
+      data: lisvroDetalheResolver,
+    },
+    canActivate: [AuthGuard],
   },
 ];
 
