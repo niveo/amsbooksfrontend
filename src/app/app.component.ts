@@ -17,7 +17,16 @@ export class AppComponent implements OnInit {
     Amplify.configure(awsExports);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authenticator.subscribe(ev => {
+      console.log(ev);
+      
+    })
+  }
+
+  signOut() {
+    this.authenticator.signOut();
+  }
 
   isOpen = false;
   visualizarPage(page) {

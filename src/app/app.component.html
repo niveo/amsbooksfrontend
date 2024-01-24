@@ -24,7 +24,7 @@
         <span nz-icon nzType="menu"></span>
       </button>
 
-      <button nz-button [nzGhost]="true" nzType="dashed" nzShape="circle">
+      <button nz-button [nzGhost]="true" nzType="dashed" nzShape="circle" (click)="signOut()">
         <span nz-icon nzType="user"></span>
       </button>
     </nz-header>
@@ -32,7 +32,7 @@
       <div class="inner-content">
         <!--router-outlet></!--router-outlet-->
 
-        <amplify-authenticator [socialProviders]="['google']">
+        <amplify-authenticator>
         </amplify-authenticator>
       </div>
     </nz-content>
