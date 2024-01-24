@@ -11,6 +11,7 @@ import { ROTA_LIVROS } from 'src/app/common/constantes';
 })
 export class LivroDetalheComponent {
   livro: any;
+  
   constructor(
     private readonly route: ActivatedRoute,
     private router: Router,

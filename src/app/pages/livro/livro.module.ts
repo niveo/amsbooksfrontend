@@ -12,11 +12,21 @@ import { NivelLeituraPipe } from 'src/app/pipes';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { ArrowLeftOutline } from '@ant-design/icons-angular/icons';
+import {
+  ArrowLeftOutline,
+  HeartTwoTone,
+  HeartOutline,
+} from '@ant-design/icons-angular/icons';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { LivroLeituraComponent } from './leitura/livro-leitura.component';
+import { LivroComentarioComponent } from './comentarios/livro-comentario.component';
 
 @NgModule({
-  declarations: [LivroListaComponent, LivroDetalheComponent],
+  declarations: [
+    LivroListaComponent,
+    LivroDetalheComponent,
+    LivroLeituraComponent,
+  ],
   exports: [],
   imports: [
     CommonModule,
@@ -28,7 +38,8 @@ import { NzEmptyModule } from 'ng-zorro-antd/empty';
     InfiniteScrollModule,
     ImagemComponent,
     LivroRoutingModule,
-    NzIconModule.forChild([ArrowLeftOutline]),
+    LivroComentarioComponent,
+    NzIconModule.forChild([ArrowLeftOutline, HeartTwoTone, HeartOutline]),
     NivelLeituraPipe,
     NzPageHeaderModule,
   ],
