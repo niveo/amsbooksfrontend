@@ -1,12 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticatorService } from '@aws-amplify/ui-angular';
+import { Amplify } from 'aws-amplify';
+import awsExports from '../aws-exports';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  constructor(private router: Router) {}
+export class AppComponent implements OnInit {
+  constructor(
+    private router: Router,
+    public authenticator: AuthenticatorService
+  ) {
+    Amplify.configure(awsExports);
+  }
+
+  ngOnInit(): void {}
 
   isOpen = false;
   visualizarPage(page) {

@@ -30,7 +30,10 @@
     </nz-header>
     <nz-content>
       <div class="inner-content">
-        <router-outlet></router-outlet>
+        <!--router-outlet></!--router-outlet-->
+
+        <amplify-authenticator [socialProviders]="['google']">
+        </amplify-authenticator>
       </div>
     </nz-content>
     <nz-footer>FOOTER</nz-footer>

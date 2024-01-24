@@ -1,6 +1,8 @@
 @import '@angular/cdk/overlay-prebuilt.css';
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
-@import 'styles-global.scss';
+@import 'styles-global.scss'; 
+
+// eslint-disable-next-line import/no-unresolved
+@import '~node_modules/@aws-amplify/ui-angular/theme.css';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

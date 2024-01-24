@@ -29,7 +29,7 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
+            "styles": [ 
               "src/theme.less",
               "src/styles.scss"
             ],
