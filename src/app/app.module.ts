@@ -41,14 +41,12 @@ import {
   UserOutline,
 } from '@ant-design/icons-angular/icons';
 
-import { Amplify } from 'aws-amplify';
 import { I18n } from 'aws-amplify/utils';
 import {
   AmplifyAuthenticatorModule,
   translations,
 } from '@aws-amplify/ui-angular';
-import amplifyconfig from '../amplifyconfiguration.json';
-Amplify.configure(amplifyconfig);
+
 I18n.putVocabularies(translations);
 I18n.setLanguage('pt');
 
