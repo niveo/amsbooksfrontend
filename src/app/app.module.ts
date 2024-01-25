@@ -38,13 +38,15 @@ import {
   MenuOutline,
   HomeOutline,
   UserOutline,
+  LogoutOutline,
 } from '@ant-design/icons-angular/icons';
 
 import { I18n } from 'aws-amplify/utils';
-import {
-  AmplifyAuthenticatorModule,
-  translations,
-} from '@aws-amplify/ui-angular';
+import { translations } from '@aws-amplify/ui-angular';
+import { AutenticacaoComponent } from './pages/autenticacao/autenticacao.component';
+import { CoreGlobalModule } from './common/core.global.module';
+import { LogarButtonComponent } from './componentes';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 I18n.putVocabularies(translations);
 I18n.setLanguage('pt');
@@ -53,7 +55,7 @@ registerLocaleData(pt);
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AutenticacaoComponent, LogarButtonComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -63,7 +65,6 @@ registerLocaleData(en);
     ErrorComponent,
     PageNotFoundComponent,
     CommonModule,
-    AmplifyAuthenticatorModule,
 
     NzIconModule.forRoot([
       BookOutline,
@@ -72,16 +73,21 @@ registerLocaleData(en);
       MenuOutline,
       HomeOutline,
       UserOutline,
+      LogoutOutline,
     ]),
     NzMenuModule,
     NzButtonModule,
     NzAvatarModule,
     NzToolTipModule,
     NzLayoutModule,
+    NzToolTipModule,
+    NzModalModule,
 
     LivroModule,
     TagModule,
     CategoriaModule,
+
+    CoreGlobalModule,
 
     OverlayModule,
   ],

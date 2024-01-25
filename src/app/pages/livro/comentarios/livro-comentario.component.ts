@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AutenticacaoStore } from './../../../services/autenticacao.store';
+import { Component, Inject } from '@angular/core';
 
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +10,9 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { formatDistance } from 'date-fns';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { LogarButtonComponent } from 'src/app/componentes';
+import { CommonModule } from '@angular/common';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 
 @Component({
   selector: 'app-livro-comentario-component',
@@ -23,7 +27,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     NzFormModule,
     NzAvatarModule,
     NzButtonModule,
-    NzInputModule
+    NzInputModule, 
+    CommonModule,
+    NzAlertModule,
   ],
 })
 export class LivroComentarioComponent {
@@ -35,6 +41,8 @@ export class LivroComentarioComponent {
     avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
   };
   inputValue = '';
+
+  constructor(public readonly autenticacaoStore: AutenticacaoStore) {}
 
   handleSubmit(): void {
     this.submitting = true;

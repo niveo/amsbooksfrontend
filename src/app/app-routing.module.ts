@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './pages/notfound/page-not-found.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { AutenticacaoComponent } from './pages/autenticacao/autenticacao.component';
 
 /*
 {
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     path: 'error',
     component: ErrorComponent,
+  },
+  {
+    path: 'autenticacao',
+    component: AutenticacaoComponent,
   },
   { path: '**', component: PageNotFoundComponent },
 ];
