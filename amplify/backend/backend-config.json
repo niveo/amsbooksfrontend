@@ -1,6 +1,6 @@
 {
   "auth": {
-    "amsbooksfrontend2d167153": {
+    "amsbooksfrontend274b30bf": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -13,7 +13,8 @@
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
-          "EMAIL"
+          "EMAIL",
+          "NAME"
         ],
         "socialProviders": [],
         "usernameAttributes": [

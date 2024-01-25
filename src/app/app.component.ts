@@ -52,15 +52,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.currentSession();
+    this.currentSession();
     this.currentAuthenticatedUser();
   }
 
   async currentSession() {
     try {
       const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
-      console.log(accessToken.toString());
-      console.log(idToken.toString());
+      console.log(accessToken);
+      console.log(idToken);
     } catch (err) {
       console.log(err);
     }
@@ -68,10 +68,10 @@ export class AppComponent implements OnInit {
 
   async currentAuthenticatedUser() {
     try {
-      const { username, userId, signInDetails } = await getCurrentUser();
-      console.log(`The username: ${username}`);
-      console.log(`The userId: ${userId}`);
-      console.log(signInDetails);
+      const AR = await getCurrentUser(); 
+      console.log(AR);
+      console.log(this.authenticator.user);
+      console.log(this.authenticator.username);
     } catch (err) {
       console.log(err);
     }

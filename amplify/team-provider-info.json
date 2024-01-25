@@ -1,19 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-amsbooksfrontend-dev-160553-authRole",
-      "UnauthRoleArn": "arn:aws:iam::517640171579:role/amplify-amsbooksfrontend-dev-160553-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::517640171579:role/amplify-amsbooksfrontend-dev-160553-authRole",
+      "AuthRoleName": "amplify-amsbooksfrontend-dev-172403-authRole",
+      "UnauthRoleArn": "arn:aws:iam::517640171579:role/amplify-amsbooksfrontend-dev-172403-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::517640171579:role/amplify-amsbooksfrontend-dev-172403-authRole",
       "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-amsbooksfrontend-dev-160553-deployment",
-      "UnauthRoleName": "amplify-amsbooksfrontend-dev-160553-unauthRole",
-      "StackName": "amplify-amsbooksfrontend-dev-160553",
-      "StackId": "arn:aws:cloudformation:us-east-2:517640171579:stack/amplify-amsbooksfrontend-dev-160553/9a0713a0-baeb-11ee-bd3e-02875404b2ab",
-      "AmplifyAppId": "d8wudas3bkwco"
+      "DeploymentBucketName": "amplify-amsbooksfrontend-dev-172403-deployment",
+      "UnauthRoleName": "amplify-amsbooksfrontend-dev-172403-unauthRole",
+      "StackName": "amplify-amsbooksfrontend-dev-172403",
+      "StackId": "arn:aws:cloudformation:us-east-2:517640171579:stack/amplify-amsbooksfrontend-dev-172403/afcbf0f0-bbbf-11ee-8d80-06c04e21793d",
+      "AmplifyAppId": "db99pf5evhxji"
     },
     "categories": {
       "auth": {
-        "amsbooksfrontend2d167153": {}
+        "amsbooksfrontend274b30bf": {}
       }
     }
   }
