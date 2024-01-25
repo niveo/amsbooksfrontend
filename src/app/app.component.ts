@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
   ) {
     Amplify.configure(awsExports);
     cognitoUserPoolsTokenProvider.setKeyValueStorage(sessionStorage);
- 
 
     Hub.listen('auth', ({ payload }) => {
       switch (payload.event) {
@@ -68,7 +67,7 @@ export class AppComponent implements OnInit {
 
   async currentAuthenticatedUser() {
     try {
-      const AR = await getCurrentUser(); 
+      const AR = await getCurrentUser();
       console.log(AR);
       console.log(this.authenticator.user);
       console.log(this.authenticator.username);
