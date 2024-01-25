@@ -18,7 +18,6 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
 import { HttpsRequestInterceptor } from './interceptors/requests.interceptor';
 import { APP_CONFIG } from './utils/app-config';
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
@@ -85,22 +84,10 @@ registerLocaleData(en);
     CategoriaModule,
 
     OverlayModule,
-
-    AuthModule.forRoot({
-      ...environment.auth,
-      httpInterceptor: {
-        ...environment.httpInterceptor,
-      },
-    }),
   ],
   providers: [
     { provide: APP_CONFIG, useValue: environment },
     { provide: DEFAULT_TIMEOUT, useValue: 30000 },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthHttpInterceptor,
-      multi: true,
-    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpsRequestInterceptor,

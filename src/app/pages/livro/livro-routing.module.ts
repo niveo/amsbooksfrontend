@@ -10,7 +10,7 @@ import { LivroListaComponent } from './livro-lista.component';
 import { LivroDetalheComponent } from './detalhe/livro-detalhe.component';
 import { LivroService } from 'src/app/services/livro.service';
 import { LivroLeituraComponent } from './leitura/livro-leitura.component';
-import { AuthGuard } from '@auth0/auth0-angular';
+
 
 const lisvroDetalheResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot,
@@ -39,7 +39,7 @@ const routes: Routes = [
     resolve: {
       data: lisvroDetalheResolver,
     },
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
   },
 ];
 
