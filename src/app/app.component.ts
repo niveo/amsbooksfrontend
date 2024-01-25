@@ -5,6 +5,10 @@ import { Amplify } from 'aws-amplify';
 import awsExports from '../aws-exports';
 import { AutenticacaoStore } from './services/autenticacao.store';
 import { Hub } from 'aws-amplify/utils';
+import { fetchAuthSession } from 'aws-amplify/auth';
+import { sessionStorage } from 'aws-amplify/utils';
+import { cognitoUserPoolsTokenProvider } from 'aws-amplify/auth/cognito';
+import { getCurrentUser } from 'aws-amplify/auth';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +22,9 @@ export class AppComponent implements OnInit {
     private readonly autenticacaoStore: AutenticacaoStore
   ) {
     Amplify.configure(awsExports);
+    cognitoUserPoolsTokenProvider.setKeyValueStorage(sessionStorage);
+ 
+
     Hub.listen('auth', ({ payload }) => {
       switch (payload.event) {
         case 'signedIn':
@@ -44,7 +51,31 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    //this.currentSession();
+    this.currentAuthenticatedUser();
+  }
+
+  async currentSession() {
+    try {
+      const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
+      console.log(accessToken.toString());
+      console.log(idToken.toString());
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async currentAuthenticatedUser() {
+    try {
+      const { username, userId, signInDetails } = await getCurrentUser();
+      console.log(`The username: ${username}`);
+      console.log(`The userId: ${userId}`);
+      console.log(signInDetails);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   signOut() {
     this.authenticator.signOut();

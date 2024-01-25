@@ -21,7 +21,6 @@ const routes: Routes = [
     path: 'livros',
     loadChildren: () =>
       import('./pages/livro/livro.module').then((m) => m.LivroModule),
-    data: { preload: true },
   },
   {
     path: 'categorias',
@@ -29,13 +28,11 @@ const routes: Routes = [
       import('./pages/categoria/categoria.module').then(
         (m) => m.CategoriaModule
       ),
-    data: { preload: true },
   },
   {
     path: 'tags',
     loadChildren: () =>
       import('./pages/tag/tag.module').then((m) => m.TagModule),
-    data: { preload: true },
   },
   {
     path: 'error',
