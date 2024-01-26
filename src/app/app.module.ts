@@ -47,6 +47,7 @@ import { AutenticacaoComponent } from './pages/autenticacao/autenticacao.compone
 import { CoreGlobalModule } from './common/core.global.module';
 import { LogarButtonComponent } from './componentes';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { AvatarUsuarioComponent } from './componentes/avatar-usuario.component';
 
 I18n.putVocabularies(translations);
 I18n.setLanguage('pt');

@@ -10,7 +10,6 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { formatDistance } from 'date-fns';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { LogarButtonComponent } from 'src/app/componentes';
 import { CommonModule } from '@angular/common';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 
@@ -18,19 +17,6 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
   selector: 'app-livro-comentario-component',
   templateUrl: './livro-comentario.component.html',
   styleUrl: './livro-comentario.component.scss',
-  standalone: true,
-  imports: [
-    NzRateModule,
-    FormsModule,
-    NzCommentModule,
-    NzListModule,
-    NzFormModule,
-    NzAvatarModule,
-    NzButtonModule,
-    NzInputModule, 
-    CommonModule,
-    NzAlertModule,
-  ],
 })
 export class LivroComentarioComponent {
   rate;

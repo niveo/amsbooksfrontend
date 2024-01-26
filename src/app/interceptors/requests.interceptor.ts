@@ -22,14 +22,16 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (this.authenticator.authStatus === 'unauthenticated') {
+    if (this.authenticator.authStatus !== 'authenticated') {
       return this.defaultClone(req, next);
     } else {
       return from(fetchAuthSession()).pipe(
-        mergeMap(({ tokens }) => {
+        mergeMap(({ tokens }) => { 
           if (tokens.idToken) {
             const authReq = req.clone({
               url: this.conf.apiUri + req.url,
+              //Passado para pegar sessão
+              withCredentials: true,
               setHeaders: {
                 Authorization: 'Bearer ' + tokens.idToken.toString(),
               },
@@ -49,6 +51,8 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
 
   defaultClone(req: HttpRequest<any>, next: HttpHandler) {
     const dupReq = req.clone({
+      //Passado para pegar sessão
+      withCredentials: true,
       url: this.conf.apiUri + req.url,
     });
     return next.handle(dupReq);

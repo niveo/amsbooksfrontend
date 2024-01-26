@@ -1,0 +1,7 @@
+tem um custo de 563.636 bytes - 839.541 bytes
+@import '~node_modules/@aws-amplify/ui-angular/theme.css';
+
+
+tem um custo de 1.413.486 bytes - 1.495.172 bytes
+import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
+<amplify-authenticator [signUpAttributes]="['name']"> </amplify-authenticator>

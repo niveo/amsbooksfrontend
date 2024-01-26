@@ -20,12 +20,23 @@ import {
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { LivroLeituraComponent } from './leitura/livro-leitura.component';
 import { LivroComentarioComponent } from './comentarios/livro-comentario.component';
+import { NzRateModule } from 'ng-zorro-antd/rate';
+import { FormsModule } from '@angular/forms';
+import { NzCommentModule } from 'ng-zorro-antd/comment';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { AvatarUsuarioComponent } from 'src/app/componentes';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 
 @NgModule({
   declarations: [
     LivroListaComponent,
     LivroDetalheComponent,
     LivroLeituraComponent,
+    LivroComentarioComponent,
+    AvatarUsuarioComponent,
   ],
   exports: [],
   imports: [
@@ -38,10 +49,19 @@ import { LivroComentarioComponent } from './comentarios/livro-comentario.compone
     InfiniteScrollModule,
     ImagemComponent,
     LivroRoutingModule,
-    LivroComentarioComponent,
     NzIconModule.forChild([ArrowLeftOutline, HeartTwoTone, HeartOutline]),
     NivelLeituraPipe,
     NzPageHeaderModule,
+    NzRateModule,
+    FormsModule,
+    NzCommentModule,
+    NzListModule,
+    NzFormModule,
+    NzButtonModule,
+    NzInputModule,
+    CommonModule,
+    NzAlertModule,
+    NzAvatarModule
   ],
 })
 export class LivroModule {}
