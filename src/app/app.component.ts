@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import { AuthenticatorService } from '@aws-amplify/ui-angular';
 import { Amplify } from 'aws-amplify';
 import awsExports from '../aws-exports';
-import { AutenticacaoStore } from './services/autenticacao.store';
 import { Hub } from 'aws-amplify/utils';
 import { sessionStorage } from 'aws-amplify/utils';
 import { cognitoUserPoolsTokenProvider } from 'aws-amplify/auth/cognito';
+import { AutenticacaoStore } from './stores';
 
 @Component({
   selector: 'app-root',

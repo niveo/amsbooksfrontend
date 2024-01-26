@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { AutenticacaoComponent } from '../pages/autenticacao/autenticacao.component';
-import { AutenticacaoStore } from '../services/autenticacao.store';
+import { AutenticacaoStore } from '../stores';
 
 @Component({
   selector: 'app-logar-button-component',
