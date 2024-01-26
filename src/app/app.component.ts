@@ -5,10 +5,8 @@ import { Amplify } from 'aws-amplify';
 import awsExports from '../aws-exports';
 import { AutenticacaoStore } from './services/autenticacao.store';
 import { Hub } from 'aws-amplify/utils';
-import { fetchAuthSession } from 'aws-amplify/auth';
 import { sessionStorage } from 'aws-amplify/utils';
 import { cognitoUserPoolsTokenProvider } from 'aws-amplify/auth/cognito';
-import { getCurrentUser } from 'aws-amplify/auth';
 
 @Component({
   selector: 'app-root',
@@ -50,31 +48,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.currentSession();
-    this.currentAuthenticatedUser();
-  }
-
-  async currentSession() {
-    try {
-      const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
-      console.log(accessToken);
-      console.log(idToken);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  async currentAuthenticatedUser() {
-    try {
-      const AR = await getCurrentUser();
-      console.log(AR);
-      console.log(this.authenticator.user);
-      console.log(this.authenticator.username);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  ngOnInit(): void {}
 
   signOut() {
     this.authenticator.signOut();
