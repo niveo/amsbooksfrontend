@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AutenticacaoStore } from 'src/app/stores';
 import { LivroComentarioStore } from 'src/app/stores/livro-comentario.store';
 
@@ -13,10 +13,11 @@ export class LivroComentarioComponent implements OnInit {
   livroId: number;
 
   rate: number;
-  data: any[] = [];
-  submitting = false;
+  data$: Observable<any[]>;
+  loading = false;
   inputValue = '';
   storeSub: Subscription;
+  storeLoadingSub: Subscription;
 
   constructor(
     public readonly autenticacaoStore: AutenticacaoStore,
@@ -26,12 +27,10 @@ export class LivroComentarioComponent implements OnInit {
   ngOnInit(): void {
     this.livroComentarioStore.init(this.livroId);
 
-    this.storeSub = this.livroComentarioStore.stateChanged.subscribe(
-      (state) => {
-        console.log(state);
+    this.data$ = this.livroComentarioStore.data$;
 
-        this.data = state.data;
-      }
+    this.storeLoadingSub = this.livroComentarioStore.loading$.subscribe(
+      (loading) => (this.loading = loading)
     );
 
     this.livroComentarioStore.fetchData();
@@ -41,10 +40,12 @@ export class LivroComentarioComponent implements OnInit {
     if (this.storeSub) {
       this.storeSub.unsubscribe();
     }
+    if (this.storeLoadingSub) {
+      this.storeLoadingSub.unsubscribe();
+    }
   }
 
   handleSubmit(): void {
-    this.submitting = true;
     const content = this.inputValue;
     const rate = this.rate;
     this.inputValue = '';

@@ -4,14 +4,12 @@ import { catchError } from 'rxjs';
 import { handleError } from '../common/handle-error';
 
 export class LivroComentarioInputDto {
-  livroId: number; 
+  livroId: number;
   texto: string;
   rate: number;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class LivroComentarioService {
   constructor(private readonly http: HttpClient) {}
 

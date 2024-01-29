@@ -29,6 +29,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { AvatarUsuarioComponent } from 'src/app/componentes';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { LivroComentarioStore } from 'src/app/stores/livro-comentario.store';
+import { LivroComentarioService } from 'src/app/services/livro-comentario.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +65,9 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
     CommonModule,
     NzAlertModule,
     NzAvatarModule,
-    DateDistancePipe
+    DateDistancePipe,
+    NzSpinModule,
   ],
+  providers: [LivroComentarioStore, LivroComentarioService],
 })
 export class LivroModule {}
