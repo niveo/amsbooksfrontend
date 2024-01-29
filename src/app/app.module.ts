@@ -45,9 +45,9 @@ import { I18n } from 'aws-amplify/utils';
 import { translations } from '@aws-amplify/ui-angular';
 import { AutenticacaoComponent } from './pages/autenticacao/autenticacao.component';
 import { CoreGlobalModule } from './common/core.global.module';
-import { LogarButtonComponent } from './componentes';
+import { PerfilUsuarioButtonComponent } from './componentes';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import { AvatarUsuarioComponent } from './componentes/avatar-usuario.component';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 I18n.putVocabularies(translations);
 I18n.setLanguage('pt');
@@ -56,7 +56,11 @@ registerLocaleData(pt);
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, AutenticacaoComponent, LogarButtonComponent],
+  declarations: [
+    AppComponent,
+    AutenticacaoComponent,
+    PerfilUsuarioButtonComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -83,6 +87,7 @@ registerLocaleData(en);
     NzLayoutModule,
     NzToolTipModule,
     NzModalModule,
+    NzUploadModule,
 
     LivroModule,
     TagModule,
