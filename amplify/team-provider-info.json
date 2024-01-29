@@ -14,6 +14,9 @@
     "categories": {
       "auth": {
         "amsbooksfrontend274b30bf": {}
+      },
+      "storage": {
+        "amsbooksfrontend": {}
       }
     }
   }
