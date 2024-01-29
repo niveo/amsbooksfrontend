@@ -1,4 +1,5 @@
-@if(autenticacaoStore.isUsuarioLogado){
+@if((usuarioLogado$ | async) && !(comentarioIdHistorico$ | async )){
+
 <nz-comment [nzAuthor]="tplautor">
   <nz-comment-content>
     <nz-form-item>
@@ -17,7 +18,7 @@
     </nz-form-item>
   </nz-comment-content>
 </nz-comment>
-} @else {<nz-alert
+} @else if(!(usuarioLogado$ | async)) {<nz-alert
   nzType="info"
   nzMessage="É necessário estar logado para fazer um comentario."
 ></nz-alert
@@ -25,7 +26,7 @@
 
 <nz-spin [nzSpinning]="loading">
   <nz-list [nzItemLayout]="'horizontal'">
-    @for(item of data$ | async; track item.codigo){
+    @for(item of data$ | async; track item.id){
     <nz-comment
       [nzAuthor]="item.nome"
       [nzDatetime]="item.displayTime | datedistance"
@@ -39,6 +40,18 @@
         <nz-rate [(ngModel)]="item.rate" [nzDisabled]="true"></nz-rate>
         <p>{{ item.texto }}</p>
       </nz-comment-content>
+
+      <nz-comment-action>
+        @if(item.usuarioComentou) {
+        <span
+          nz-tooltip="Remover"
+          nzTitle="Remover"
+          nz-icon
+          nzType="delete"
+          (click)="removerComentario(item.id)"
+        ></span>
+        }
+      </nz-comment-action>
     </nz-comment>
     }
   </nz-list>

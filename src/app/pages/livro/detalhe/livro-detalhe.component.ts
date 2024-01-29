@@ -1,8 +1,15 @@
 import { Component, Inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  ResolveEnd,
+  ResolveStart,
+  Router,
+} from '@angular/router';
 import { APP_CONFIG, IConfigToken } from 'src/app/utils/app-config';
 import { Location } from '@angular/common';
 import { ROTA_LIVROS } from 'src/app/common/constantes';
+import { LivroDetalheStore } from 'src/app/stores';
+import { Observable, filter, mapTo, merge } from 'rxjs';
 
 @Component({
   selector: 'app-livro-detalhe-component',
@@ -10,17 +17,24 @@ import { ROTA_LIVROS } from 'src/app/common/constantes';
   styleUrl: './livro-detalhe.component.scss',
 })
 export class LivroDetalheComponent {
-  livro: any;
-  
+  livro$: Observable<any>;
+  isLoading$!: Observable<boolean>;
+
   constructor(
     private readonly route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    @Inject(APP_CONFIG) readonly config: IConfigToken
+    @Inject(APP_CONFIG) readonly config: IConfigToken,
+    private readonly livroDetalheStore: LivroDetalheStore
   ) {}
 
   ngOnInit() {
-    this.route.data.subscribe(({ data }) => (this.livro = data));
+    this.livro$ = this.livroDetalheStore.data$;
+    this.isLoading$ = this.livroDetalheStore.loading$;
+
+    this.route.paramMap.subscribe((params) => {
+      this.livroDetalheStore.fetchData(Number(params.get('id')));
+    });
   }
 
   visualizarLivrosTag(tag: any) {

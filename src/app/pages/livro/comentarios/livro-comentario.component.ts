@@ -14,10 +14,11 @@ export class LivroComentarioComponent implements OnInit {
 
   rate: number;
   data$: Observable<any[]>;
+  usuarioLogado$: Observable<boolean>;
   loading = false;
   inputValue = '';
-  storeSub: Subscription;
   storeLoadingSub: Subscription;
+  comentarioIdHistorico$: Observable<any>;
 
   constructor(
     public readonly autenticacaoStore: AutenticacaoStore,
@@ -25,21 +26,17 @@ export class LivroComentarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.livroComentarioStore.init(this.livroId);
-
     this.data$ = this.livroComentarioStore.data$;
+    this.usuarioLogado$ = this.autenticacaoStore.usuarioLogado$;
+    this.comentarioIdHistorico$ =
+      this.livroComentarioStore.comentarioIdHistorico$;
 
     this.storeLoadingSub = this.livroComentarioStore.loading$.subscribe(
       (loading) => (this.loading = loading)
     );
-
-    this.livroComentarioStore.fetchData();
   }
 
   ngOnDestroy() {
-    if (this.storeSub) {
-      this.storeSub.unsubscribe();
-    }
     if (this.storeLoadingSub) {
       this.storeLoadingSub.unsubscribe();
     }
@@ -51,5 +48,9 @@ export class LivroComentarioComponent implements OnInit {
     this.inputValue = '';
     this.rate = 0;
     this.livroComentarioStore.addComentario(rate, content);
+  }
+
+  removerComentario(comentarioId) {
+    this.livroComentarioStore.removerComentario(comentarioId);
   }
 }

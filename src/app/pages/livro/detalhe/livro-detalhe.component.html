@@ -1,3 +1,5 @@
+<nz-spin [nzSpinning]="isLoading$ | async" />
+@if(livro$ | async; as livro){
 <div class="fx-column host pd-5">
   <nz-page-header
     class="site-page-header"
@@ -41,8 +43,9 @@
           }
         </div>
       </div>
-      }      
-      <app-livro-comentario-component [livroId]="livro.id"/>
+      }
+      <app-livro-comentario-component [livroId]="livro.id" />
     </div>
   </div>
 </div>
+}

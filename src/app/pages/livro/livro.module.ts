@@ -16,6 +16,7 @@ import {
   ArrowLeftOutline,
   HeartTwoTone,
   HeartOutline,
+  DeleteOutline
 } from '@ant-design/icons-angular/icons';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { LivroLeituraComponent } from './leitura/livro-leitura.component';
@@ -32,6 +33,9 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { LivroComentarioStore } from 'src/app/stores/livro-comentario.store';
 import { LivroComentarioService } from 'src/app/services/livro-comentario.service';
+import { LivroHistoricoUsuarioService } from 'src/app/services';
+import { LivroDetalheStore } from 'src/app/stores/livro-detalhe.store';
+import { LivroHistoricoUsuarioStore } from 'src/app/stores';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,6 @@ import { LivroComentarioService } from 'src/app/services/livro-comentario.servic
     LivroComentarioComponent,
     AvatarUsuarioComponent,
   ],
-  exports: [],
   imports: [
     CommonModule,
     NzCardModule,
@@ -52,7 +55,7 @@ import { LivroComentarioService } from 'src/app/services/livro-comentario.servic
     InfiniteScrollModule,
     ImagemComponent,
     LivroRoutingModule,
-    NzIconModule.forChild([ArrowLeftOutline, HeartTwoTone, HeartOutline]),
+    NzIconModule.forChild([ArrowLeftOutline, HeartTwoTone, HeartOutline, DeleteOutline]),
     NivelLeituraPipe,
     NzPageHeaderModule,
     NzRateModule,
@@ -68,6 +71,13 @@ import { LivroComentarioService } from 'src/app/services/livro-comentario.servic
     DateDistancePipe,
     NzSpinModule,
   ],
-  providers: [LivroComentarioStore, LivroComentarioService],
+  providers: [
+    LivroComentarioStore,
+    LivroDetalheStore,
+    LivroHistoricoUsuarioStore,
+
+    LivroComentarioService,
+    LivroHistoricoUsuarioService,
+  ],
 })
 export class LivroModule {}
