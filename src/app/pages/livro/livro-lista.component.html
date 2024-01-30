@@ -1,4 +1,7 @@
-<div class="ovh wf">
+<div class="ovh wf root">
+  @if(loading){
+  <nz-skeleton [nzActive]="true"></nz-skeleton>
+  }
   <div
     infinite-scroll
     [infiniteScrollDistance]="scrollDistance"
@@ -9,7 +12,8 @@
   >
     @for(livro of livros; track livro.id){
     <div class="">
-      <nz-card class="content-card"
+      <nz-card
+        class="content-card"
         nzHoverable
         [nzCover]="coverTemplate"
         (click)="detalharLivro(livro)"
@@ -25,8 +29,6 @@
         </div>
       </ng-template>
     </div>
-    } @empty {
-    <nz-empty></nz-empty>
     }
   </div>
 </div>

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './pages/notfound/page-not-found.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { AutenticacaoComponent } from './pages/autenticacao/autenticacao.component';
+import { AlertaComponent } from './pages/alerta/alerta.component';
 
 /*
 {
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'error',
     component: ErrorComponent,
+  },
+  {
+    path: 'alerta',
+    component: AlertaComponent,
   },
   {
     path: 'autenticacao',

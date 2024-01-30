@@ -39,6 +39,7 @@ import {
   HomeOutline,
   UserOutline,
   LogoutOutline,
+  WarningFill
 } from '@ant-design/icons-angular/icons';
 
 import { I18n } from 'aws-amplify/utils';
@@ -79,6 +80,7 @@ registerLocaleData(en);
       HomeOutline,
       UserOutline,
       LogoutOutline,
+      WarningFill
     ]),
     NzMenuModule,
     NzButtonModule,

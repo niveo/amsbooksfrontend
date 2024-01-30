@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { finalize } from 'rxjs';
 import { LivroService } from 'src/app/services/livro.service';
 import { APP_CONFIG, IConfigToken } from 'src/app/utils/app-config';
 
@@ -18,6 +19,8 @@ export class LivroListaComponent implements OnInit {
   scrollUpDistance = 2;
   throttle = 300;
 
+  loading = true;
+
   constructor(
     private router: Router,
     private readonly route: ActivatedRoute,
@@ -34,6 +37,7 @@ export class LivroListaComponent implements OnInit {
   }
 
   private carregarRegistros() {
+    this.loading = true;
     this.route.paramMap.subscribe((params) => {
       const obs = {};
       params.keys.forEach((key) => {
@@ -41,9 +45,16 @@ export class LivroListaComponent implements OnInit {
       });
       this.livroService
         .getAll(this.pageSize, this.page, obs)
-        .subscribe((response) => {
-          this.livros.push(...response.results);
-          this.count = response.count;
+        .pipe(finalize(() => (this.loading = false)))
+        .subscribe({
+          next: (response) => {
+            this.router.navigate(['alerta']);
+           // this.livros.push(...response.results);
+          //  this.count = response.count;
+          },
+          error: () => {
+    
+          },
         });
     });
   }

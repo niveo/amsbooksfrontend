@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import { ViewResultComponent } from 'src/app/componentes/view-result.component';
-
 @Component({
-  selector: 'app-error-component',
+  selector: 'app-alerta-component',
   template: `<view-result-component
-    status="500"
-    title="500"
-    subTitle="Sorry, there is an error on server."
+    status="warning"
+    title="There are some problems with your operation"
   /> `,
   standalone: true,
   imports: [ViewResultComponent],
 })
-export class ErrorComponent {}
+export class AlertaComponent {}

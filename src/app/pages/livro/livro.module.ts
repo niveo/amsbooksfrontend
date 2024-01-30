@@ -35,6 +35,7 @@ import { LivroComentarioService } from 'src/app/services/livro-comentario.servic
 import { LivroHistoricoUsuarioService } from 'src/app/services';
 import { LivroDetalheStore } from 'src/app/stores/livro-detalhe.store';
 import { LivroHistoricoUsuarioStore } from 'src/app/stores';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { LivroHistoricoUsuarioStore } from 'src/app/stores';
     NzAvatarModule,
     DateDistancePipe,
     NzSpinModule,
+    NzSkeletonModule
   ],
   providers: [
     LivroComentarioStore,
