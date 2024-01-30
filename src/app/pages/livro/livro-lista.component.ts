@@ -48,12 +48,11 @@ export class LivroListaComponent implements OnInit {
         .pipe(finalize(() => (this.loading = false)))
         .subscribe({
           next: (response) => {
-            this.router.navigate(['alerta']);
-           // this.livros.push(...response.results);
-          //  this.count = response.count;
+            this.livros.push(...response.results);
+            this.count = response.count;
           },
           error: () => {
-    
+            this.router.navigate(['alerta']);
           },
         });
     });
