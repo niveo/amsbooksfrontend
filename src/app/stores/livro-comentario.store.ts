@@ -45,8 +45,6 @@ export class LivroComentarioStore extends BaseLoadingStore {
     });
 
     this._dataSource.subscribe(() => {
-      console.log('C');
-
       this.livroComentarioService
         .getComentarioIdLivroUsuario(this.livroId)
         .subscribe((data) => this._comentarioIdHistoricoSource.next(data));
@@ -94,10 +92,14 @@ export class LivroComentarioStore extends BaseLoadingStore {
       .pipe(finalize(() => this.finalizarLoading()))
       .subscribe({
         next: (response: any[]) => {
-          var observables = response.map((url) => this.getDataFromJson(url));
-          forkJoin(observables).subscribe((val) => {
-            this._dataSource.next(val);
-          });
+          if (!response || response.length === 0) {
+            this._dataSource.next([]);
+          } else {
+            var observables = response.map((url) => this.getDataFromJson(url));
+            forkJoin(observables).subscribe((val) => {
+              this._dataSource.next(val);
+            });
+          }
         },
         error: () => {
           this._dataSource.next([]);
