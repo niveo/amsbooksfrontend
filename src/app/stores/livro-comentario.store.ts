@@ -1,8 +1,23 @@
 import { LivroDetalheStore } from 'src/app/stores/livro-detalhe.store';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, finalize } from 'rxjs';
+import {
+  BehaviorSubject,
+  finalize,
+  mergeMap,
+  firstValueFrom,
+  from,
+  switchMap,
+  map,
+  of,
+  flatMap,
+  tap,
+  forkJoin,
+  toArray,
+  catchError,
+} from 'rxjs';
 import { LivroComentarioService } from '../services/livro-comentario.service';
 import { BaseLoadingStore } from './base-loading.store';
+import { getUrl } from 'aws-amplify/storage';
 
 @Injectable()
 export class LivroComentarioStore extends BaseLoadingStore {
@@ -29,7 +44,9 @@ export class LivroComentarioStore extends BaseLoadingStore {
       }
     });
 
-    this.data$.subscribe(() => {
+    this._dataSource.subscribe(() => {
+      console.log('C');
+
       this.livroComentarioService
         .getComentarioIdLivroUsuario(this.livroId)
         .subscribe((data) => this._comentarioIdHistoricoSource.next(data));
@@ -54,29 +71,52 @@ export class LivroComentarioStore extends BaseLoadingStore {
       });
   }
 
+  getDataFromJson(file) {
+    return from(
+      getUrl({
+        key: file.usuarioId,
+        options: {
+          accessLevel: 'private',
+        },
+      })
+    ).pipe(
+      map((mp) => {
+        file.avatar = mp.url.toString();
+        return file;
+      })
+    );
+  }
+
   fetchData(): void {
     this.iniciarLoading();
     this.livroComentarioService
       .getAll(this.livroId)
       .pipe(finalize(() => this.finalizarLoading()))
       .subscribe({
-        next: (response) => {
-          this._dataSource.next(response);
+        next: (response: any[]) => {
+          var observables = response.map((url) => this.getDataFromJson(url));
+          forkJoin(observables).subscribe((val) => {
+            this._dataSource.next(val);
+          });
         },
         error: () => {
           this._dataSource.next([]);
         },
+        complete: () => {
+          console.log('complete');
+        },
       });
   }
 
-  removerComentario(codigo: number) {
+  removerComentario(comentarioId: number, idx: number) {
     this.iniciarLoading();
     this.livroComentarioService
-      .delete(codigo)
+      .delete(comentarioId)
       .pipe(finalize(() => this.finalizarLoading()))
       .subscribe({
         next: () => {
-          this.fetchData();
+          const response = [...this._dataSource.getValue()].splice(idx + 1, 1);
+          this._dataSource.next(response);
         },
         error: () => {},
       });

@@ -18,46 +18,50 @@
     </nz-form-item>
   </nz-comment-content>
 </nz-comment>
-} @else if(!(usuarioLogado$ | async)) {<nz-alert
+} @else if(!(usuarioLogado$ | async) && !(comentarioIdHistorico$ | async ))
+{<nz-alert
   nzType="info"
   nzMessage="É necessário estar logado para fazer um comentario."
 ></nz-alert
 >}
 
-<nz-spin [nzSpinning]="loading">
-  <nz-list [nzItemLayout]="'horizontal'">
-    @for(item of data$ | async; track item.id){
-    <nz-comment
-      [nzAuthor]="item.nome"
-      [nzDatetime]="item.displayTime | datedistance"
-    >
-      <nz-avatar
-        nz-comment-avatar
-        nzIcon="user"
-        [nzSrc]="item.avatar"
-      ></nz-avatar>
-      <nz-comment-content>
-        <nz-rate [(ngModel)]="item.rate" [nzDisabled]="true"></nz-rate>
-        <p>{{ item.texto }}</p>
-      </nz-comment-content>
+<nz-list nzItemLayout="vertical" [nzLoading]="loading">
+  @for(item of data$ | async; track item.id; let idx = $index){
+  <nz-comment
+    [nzAuthor]="item.nome"
+    [nzDatetime]="item.displayTime | datedistance"
+  >
+    <nz-avatar
+      nz-comment-avatar
+      nzIcon="user"
+      [nzSrc]="item.avatar"
+    ></nz-avatar>
 
-      <nz-comment-action>
-        @if(item.usuarioComentou) {
-        <span
-          nz-tooltip="Remover"
-          nzTitle="Remover"
-          nz-icon
-          nzType="delete"
-          (click)="removerComentario(item.id)"
-        ></span>
-        }
-      </nz-comment-action>
-    </nz-comment>
-    }
-  </nz-list>
-</nz-spin>
+    <nz-comment-content>
+      <nz-rate [(ngModel)]="item.rate" [nzDisabled]="true"></nz-rate>
+      <p>{{ item.texto }}</p>
+    </nz-comment-content>
+
+    <nz-comment-action>
+      @if((usuarioLogado$ | async ) && comentarioIdHistorico$ | async ; as
+      comentarioIdHistorico){
+      <span
+        *ngIf="comentarioIdHistorico === item.id"
+        nz-tooltip="Remover"
+        nzTitle="Remover"
+        nz-icon
+        nzType="delete"
+        (click)="removerComentario(item.id, idx)"
+      ></span>
+      }
+    </nz-comment-action>
+  </nz-comment>
+  }
+</nz-list>
 
 <ng-template #tplautor>
-  <app-avatar-usuario-component />
+  @if(usuarioLogado$ | async; as usuario){
+  <app-avatar-usuario-component [usuarioId]="usuario['id']" />
+  }
   <nz-rate [(ngModel)]="rate"></nz-rate>
 </ng-template>

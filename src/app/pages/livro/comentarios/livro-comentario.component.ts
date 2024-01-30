@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { AutenticacaoStore } from 'src/app/stores';
 import { LivroComentarioStore } from 'src/app/stores/livro-comentario.store';
+import { getUrl } from 'aws-amplify/storage';
 
 @Component({
   selector: 'app-livro-comentario-component',
@@ -42,6 +43,17 @@ export class LivroComentarioComponent implements OnInit {
     }
   }
 
+  async getAvatarItem(usuarioId: number) {
+    return (
+      await getUrl({
+        key: String(usuarioId),
+        options: {
+          validateObjectExistence: true, // defaults to false
+        },
+      })
+    ).url.toString();
+  }
+
   handleSubmit(): void {
     const content = this.inputValue;
     const rate = this.rate;
@@ -50,7 +62,7 @@ export class LivroComentarioComponent implements OnInit {
     this.livroComentarioStore.addComentario(rate, content);
   }
 
-  removerComentario(comentarioId) {
-    this.livroComentarioStore.removerComentario(comentarioId);
+  removerComentario(comentarioId: number, idx: number) {
+    this.livroComentarioStore.removerComentario(comentarioId, idx);
   }
 }
