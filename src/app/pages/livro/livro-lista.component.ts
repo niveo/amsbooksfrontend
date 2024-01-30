@@ -38,6 +38,7 @@ export class LivroListaComponent implements OnInit {
 
   private carregarRegistros() {
     this.loading = true;
+    this.livros = [];
     this.route.paramMap.subscribe((params) => {
       const obs = {};
       params.keys.forEach((key) => {
@@ -48,7 +49,7 @@ export class LivroListaComponent implements OnInit {
         .pipe(finalize(() => (this.loading = false)))
         .subscribe({
           next: (response) => {
-            this.livros.push(...response.results);
+            this.livros = response.results;
             this.count = response.count;
           },
           error: () => {

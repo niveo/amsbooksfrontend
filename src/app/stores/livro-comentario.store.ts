@@ -104,9 +104,6 @@ export class LivroComentarioStore extends BaseLoadingStore {
         error: () => {
           this._dataSource.next([]);
         },
-        complete: () => {
-          console.log('complete');
-        },
       });
   }
 
