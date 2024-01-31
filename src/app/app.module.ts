@@ -59,7 +59,7 @@ import { UsuarioPerfilComponent } from './pages/usuario/perfil/usuario-perfil.co
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
-import { UsuarioPerfilImagemComponent } from './pages/usuario/perfil/carregar-imagem/usuario-perfil-imagem.component';
+import { UsuarioPerfilImagemComponent } from './pages/usuario/perfil/imagem/usuario-perfil-imagem.component';
 
 I18n.putVocabularies(translations);
 I18n.setLanguage('pt');

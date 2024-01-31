@@ -48,7 +48,7 @@ export class LivroImagemComponent implements OnInit {
 
   ngOnInit(): void {
     this._imagemRemotaService
-      .obterUrl('livros/' + this.identificador)
+      .getUrl('livros/' + this.identificador)
       .subscribe((url) => (this.src = url));
   }
 }

@@ -1,0 +1,19 @@
+<nz-upload
+  class="avatar-uploader"
+  nzName="avatar"
+  nzListType="picture-card"
+  [nzShowUploadList]="false"
+  [nzBeforeUpload]="beforeUpload"
+>
+  @if(usuarioPerfil$ | async; as perfil){
+  <img [src]="perfil.picture" style="width: 100%" />
+  } @else {
+  <ng-container>
+    <span
+      class="upload-icon"
+      nz-icon
+      [nzType]="loading ? 'loading' : 'plus'"
+    ></span>
+    <div class="ant-upload-text">Imagem</div> </ng-container
+  >}
+</nz-upload>

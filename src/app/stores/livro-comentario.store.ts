@@ -58,7 +58,7 @@ export class LivroComentarioStore extends BaseLoadingStore {
 
   getDataFromJson(file) {
     return this.imagemRemotaService
-      .obterUrl(`${DIRETORIO_IMAGEM_USUARIO}${file.userId}`)
+      .getUrl(`${DIRETORIO_IMAGEM_USUARIO}${file.userId}`)
       .pipe(
         map((url) => {
           file.avatar = url;

@@ -3,7 +3,7 @@
 <nz-avatar
   nz-comment-avatar
   nzIcon="user"
-  [nzSrc]="srcImagem"
+  [nzSrc]="user.picture"
   nz-tooltip
   nzTooltipTitle="Profile"
   class="profile-image"
@@ -38,7 +38,7 @@
 <ng-template #contentTitle>
   <div class="fx-row profile-title-content">
     <div class="profile-image-avatar">
-      <nz-avatar nzIcon="user" [nzSrc]="srcImagem"></nz-avatar>
+      <nz-avatar nzIcon="user" [nzSrc]="user.picture"></nz-avatar>
     </div>
     <div class="fx-column">
       <p class="profile-name-user">{{ user.name }}</p>

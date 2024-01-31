@@ -1,4 +1,3 @@
-import { AutenticacaoStore } from 'src/app/stores';
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
@@ -6,12 +5,11 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { AuthenticatorService } from '@aws-amplify/ui-angular';
-import { ImagemRemotaService } from 'src/app/services';
 import { UsuarioPerfilStore } from 'src/app/stores/usuario-perfil.store';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { DIRETORIO_IMAGEM_USUARIO } from 'src/app/common/constantes';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { PerfilUsuario } from 'src/app/model';
 
 @Component({
   selector: 'app-menu-usuario-component',
@@ -24,32 +22,19 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
     NzButtonModule,
     NzDividerModule,
     AsyncPipe,
-    NzSpinModule
+    NzSpinModule,
   ],
 })
 export class MenuUsuarioComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly authenticator = inject(AuthenticatorService);
-  private readonly imagemRemotaService = inject(ImagemRemotaService);
   private readonly usuarioPerfilStore = inject(UsuarioPerfilStore);
-  private readonly autenticacaoStore = inject(AutenticacaoStore);
 
   visible: boolean = false;
-  srcImagem: string;
-  usuarioPerfil$: Observable<any>;
+  usuarioPerfil$: Observable<PerfilUsuario>;
 
   ngOnInit(): void {
     this.usuarioPerfil$ = this.usuarioPerfilStore.usuarioPerfil$;
-    this.usuarioPerfil$.subscribe(() => {
-      
-    });
-    this.autenticacaoStore.userId$.subscribe((value) => {
-      if (value) {
-        this.imagemRemotaService
-          .obterUrl(DIRETORIO_IMAGEM_USUARIO + value)
-          .subscribe((url: string) => (this.srcImagem = url));
-      }
-    });
   }
 
   perfilUsuario() {
