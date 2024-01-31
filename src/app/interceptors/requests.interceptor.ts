@@ -8,19 +8,19 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { APP_CONFIG, IConfigToken } from '../utils/app-config';
-import { fetchAuthSession } from 'aws-amplify/auth';
-import { AuthenticatorService } from '@aws-amplify/ui-angular';
+import { fetchAuthSession } from 'aws-amplify/auth'; 
+import { AutenticacaoStore } from '../stores';
 
 @Injectable()
 export class HttpsRequestInterceptor implements HttpInterceptor {
   private readonly conf = inject<IConfigToken>(APP_CONFIG);
-  private readonly authenticator = inject(AuthenticatorService);
+  private readonly authenticator = inject(AutenticacaoStore);
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (this.authenticator.authStatus !== 'authenticated') {
+    if (!this.authenticator.authenticated()) {
       return this.defaultClone(req, next);
     } else {
       return from(fetchAuthSession()).pipe(

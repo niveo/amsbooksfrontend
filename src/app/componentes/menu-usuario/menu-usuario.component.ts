@@ -37,10 +37,10 @@ export class MenuUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuarioPerfil$ = this.usuarioPerfilStore.usuarioPerfil$;
-    this.autenticacaoStore.usuarioLogado$.subscribe((logado) => {
-      if (logado) {
+    this.autenticacaoStore.usuarioId$.subscribe((value) => {
+      if (value) {
         this.imagemRemotaService
-          .obterUrl(this.authenticator.user.userId, 'private')
+          .obterUrl(value, 'private')
           .subscribe((url) => (this.srcImagem = url));
       }
     });
