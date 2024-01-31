@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import {
   ActivatedRoute,
   ResolveEnd,
@@ -17,16 +17,13 @@ import { Observable, filter, mapTo, merge } from 'rxjs';
   styleUrl: './livro-detalhe.component.scss',
 })
 export class LivroDetalheComponent {
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly location = inject(Location);
+  private readonly livroDetalheStore = inject(LivroDetalheStore);
+
   livro$: Observable<any>;
   isLoading$!: Observable<boolean>;
-
-  constructor(
-    private readonly route: ActivatedRoute,
-    private router: Router,
-    private location: Location,
-    @Inject(APP_CONFIG) readonly config: IConfigToken,
-    private readonly livroDetalheStore: LivroDetalheStore
-  ) {}
 
   ngOnInit() {
     this.livro$ = this.livroDetalheStore.data$;

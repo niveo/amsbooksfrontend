@@ -1,7 +1,7 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticatorService } from '@aws-amplify/ui-angular';
-import { BehaviorSubject } from 'rxjs';
-
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 export interface StoreStateModel {
   usuarioLogado: boolean;
@@ -9,9 +9,10 @@ export interface StoreStateModel {
 
 @Injectable({
   providedIn: 'root',
-  deps: [AuthenticatorService],
 })
 export class AutenticacaoStore {
+  private readonly authenticatorService = inject(AuthenticatorService);
+  private readonly router = inject(Router);
   private readonly _usuarioLogadoSource = new BehaviorSubject<boolean>(false);
   readonly usuarioLogado$ = this._usuarioLogadoSource.asObservable();
 
@@ -21,9 +22,9 @@ export class AutenticacaoStore {
     usuarioLogado: false,
   };
 
-  constructor(public authenticator: AuthenticatorService) {
+  constructor() {
     setTimeout(() => {
-      this.fetchData(authenticator.authStatus === 'authenticated');
+      this.fetchData(this.authenticatorService.authStatus === 'authenticated');
     }, 300);
   }
 
@@ -34,5 +35,8 @@ export class AutenticacaoStore {
   fetchData(usuarioLogado: boolean): void {
     this._usuarioLogadoSource.next(usuarioLogado);
     this.authenticated.set(usuarioLogado);
+    if (!usuarioLogado) {
+      this.router.navigate(['/']);
+    }
   }
 }

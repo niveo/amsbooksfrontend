@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { AutenticacaoStore } from 'src/app/stores';
 import { LivroComentarioStore } from 'src/app/stores/livro-comentario.store';
@@ -10,6 +10,9 @@ import { getUrl } from 'aws-amplify/storage';
   styleUrl: './livro-comentario.component.scss',
 })
 export class LivroComentarioComponent implements OnInit {
+  public readonly autenticacaoStore = inject(AutenticacaoStore);
+  private readonly livroComentarioStore = inject(LivroComentarioStore);
+
   @Input({ required: true })
   livroId: number;
 
@@ -20,11 +23,6 @@ export class LivroComentarioComponent implements OnInit {
   inputValue = '';
   storeLoadingSub: Subscription;
   comentarioIdHistorico$: Observable<any>;
-
-  constructor(
-    public readonly autenticacaoStore: AutenticacaoStore,
-    private readonly livroComentarioStore: LivroComentarioStore
-  ) {}
 
   ngOnInit(): void {
     this.data$ = this.livroComentarioStore.data$;

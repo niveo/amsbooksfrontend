@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticatorService } from '@aws-amplify/ui-angular';
 import { Amplify } from 'aws-amplify';
@@ -14,11 +14,11 @@ import { AutenticacaoStore } from './stores';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(
-    private router: Router,
-    public authenticator: AuthenticatorService,
-    private readonly autenticacaoStore: AutenticacaoStore
-  ) {
+  private readonly router = inject(Router);
+  private readonly authenticator = inject(AuthenticatorService);
+  private readonly autenticacaoStore = inject(AutenticacaoStore);
+
+  constructor() {
     Amplify.configure(awsExports);
     cognitoUserPoolsTokenProvider.setKeyValueStorage(sessionStorage);
 

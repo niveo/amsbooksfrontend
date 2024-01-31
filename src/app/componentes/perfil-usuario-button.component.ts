@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core'; 
+import { Component, inject } from '@angular/core';
 import { AutenticacaoStore } from '../stores';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -21,13 +21,13 @@ import { Router } from '@angular/router';
     } `,
 })
 export class PerfilUsuarioButtonComponent {
+  private router = inject(Router);
+  private readonly autenticacaoStore = inject(AutenticacaoStore);
+
   usuarioLogado$: Observable<boolean>;
 
-  constructor(
-    private router: Router,
-    public readonly autenticacaoStore: AutenticacaoStore
-  ) {
-    this.usuarioLogado$ = autenticacaoStore.usuarioLogado$;
+  constructor() {
+    this.usuarioLogado$ = this.autenticacaoStore.usuarioLogado$;
   }
 
   logarUsuario() {

@@ -15,7 +15,6 @@ export class UsuarioPerfilStore {
       if (logado) {
         from(fetchUserAttributes()).subscribe({
           next: (value) => {
-            console.log(value);
             this._usuarioPerfilSource.next(value);
           },
           error: (err) => {

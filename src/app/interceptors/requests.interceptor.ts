@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, inject } from '@angular/core';
 import { Observable, catchError, from, lastValueFrom, mergeMap } from 'rxjs';
 
 import {
@@ -13,10 +13,8 @@ import { AuthenticatorService } from '@aws-amplify/ui-angular';
 
 @Injectable()
 export class HttpsRequestInterceptor implements HttpInterceptor {
-  constructor(
-    @Inject(APP_CONFIG) private readonly conf: IConfigToken,
-    public authenticator: AuthenticatorService
-  ) {}
+  private readonly conf = inject<IConfigToken>(APP_CONFIG);
+  private readonly authenticator = inject(AuthenticatorService);
 
   intercept(
     req: HttpRequest<any>,
@@ -26,7 +24,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
       return this.defaultClone(req, next);
     } else {
       return from(fetchAuthSession()).pipe(
-        mergeMap(({ tokens }) => { 
+        mergeMap(({ tokens }) => {
           if (tokens.idToken) {
             const authReq = req.clone({
               url: this.conf.apiUri + req.url,

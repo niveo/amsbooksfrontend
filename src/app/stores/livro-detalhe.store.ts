@@ -1,5 +1,5 @@
 import { LivroService } from 'src/app/services/livro.service';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, finalize } from 'rxjs';
 import { BaseLoadingStore } from './base-loading.store';
 
@@ -11,9 +11,7 @@ export class LivroDetalheStore extends BaseLoadingStore {
   private readonly _livroIdSource = new BehaviorSubject<any>(null);
   readonly livroId$ = this._livroIdSource.asObservable();
 
-  constructor(private readonly livroService: LivroService) {
-    super();
-  }
+  private readonly livroService = inject(LivroService);
 
   fetchData(livroId: number): void {
     this._livroIdSource.next(livroId);

@@ -4,13 +4,13 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, timeout } from 'rxjs';
 import { DEFAULT_TIMEOUT } from '../common/tokens';
 
 @Injectable()
 export class TimeoutInterceptor implements HttpInterceptor {
-  constructor(@Inject(DEFAULT_TIMEOUT) protected defaultTimeout) {}
+  private readonly defaultTimeout = inject(DEFAULT_TIMEOUT);
 
   intercept(
     req: HttpRequest<any>,

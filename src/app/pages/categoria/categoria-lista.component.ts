@@ -1,8 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CategoriaService } from '../../services';
-import { APP_CONFIG, IConfigToken } from 'src/app/utils/app-config';
 import { ROTA_LIVROS } from 'src/app/common/constantes';
 
 @Component({
@@ -11,12 +10,10 @@ import { ROTA_LIVROS } from 'src/app/common/constantes';
   styleUrls: ['./categoria-lista.component.scss'],
 })
 export class CategoriaListaComponent implements OnInit {
+  private readonly router = inject(Router);
+  private readonly categoriaService = inject(CategoriaService);
+
   categorias$!: Observable<any[]>;
-  constructor(
-    private router: Router,
-    private readonly categoriaService: CategoriaService,
-    @Inject(APP_CONFIG) readonly config: IConfigToken
-  ) {}
 
   ngOnInit(): void {
     this.categorias$ = this.categoriaService.getAll();

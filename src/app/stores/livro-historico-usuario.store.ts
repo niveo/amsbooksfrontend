@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { LivroHistoricoUsuarioService } from '../services';
 import { LivroDetalheStore } from './livro-detalhe.store';
 import { BehaviorSubject } from 'rxjs';
@@ -6,11 +6,12 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class LivroHistoricoUsuarioStore {
   private livroId: number;
+  private readonly livroHistoricoUsuarioService = inject(
+    LivroHistoricoUsuarioService
+  );
+  private readonly livroDetalheStore = inject(LivroDetalheStore);
 
-  constructor(
-    private readonly livroHistoricoUsuarioService: LivroHistoricoUsuarioService,
-    private readonly livroDetalheStore: LivroDetalheStore
-  ) {
+  constructor() {
     this.livroDetalheStore.livroId$.subscribe((livroId) => {
       if (livroId) {
         this.livroId = livroId;

@@ -1,5 +1,5 @@
 import { AutenticacaoStore } from 'src/app/stores';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -25,23 +25,25 @@ import { AsyncPipe } from '@angular/common';
   ],
 })
 export class MenuUsuarioComponent implements OnInit {
+  private readonly router = inject(Router);
+  private readonly authenticator = inject(AuthenticatorService);
+  private readonly imagemRemotaService = inject(ImagemRemotaService);
+  private readonly usuarioPerfilStore = inject(UsuarioPerfilStore);
+  private readonly autenticacaoStore = inject(AutenticacaoStore);
+
   visible: boolean = false;
   srcImagem: string;
   usuarioPerfil$: Observable<any>;
 
-  constructor(
-    private readonly router: Router,
-    public readonly authenticator: AuthenticatorService,
-    private readonly imagemRemotaService: ImagemRemotaService,
-    private readonly usuarioPerfilStore: UsuarioPerfilStore
-  ) {}
-
   ngOnInit(): void {
     this.usuarioPerfil$ = this.usuarioPerfilStore.usuarioPerfil$;
-
-    this.imagemRemotaService
-      .obterUrl(this.authenticator.user.userId, 'private')
-      .subscribe((url) => (this.srcImagem = url));
+    this.autenticacaoStore.usuarioLogado$.subscribe((logado) => {
+      if (logado) {
+        this.imagemRemotaService
+          .obterUrl(this.authenticator.user.userId, 'private')
+          .subscribe((url) => (this.srcImagem = url));
+      }
+    });
   }
 
   perfilUsuario() {

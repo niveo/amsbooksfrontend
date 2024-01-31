@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -7,7 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './autenticacao.component.scss',
 })
 export class AutenticacaoComponent {
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
   @HostListener('document:keydown.escape', ['$event']) onKeydownHandler() {
     this.closePopup();

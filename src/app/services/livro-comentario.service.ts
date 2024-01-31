@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs';
 import { handleError } from '../common/handle-error';
+import { BaseHttpService } from './base-http.service';
 
 export class LivroComentarioInputDto {
   livroId: number;
@@ -10,9 +10,7 @@ export class LivroComentarioInputDto {
 }
 
 @Injectable()
-export class LivroComentarioService {
-  constructor(private readonly http: HttpClient) {}
-
+export class LivroComentarioService extends BaseHttpService {
   getAll(livroId: number) {
     return this.http
       .get<any>('/livros_comentarios', {

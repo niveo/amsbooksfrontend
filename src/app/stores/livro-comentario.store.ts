@@ -1,5 +1,5 @@
 import { LivroDetalheStore } from 'src/app/stores/livro-detalhe.store';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, finalize, map, forkJoin } from 'rxjs';
 import { LivroComentarioService } from '../services/livro-comentario.service';
 import { BaseLoadingStore } from './base-loading.store';
@@ -7,9 +7,12 @@ import { ImagemRemotaService } from '../services';
 
 @Injectable()
 export class LivroComentarioStore extends BaseLoadingStore {
+  private readonly livroComentarioService = inject(LivroComentarioService);
+  private readonly livroDetalheStore = inject(LivroDetalheStore);
+  private readonly imagemRemotaService = inject(ImagemRemotaService);
+
   private readonly _dataSource = new BehaviorSubject<any[]>([]);
   readonly data$ = this._dataSource.asObservable();
-
   private readonly _comentarioIdHistoricoSource = new BehaviorSubject<any[]>(
     []
   );
@@ -18,11 +21,7 @@ export class LivroComentarioStore extends BaseLoadingStore {
 
   private livroId: number;
 
-  constructor(
-    private readonly livroComentarioService: LivroComentarioService,
-    private readonly livroDetalheStore: LivroDetalheStore,
-    private readonly imagemRemotaService: ImagemRemotaService
-  ) {
+  constructor() {
     super();
     this.livroDetalheStore.livroId$.subscribe((livroId) => {
       if (livroId) {
