@@ -42,6 +42,7 @@ import {
   WarningFill,
   ProfileOutline,
   SaveOutline,
+  PlusOutline
 } from '@ant-design/icons-angular/icons';
 
 import { I18n } from 'aws-amplify/utils';
@@ -58,6 +59,7 @@ import { UsuarioPerfilComponent } from './pages/usuario/perfil/usuario-perfil.co
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { UsuarioPerfilImagemComponent } from './pages/usuario/perfil/carregar-imagem/usuario-perfil-imagem.component';
 
 I18n.putVocabularies(translations);
 I18n.setLanguage('pt');
@@ -71,6 +73,7 @@ registerLocaleData(en);
     AutenticacaoComponent,
     PerfilUsuarioButtonComponent,
     UsuarioPerfilComponent,
+    UsuarioPerfilImagemComponent
   ],
   imports: [
     BrowserModule,
@@ -94,6 +97,7 @@ registerLocaleData(en);
       WarningFill,
       ProfileOutline,
       SaveOutline,
+      PlusOutline
     ]),
     NzMenuModule,
     NzButtonModule,
@@ -117,7 +121,7 @@ registerLocaleData(en);
   ],
   providers: [
     { provide: APP_CONFIG, useValue: environment },
-    { provide: TOKEN_CARREGAR_IMAGEM_REMOTA, useValue: false },
+    { provide: TOKEN_CARREGAR_IMAGEM_REMOTA, useValue: environment.carregarImagemRemota },
     { provide: DEFAULT_TIMEOUT, useValue: 30000 },
     {
       provide: HTTP_INTERCEPTORS,

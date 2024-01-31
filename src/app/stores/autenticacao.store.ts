@@ -17,8 +17,8 @@ export class AutenticacaoStore {
   private readonly _usuarioLogadoSource = new BehaviorSubject<boolean>(false);
   readonly usuarioLogado$ = this._usuarioLogadoSource.asObservable();
 
-  private readonly _usuarioIdSource = new BehaviorSubject<string>(null);
-  readonly usuarioId$ = this._usuarioIdSource.asObservable();
+  private readonly _userIdSource = new BehaviorSubject<string>(null);
+  readonly userId$ = this._userIdSource.asObservable();
 
   authenticated = signal(false);
 
@@ -41,8 +41,14 @@ export class AutenticacaoStore {
     return this._usuarioLogadoSource.getValue();
   }
 
-  private fetchDataAuthenticator(authenticatorService: AuthenticatorService): void {
-    this._usuarioIdSource.next(authenticatorService.user.userId);
+  get getUserId(): string {
+    return this._userIdSource.getValue();
+  }
+
+  private fetchDataAuthenticator(
+    authenticatorService: AuthenticatorService
+  ): void {
+    this._userIdSource.next(authenticatorService.user.userId);
     this.fetchData(authenticatorService.authStatus === 'authenticated');
   }
 
@@ -50,7 +56,7 @@ export class AutenticacaoStore {
     this._usuarioLogadoSource.next(usuarioLogado);
     this.authenticated.set(usuarioLogado);
     if (!usuarioLogado) {
-      this._usuarioIdSource.next(null);
+      this._userIdSource.next(null);
       this.router.navigate(['/']);
     }
   }

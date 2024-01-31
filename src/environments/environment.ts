@@ -3,5 +3,6 @@ export const environment = {
   apiUri: 'config.apiUri', 
   imageKitPublicKey: 'config.imageKitPublicKey',
   imageKitUrlEndPoint: 'config.imageKitUrlEndPoint',
-  imageKitUrlEndPointLivros: 'config.imageKitUrlEndPointCatalogo'
+  imageKitUrlEndPointLivros: 'config.imageKitUrlEndPointCatalogo',
+  carregarImagemRemota: true
 };

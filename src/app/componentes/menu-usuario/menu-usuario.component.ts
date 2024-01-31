@@ -43,7 +43,7 @@ export class MenuUsuarioComponent implements OnInit {
     this.usuarioPerfil$.subscribe(() => {
       
     });
-    this.autenticacaoStore.usuarioId$.subscribe((value) => {
+    this.autenticacaoStore.userId$.subscribe((value) => {
       if (value) {
         this.imagemRemotaService
           .obterUrl(DIRETORIO_IMAGEM_USUARIO + value)

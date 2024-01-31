@@ -7,7 +7,7 @@ import { TOKEN_CARREGAR_IMAGEM_REMOTA } from 'src/app/common';
   providedIn: 'root',
 })
 export class ImagemRemotaService {
-  carregarImagemRemoto = inject(TOKEN_CARREGAR_IMAGEM_REMOTA);
+  private readonly carregarImagemRemoto = inject(TOKEN_CARREGAR_IMAGEM_REMOTA);
 
   obterUrl(key: string, level: 'guest' | 'private' | 'protected' = 'guest') {
     return from(
