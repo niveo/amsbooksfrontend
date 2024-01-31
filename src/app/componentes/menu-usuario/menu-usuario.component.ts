@@ -10,6 +10,8 @@ import { ImagemRemotaService } from 'src/app/services';
 import { UsuarioPerfilStore } from 'src/app/stores/usuario-perfil.store';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { DIRETORIO_IMAGEM_USUARIO } from 'src/app/common/constantes';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @Component({
   selector: 'app-menu-usuario-component',
@@ -22,6 +24,7 @@ import { AsyncPipe } from '@angular/common';
     NzButtonModule,
     NzDividerModule,
     AsyncPipe,
+    NzSpinModule
   ],
 })
 export class MenuUsuarioComponent implements OnInit {
@@ -37,11 +40,14 @@ export class MenuUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuarioPerfil$ = this.usuarioPerfilStore.usuarioPerfil$;
+    this.usuarioPerfil$.subscribe(() => {
+      
+    });
     this.autenticacaoStore.usuarioId$.subscribe((value) => {
       if (value) {
         this.imagemRemotaService
-          .obterUrl(value, 'private')
-          .subscribe((url) => (this.srcImagem = url));
+          .obterUrl(DIRETORIO_IMAGEM_USUARIO + value)
+          .subscribe((url: string) => (this.srcImagem = url));
       }
     });
   }

@@ -21,7 +21,7 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { HttpsRequestInterceptor } from './interceptors/requests.interceptor';
 import { APP_CONFIG } from './utils/app-config';
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
-import { DEFAULT_TIMEOUT } from './common/tokens';
+import { DEFAULT_TIMEOUT, TOKEN_CARREGAR_IMAGEM_REMOTA } from './common/tokens';
 import { LivroModule } from './pages/livro/livro.module';
 
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -41,6 +41,7 @@ import {
   LogoutOutline,
   WarningFill,
   ProfileOutline,
+  SaveOutline,
 } from '@ant-design/icons-angular/icons';
 
 import { I18n } from 'aws-amplify/utils';
@@ -53,6 +54,10 @@ import {
 } from './componentes';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { UsuarioPerfilComponent } from './pages/usuario/perfil/usuario-perfil.component';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 I18n.putVocabularies(translations);
 I18n.setLanguage('pt');
@@ -65,6 +70,7 @@ registerLocaleData(en);
     AppComponent,
     AutenticacaoComponent,
     PerfilUsuarioButtonComponent,
+    UsuarioPerfilComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +93,7 @@ registerLocaleData(en);
       LogoutOutline,
       WarningFill,
       ProfileOutline,
+      SaveOutline,
     ]),
     NzMenuModule,
     NzButtonModule,
@@ -96,6 +103,9 @@ registerLocaleData(en);
     NzToolTipModule,
     NzModalModule,
     NzUploadModule,
+    NzSpaceModule,
+    NzInputModule,
+    NzSpinModule,
 
     LivroModule,
     TagModule,
@@ -107,6 +117,7 @@ registerLocaleData(en);
   ],
   providers: [
     { provide: APP_CONFIG, useValue: environment },
+    { provide: TOKEN_CARREGAR_IMAGEM_REMOTA, useValue: false },
     { provide: DEFAULT_TIMEOUT, useValue: 30000 },
     {
       provide: HTTP_INTERCEPTORS,

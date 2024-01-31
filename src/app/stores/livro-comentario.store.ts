@@ -4,6 +4,7 @@ import { BehaviorSubject, finalize, map, forkJoin } from 'rxjs';
 import { LivroComentarioService } from '../services/livro-comentario.service';
 import { BaseLoadingStore } from './base-loading.store';
 import { ImagemRemotaService } from '../services';
+import { DIRETORIO_IMAGEM_USUARIO } from '../common/constantes';
 
 @Injectable()
 export class LivroComentarioStore extends BaseLoadingStore {
@@ -56,12 +57,14 @@ export class LivroComentarioStore extends BaseLoadingStore {
   }
 
   getDataFromJson(file) {
-    return this.imagemRemotaService.obterUrl(file.usuarioId, 'private').pipe(
-      map((url) => {
-        file.avatar = url;
-        return file;
-      })
-    );
+    return this.imagemRemotaService
+      .obterUrl(`${DIRETORIO_IMAGEM_USUARIO}${file.userId}`)
+      .pipe(
+        map((url) => {
+          file.avatar = url;
+          return file;
+        })
+      );
   }
 
   fetchData(): void {

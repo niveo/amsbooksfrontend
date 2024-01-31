@@ -1,0 +1,31 @@
+@if(usuarioPerfil$ | async; as usuarioPerfil){
+<div class="fx-row gap-5 wf">
+  <div class="fx-column gap-5 wf">
+    <input
+      type="text"
+      nz-input
+      [(ngModel)]="usuarioPerfil.email"
+      nzSize="large"
+      readonly
+    />
+    <nz-input-group [nzSuffix]="tplsave">
+      <input
+        type="text"
+        nz-input
+        [(ngModel)]="usuarioPerfil.name"
+        nzSize="large"
+      />
+    </nz-input-group>
+    <ng-template #tplsave>
+      <button
+        nz-button
+        nzShape="circle"
+        nz-tooltip="Salvar Alteração"
+        (click)="alterarNome()"
+      >
+        <span nz-icon nzType="save" nzTheme="outline"></span>
+      </button>
+    </ng-template>
+  </div>
+</div>
+}

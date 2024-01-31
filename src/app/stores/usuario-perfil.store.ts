@@ -1,7 +1,8 @@
 import { AutenticacaoStore } from 'src/app/stores';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { fetchUserAttributes } from 'aws-amplify/auth';
 import { BehaviorSubject, from } from 'rxjs';
+import { UsuarioPerfilRemotoService } from '../services';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,10 @@ import { BehaviorSubject, from } from 'rxjs';
 export class UsuarioPerfilStore {
   private readonly _usuarioPerfilSource = new BehaviorSubject<any>(null);
   readonly usuarioPerfil$ = this._usuarioPerfilSource.asObservable();
+
+  private readonly _usuarioPerfilRemotoService = inject(
+    UsuarioPerfilRemotoService
+  );
 
   constructor(autenticacaoStore: AutenticacaoStore) {
     autenticacaoStore.usuarioLogado$.subscribe((logado) => {
@@ -23,5 +28,10 @@ export class UsuarioPerfilStore {
         });
       }
     });
+  }
+
+  alterarNome() {
+    const value = this._usuarioPerfilSource.getValue();
+    return this._usuarioPerfilRemotoService.atualizarNome(value.name)
   }
 }

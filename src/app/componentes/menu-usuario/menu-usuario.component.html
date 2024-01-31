@@ -1,3 +1,5 @@
+@if(usuarioPerfil$ | async; as user){
+
 <nz-avatar
   nz-comment-avatar
   nzIcon="user"
@@ -34,7 +36,6 @@
 </ng-template>
 
 <ng-template #contentTitle>
-  @if(usuarioPerfil$ | async; as user){
   <div class="fx-row profile-title-content">
     <div class="profile-image-avatar">
       <nz-avatar nzIcon="user" [nzSrc]="srcImagem"></nz-avatar>
@@ -44,5 +45,6 @@
       <p class="profile-email-user">{{ user.email }}</p>
     </div>
   </div>
-  }
 </ng-template>
+
+} @else {<nz-spin nzSimple nzSize="large" />}
