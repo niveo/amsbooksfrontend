@@ -1,4 +1,4 @@
-@if((usuarioLogado$ | async) && !(comentarioIdHistorico$ | async )){
+@if((autenticacaoStore.authenticated()) && !(comentarioIdHistorico$ | async )){
 
 <nz-comment [nzAuthor]="tplautor">
   <nz-comment-content>
@@ -18,7 +18,7 @@
     </nz-form-item>
   </nz-comment-content>
 </nz-comment>
-} @else if(!(usuarioLogado$ | async) && !(comentarioIdHistorico$ | async ))
+} @else if(!(autenticacaoStore.authenticated()) && !(comentarioIdHistorico$ | async ))
 {<nz-alert
   nzType="info"
   nzMessage="É necessário estar logado para fazer um comentario."
@@ -43,7 +43,7 @@
     </nz-comment-content>
 
     <nz-comment-action>
-      @if((usuarioLogado$ | async ) && comentarioIdHistorico$ | async ; as
+      @if((autenticacaoStore.authenticated()) && comentarioIdHistorico$ | async ; as
       comentarioIdHistorico){
       <span
         *ngIf="comentarioIdHistorico === item.id"
@@ -60,8 +60,8 @@
 </nz-list>
 
 <ng-template #tplautor>
-  @if(usuarioLogado$ | async; as usuario){
-  <app-avatar-usuario-component [usuarioId]="usuario['id']" />
+  @if(autenticacaoStore.authenticated()){
+  <app-menu-usuario-component  />
   }
   <nz-rate [(ngModel)]="rate"></nz-rate>
 </ng-template>

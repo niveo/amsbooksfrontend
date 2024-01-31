@@ -4,14 +4,9 @@ import { PageNotFoundComponent } from './pages/notfound/page-not-found.component
 import { ErrorComponent } from './pages/error/error.component';
 import { AutenticacaoComponent } from './pages/autenticacao/autenticacao.component';
 import { AlertaComponent } from './pages/alerta/alerta.component';
+import { UsuarioPerfilComponent } from './pages/usuario/perfil/usuario-perfil.component';
+import { userGuard } from './guards/user.guard';
 
-/*
-{
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [AuthGuard],
-},
-*/
 const routes: Routes = [
   {
     path: '',
@@ -31,6 +26,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'perfil',
+    component: UsuarioPerfilComponent,
+    canActivate: [userGuard],
+  },
+  {
     path: 'tags',
     loadChildren: () =>
       import('./pages/tag/tag.module').then((m) => m.TagModule),
@@ -46,6 +46,7 @@ const routes: Routes = [
   {
     path: 'autenticacao',
     component: AutenticacaoComponent,
+    outlet: 'autenticacaoPopup',
   },
   { path: '**', component: PageNotFoundComponent },
 ];

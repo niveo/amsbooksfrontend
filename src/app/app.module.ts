@@ -39,14 +39,18 @@ import {
   HomeOutline,
   UserOutline,
   LogoutOutline,
-  WarningFill
+  WarningFill,
+  ProfileOutline,
 } from '@ant-design/icons-angular/icons';
 
 import { I18n } from 'aws-amplify/utils';
 import { translations } from '@aws-amplify/ui-angular';
 import { AutenticacaoComponent } from './pages/autenticacao/autenticacao.component';
 import { CoreGlobalModule } from './common/core.global.module';
-import { PerfilUsuarioButtonComponent } from './componentes';
+import {
+  MenuUsuarioComponent,
+  PerfilUsuarioButtonComponent,
+} from './componentes';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 
@@ -70,6 +74,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     ErrorComponent,
     PageNotFoundComponent,
+    MenuUsuarioComponent,
     CommonModule,
 
     NzIconModule.forRoot([
@@ -80,7 +85,8 @@ registerLocaleData(en);
       HomeOutline,
       UserOutline,
       LogoutOutline,
-      WarningFill
+      WarningFill,
+      ProfileOutline,
     ]),
     NzMenuModule,
     NzButtonModule,

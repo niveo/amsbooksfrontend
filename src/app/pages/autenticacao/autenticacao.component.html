@@ -1,1 +1,17 @@
-<amplify-authenticator [signUpAttributes]="['name']"> </amplify-authenticator>
+<amplify-authenticator [signUpAttributes]="['name']" variation="modal">
+  <ng-template amplifySlot="sign-in-footer">
+    <div style="text-align: center; padding-right: 30px; padding-left: 30px;">
+      <button
+        (click)="closePopup()"
+        class="amplify-button amplify-field-group__control"
+        data-fullwidth="false"
+        data-size="small"
+        data-variation="link"
+        type="button"
+        style="font-weight: normal; width: 100%;"
+      >
+        Sair
+      </button>
+    </div>
+  </ng-template>
+</amplify-authenticator>

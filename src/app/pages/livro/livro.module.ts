@@ -5,7 +5,7 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { LivroListaComponent } from './livro-lista.component';
 import { LivroRoutingModule } from './livro-routing.module';
-import { LivroDetalheComponent } from './detalhe/livro-detalhe.component'; 
+import { LivroDetalheComponent } from './detalhe/livro-detalhe.component';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { DateDistancePipe, NivelLeituraPipe } from 'src/app/pipes';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
@@ -15,7 +15,7 @@ import {
   ArrowLeftOutline,
   HeartTwoTone,
   HeartOutline,
-  DeleteOutline
+  DeleteOutline,
 } from '@ant-design/icons-angular/icons';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { LivroLeituraComponent } from './leitura/livro-leitura.component';
@@ -27,7 +27,10 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
-import { AvatarUsuarioComponent, LivroImagemComponent } from 'src/app/componentes';
+import {
+  MenuUsuarioComponent,
+  LivroImagemComponent,
+} from 'src/app/componentes';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { LivroComentarioStore } from 'src/app/stores/livro-comentario.store';
@@ -43,7 +46,6 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
     LivroDetalheComponent,
     LivroLeituraComponent,
     LivroComentarioComponent,
-    AvatarUsuarioComponent,
   ],
   imports: [
     CommonModule,
@@ -55,7 +57,12 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
     InfiniteScrollModule,
     LivroImagemComponent,
     LivroRoutingModule,
-    NzIconModule.forChild([ArrowLeftOutline, HeartTwoTone, HeartOutline, DeleteOutline]),
+    NzIconModule.forChild([
+      ArrowLeftOutline,
+      HeartTwoTone,
+      HeartOutline,
+      DeleteOutline,
+    ]),
     NivelLeituraPipe,
     NzPageHeaderModule,
     NzRateModule,
@@ -70,7 +77,8 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
     NzAvatarModule,
     DateDistancePipe,
     NzSpinModule,
-    NzSkeletonModule
+    NzSkeletonModule,
+    MenuUsuarioComponent,
   ],
   providers: [
     LivroComentarioStore,
@@ -80,8 +88,6 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
     LivroComentarioService,
     LivroHistoricoUsuarioService,
   ],
-  schemas:[
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class LivroModule {}

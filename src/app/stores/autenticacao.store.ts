@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { AuthenticatorService } from '@aws-amplify/ui-angular';
 import { BehaviorSubject } from 'rxjs';
+
 
 export interface StoreStateModel {
   usuarioLogado: boolean;
@@ -13,6 +14,8 @@ export interface StoreStateModel {
 export class AutenticacaoStore {
   private readonly _usuarioLogadoSource = new BehaviorSubject<boolean>(false);
   readonly usuarioLogado$ = this._usuarioLogadoSource.asObservable();
+
+  authenticated = signal(false);
 
   initialState = {
     usuarioLogado: false,
@@ -30,5 +33,6 @@ export class AutenticacaoStore {
 
   fetchData(usuarioLogado: boolean): void {
     this._usuarioLogadoSource.next(usuarioLogado);
+    this.authenticated.set(usuarioLogado);
   }
 }

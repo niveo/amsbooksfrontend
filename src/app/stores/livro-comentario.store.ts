@@ -1,23 +1,9 @@
 import { LivroDetalheStore } from 'src/app/stores/livro-detalhe.store';
 import { Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  finalize,
-  mergeMap,
-  firstValueFrom,
-  from,
-  switchMap,
-  map,
-  of,
-  flatMap,
-  tap,
-  forkJoin,
-  toArray,
-  catchError,
-} from 'rxjs';
+import { BehaviorSubject, finalize, map, forkJoin } from 'rxjs';
 import { LivroComentarioService } from '../services/livro-comentario.service';
 import { BaseLoadingStore } from './base-loading.store';
-import { getUrl } from 'aws-amplify/storage';
+import { ImagemRemotaService } from '../services';
 
 @Injectable()
 export class LivroComentarioStore extends BaseLoadingStore {
@@ -34,7 +20,8 @@ export class LivroComentarioStore extends BaseLoadingStore {
 
   constructor(
     private readonly livroComentarioService: LivroComentarioService,
-    private readonly livroDetalheStore: LivroDetalheStore
+    private readonly livroDetalheStore: LivroDetalheStore,
+    private readonly imagemRemotaService: ImagemRemotaService
   ) {
     super();
     this.livroDetalheStore.livroId$.subscribe((livroId) => {
@@ -70,16 +57,9 @@ export class LivroComentarioStore extends BaseLoadingStore {
   }
 
   getDataFromJson(file) {
-    return from(
-      getUrl({
-        key: file.usuarioId,
-        options: {
-          accessLevel: 'private',
-        },
-      })
-    ).pipe(
-      map((mp) => {
-        file.avatar = mp.url.toString();
+    return this.imagemRemotaService.obterUrl(file.usuarioId, 'private').pipe(
+      map((url) => {
+        file.avatar = url;
         return file;
       })
     );
