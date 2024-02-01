@@ -1,3 +1,3 @@
 export * from './perfil-usuario-button.component';
-export * from './menu-usuario/menu-usuario.component';
+export * from './usuario/menu/usuario-menu.component';
 export * from './livro-imagem.component';

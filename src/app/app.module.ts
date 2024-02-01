@@ -53,7 +53,7 @@ import { translations } from '@aws-amplify/ui-angular';
 import { AutenticacaoComponent } from './pages/autenticacao/autenticacao.component';
 import { CoreGlobalModule } from './common/core.global.module';
 import {
-  MenuUsuarioComponent,
+  UsuarioMenuComponent,
   PerfilUsuarioButtonComponent,
 } from './componentes';
 import { NzModalModule } from 'ng-zorro-antd/modal';
@@ -95,7 +95,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     ErrorComponent,
     PageNotFoundComponent,
-    MenuUsuarioComponent,
+    UsuarioMenuComponent,
     CommonModule,
 
     NzIconModule.forRoot([

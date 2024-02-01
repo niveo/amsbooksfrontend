@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
       <span nz-icon nzType="user"></span>
     </button>
     } @else if(usuarioLogado$ | async){
-    <app-menu-usuario-component />
+    <app-usuario-menu-component />
     } `,
 })
 export class PerfilUsuarioButtonComponent {

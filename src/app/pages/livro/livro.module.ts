@@ -28,7 +28,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import {
-  MenuUsuarioComponent,
+  UsuarioMenuComponent,
   LivroImagemComponent,
 } from 'src/app/componentes';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
@@ -78,7 +78,7 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
     DateDistancePipe,
     NzSpinModule,
     NzSkeletonModule,
-    MenuUsuarioComponent,
+    UsuarioMenuComponent,
   ],
   providers: [
     LivroComentarioStore,

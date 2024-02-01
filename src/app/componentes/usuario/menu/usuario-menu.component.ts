@@ -12,9 +12,9 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { PerfilUsuario } from 'src/app/model';
 
 @Component({
-  selector: 'app-menu-usuario-component',
-  templateUrl: './menu-usuario.component.html',
-  styleUrl: './menu-usuario.component.scss',
+  selector: 'app-usuario-menu-component',
+  templateUrl: './usuario-menu.component.html',
+  styleUrl: './usuario-menu.component.scss',
   standalone: true,
   imports: [
     NzAvatarModule,
@@ -25,7 +25,7 @@ import { PerfilUsuario } from 'src/app/model';
     NzSpinModule,
   ],
 })
-export class MenuUsuarioComponent implements OnInit {
+export class UsuarioMenuComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly authenticator = inject(AuthenticatorService);
   private readonly usuarioPerfilStore = inject(UsuarioPerfilStore);
