@@ -1,8 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticatorService } from '@aws-amplify/ui-angular';
-import { Amplify } from 'aws-amplify';
-import awsExports from '../aws-exports';
 import { Hub } from 'aws-amplify/utils';
 import { sessionStorage } from 'aws-amplify/utils';
 import { cognitoUserPoolsTokenProvider } from 'aws-amplify/auth/cognito';
@@ -19,7 +17,6 @@ export class AppComponent implements OnInit {
   private readonly autenticacaoStore = inject(AutenticacaoStore);
 
   constructor() {
-    Amplify.configure(awsExports);
     cognitoUserPoolsTokenProvider.setKeyValueStorage(sessionStorage);
 
     Hub.listen('auth', ({ payload }) => {

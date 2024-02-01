@@ -56,31 +56,27 @@ export class LivroComentarioStore extends BaseLoadingStore {
       });
   }
 
-  getDataFromJson(file) {
-    return this.imagemRemotaService
-      .getUrl(`${DIRETORIO_IMAGEM_USUARIO}${file.userId}`)
-      .pipe(
-        map((url) => {
-          file.avatar = url;
-          return file;
-        })
-      );
-  }
-
   fetchData(): void {
     this.iniciarLoading();
     this.livroComentarioService
       .getAll(this.livroId)
       .pipe(finalize(() => this.finalizarLoading()))
+      .pipe(
+        map((response) => {
+          response.forEach((element) => {
+            element.avatar = this.imagemRemotaService.getUrlPublic(
+              `${DIRETORIO_IMAGEM_USUARIO}${element.userId}`
+            );
+          });
+          return response;
+        })
+      )
       .subscribe({
         next: (response: any[]) => {
           if (!response || response.length === 0) {
             this._dataSource.next([]);
           } else {
-            var observables = response.map((url) => this.getDataFromJson(url));
-            forkJoin(observables).subscribe((val) => {
-              this._dataSource.next(val);
-            });
+            this._dataSource.next(response);
           }
         },
         error: () => {

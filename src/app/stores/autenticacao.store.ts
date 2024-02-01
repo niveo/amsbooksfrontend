@@ -30,7 +30,9 @@ export class AutenticacaoStore {
     const subs = interval(1000).subscribe(() => {
       if (this.authenticatorService.authStatus !== 'configuring') {
         setTimeout(() => {
-          this.fetchDataAuthenticator(this.authenticatorService);
+          if (this.authenticatorService.authStatus === 'authenticated') {
+            this.fetchDataAuthenticator(this.authenticatorService);
+          }
         }, 300);
         subs.unsubscribe();
       }

@@ -1,8 +1,7 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { AutenticacaoStore } from 'src/app/stores';
-import { LivroComentarioStore } from 'src/app/stores/livro-comentario.store';
-import { getUrl } from 'aws-amplify/storage';
+import { LivroComentarioStore } from 'src/app/stores/livro-comentario.store'; 
 
 @Component({
   selector: 'app-livro-comentario-component',
@@ -39,17 +38,6 @@ export class LivroComentarioComponent implements OnInit {
     if (this.storeLoadingSub) {
       this.storeLoadingSub.unsubscribe();
     }
-  }
-
-  async getAvatarItem(usuarioId: number) {
-    return (
-      await getUrl({
-        key: String(usuarioId),
-        options: {
-          validateObjectExistence: true, // defaults to false
-        },
-      })
-    ).url.toString();
   }
 
   handleSubmit(): void {
