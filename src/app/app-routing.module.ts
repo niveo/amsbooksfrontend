@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './pages/notfound/page-not-found.component';
-import { ErrorComponent } from './pages/error/error.component';
-import { AutenticacaoComponent } from './pages/autenticacao/autenticacao.component';
+import { ErrorComponent } from './pages/error/error.component'; 
 import { AlertaComponent } from './pages/alerta/alerta.component';
 import { UsuarioPerfilComponent } from './pages/usuario/perfil/usuario-perfil.component';
 import { userGuard } from './guards/user.guard';
+import { AutenticacaoAmplifyComponent } from './pages/autenticacao/amplify/autenticacao-amplify.component';
 
 const routes: Routes = [
   {
@@ -45,7 +45,7 @@ const routes: Routes = [
   },
   {
     path: 'autenticacao',
-    component: AutenticacaoComponent,
+    component: AutenticacaoAmplifyComponent,
     outlet: 'autenticacaoPopup',
   },
   { path: '**', component: PageNotFoundComponent },
