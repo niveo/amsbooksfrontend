@@ -28,7 +28,6 @@
     "@tinkoff/ng-dompurify": "4.0.0",
     "aws-amplify": "^6.0.13",
     "dompurify": "3.0.6",
-    "imagekitio-angular": "^3.0.0",
     "ng-zorro-antd": "^17.1.0",
     "ngx-infinite-scroll": "^17.0.0",
     "rxjs": "~7.8.0",

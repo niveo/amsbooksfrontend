@@ -8,7 +8,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.module';
 
 @Component({
-  selector: 'app-usuario-perfil-logar-button-component',
+  selector: 'app-usuario-perfil-logar-component',
   template: `@if(!(usuarioLogado$ | async)){
     <button
       nz-button
@@ -26,7 +26,7 @@ import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.mod
   standalone: true,
   imports: [UsuarioMenuComponent, IconsProviderUserModule, AsyncPipe, NzButtonModule],
 })
-export class UsuarioPerfilLogarButtonComponent {
+export class UsuarioPerfilLogarComponent {
   private router = inject(Router);
   private readonly autenticacaoStore = inject(AutenticacaoStore);
 

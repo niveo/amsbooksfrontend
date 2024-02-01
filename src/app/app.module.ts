@@ -33,7 +33,7 @@ import { CategoriaModule } from './pages/categoria/categoria.module';
 import { OverlayModule } from '@angular/cdk/overlay';
 
 import { CoreGlobalModule } from './common/core.global.module';
-import { UsuarioPerfilLogarButtonComponent } from './componentes';
+import { UsuarioPerfilLogarComponent } from './componentes';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { UsuarioPerfilComponent } from './pages/usuario/perfil/usuario-perfil.component';
@@ -65,7 +65,7 @@ registerLocaleData(en);
     PageNotFoundComponent,
 
     CommonModule,
-    UsuarioPerfilLogarButtonComponent,
+    UsuarioPerfilLogarComponent,
 
     IconsProviderUserModule,
 
