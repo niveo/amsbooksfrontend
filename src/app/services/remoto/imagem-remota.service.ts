@@ -2,21 +2,20 @@ import { Injectable, inject } from '@angular/core';
 import { getUrl } from 'aws-amplify/storage';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { EMPTY, from, map, of, switchMap } from 'rxjs';
-import { TOKEN_CARREGAR_IMAGEM_REMOTA } from 'src/app/common';
+import { TOKEN_CARREGAR_IMAGEM_REMOTA, TOKEN_STORAGE_S3 } from 'src/app/common';
 import { uploadData } from 'aws-amplify/storage';
-import { Amplify } from 'aws-amplify';
 
 type TYPE_ACESS_LEVEL_FILE = 'guest' | 'private' | 'protected';
 
 @Injectable({
   providedIn: 'root',
+
 })
 export class ImagemRemotaService {
   private readonly carregarImagemRemoto = inject(TOKEN_CARREGAR_IMAGEM_REMOTA);
+  private readonly s3 = inject(TOKEN_STORAGE_S3);
 
   getUrl(key: string, level: TYPE_ACESS_LEVEL_FILE = 'guest') {
-    console.log(key);
-
     return from(
       getUrl({
         key: key,
@@ -30,9 +29,8 @@ export class ImagemRemotaService {
   }
 
   getUrlPublic(key: string) {
-    if(!this.carregarImagemRemoto) return null;
-    const s3 = Amplify.getConfig().Storage.S3;
-    return `https://${s3.bucket}.s3.${s3.region}.amazonaws.com/public/${key}`;
+    if (!this.carregarImagemRemoto) return null;
+    return `https://${this.s3.bucket}.s3.${this.s3.region}.amazonaws.com/public/${key}`;
   }
 
   upload(

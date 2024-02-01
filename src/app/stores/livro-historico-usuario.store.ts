@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { LivroHistoricoUsuarioService } from '../services';
 import { LivroDetalheStore } from './livro-detalhe.store';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class LivroHistoricoUsuarioStore {

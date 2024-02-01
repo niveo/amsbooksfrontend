@@ -2,6 +2,7 @@ import { LivroService } from 'src/app/services/livro.service';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, finalize } from 'rxjs';
 import { BaseLoadingStore } from './base-loading.store';
+import { skipNull } from '../common/rxjs.utils';
 
 @Injectable()
 export class LivroDetalheStore extends BaseLoadingStore {
@@ -13,17 +14,22 @@ export class LivroDetalheStore extends BaseLoadingStore {
 
   private readonly livroService = inject(LivroService);
 
+  constructor() {
+    super();
+    this.livroId$.pipe(skipNull()).subscribe((value) => {
+      this.iniciarLoading();
+      this.livroService
+        .getLivroDetalhe(value)
+        .pipe(finalize(() => this.finalizarLoading()))
+        .subscribe({
+          next: (respose) => {
+            this._dataSource.next(respose);
+          },
+        });
+    });
+  }
+
   fetchData(livroId: number): void {
     this._livroIdSource.next(livroId);
-    this.iniciarLoading();
-
-    this.livroService
-      .getLivroDetalhe(livroId)
-      .pipe(finalize(() => this.finalizarLoading()))
-      .subscribe({
-        next: (respose) => {
-          this._dataSource.next(respose);
-        },
-      });
   }
 }

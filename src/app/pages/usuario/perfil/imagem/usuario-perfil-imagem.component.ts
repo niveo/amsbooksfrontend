@@ -1,11 +1,8 @@
-import { ImagemRemotaService } from 'src/app/services';
 import { Component, OnInit, inject } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
-
+import { Observable } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { DIRETORIO_IMAGEM_USUARIO, MSG_ERRO_ATUALIZAR } from 'src/app/common';
-import { AutenticacaoStore } from 'src/app/stores';
+import { MSG_ERRO_ATUALIZAR } from 'src/app/common';
 import { UsuarioPerfilStore } from 'src/app/stores/usuario-perfil.store';
 import { PerfilUsuario } from 'src/app/model';
 

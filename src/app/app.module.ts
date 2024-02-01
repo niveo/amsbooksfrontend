@@ -19,9 +19,12 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { HttpsRequestInterceptor } from './interceptors/requests.interceptor';
-import { APP_CONFIG } from './utils/app-config';
 import { TimeoutInterceptor } from './interceptors/timeout.interceptor';
-import { DEFAULT_TIMEOUT, TOKEN_CARREGAR_IMAGEM_REMOTA } from './common/tokens';
+import {
+  DEFAULT_TIMEOUT,
+  TOKEN_APP_CONFIG,
+  TOKEN_CARREGAR_IMAGEM_REMOTA,
+} from './common/tokens';
 import { LivroModule } from './pages/livro/livro.module';
 
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -42,7 +45,7 @@ import {
   WarningFill,
   ProfileOutline,
   SaveOutline,
-  PlusOutline
+  PlusOutline,
 } from '@ant-design/icons-angular/icons';
 
 import { I18n } from 'aws-amplify/utils';
@@ -61,11 +64,11 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { UsuarioPerfilImagemComponent } from './pages/usuario/perfil/imagem/usuario-perfil-imagem.component';
 import { DefaultTexts } from '@aws-amplify/ui';
-
+import { Amplify } from 'aws-amplify';
 
 I18n.setLanguage('pt');
-I18n.putVocabularies(translations); 
-I18n.putVocabulariesForLanguage('pt', { 
+I18n.putVocabularies(translations);
+I18n.putVocabulariesForLanguage('pt', {
   [DefaultTexts.EMAIL_ADDRESS]: 'E-mail',
   [DefaultTexts.NAME]: 'Nome',
   [DefaultTexts.ENTER_PASSWORD]: 'Digite sua senha',
@@ -82,7 +85,7 @@ registerLocaleData(en);
     AutenticacaoComponent,
     PerfilUsuarioButtonComponent,
     UsuarioPerfilComponent,
-    UsuarioPerfilImagemComponent
+    UsuarioPerfilImagemComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,7 +109,7 @@ registerLocaleData(en);
       WarningFill,
       ProfileOutline,
       SaveOutline,
-      PlusOutline
+      PlusOutline,
     ]),
     NzMenuModule,
     NzButtonModule,
@@ -129,8 +132,11 @@ registerLocaleData(en);
     OverlayModule,
   ],
   providers: [
-    { provide: APP_CONFIG, useValue: environment },
-    { provide: TOKEN_CARREGAR_IMAGEM_REMOTA, useValue: environment.carregarImagemRemota },
+    { provide: TOKEN_APP_CONFIG, useValue: environment },
+    {
+      provide: TOKEN_CARREGAR_IMAGEM_REMOTA,
+      useValue: environment.carregarImagemRemota,
+    },
     { provide: DEFAULT_TIMEOUT, useValue: 30000 },
     {
       provide: HTTP_INTERCEPTORS,

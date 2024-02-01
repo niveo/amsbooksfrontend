@@ -1,20 +1,15 @@
-import { Component, Inject, inject } from '@angular/core';
-import {
-  ActivatedRoute,
-  ResolveEnd,
-  ResolveStart,
-  Router,
-} from '@angular/router';
-import { APP_CONFIG, IConfigToken } from 'src/app/utils/app-config';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ROTA_LIVROS } from 'src/app/common/constantes';
 import { LivroDetalheStore } from 'src/app/stores';
-import { Observable, filter, mapTo, merge } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-livro-detalhe-component',
   templateUrl: './livro-detalhe.component.html',
   styleUrl: './livro-detalhe.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LivroDetalheComponent {
   private readonly route = inject(ActivatedRoute);

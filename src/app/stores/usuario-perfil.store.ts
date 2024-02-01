@@ -1,7 +1,7 @@
 import { AutenticacaoStore } from 'src/app/stores';
 import { Injectable, inject } from '@angular/core';
 import { fetchUserAttributes } from 'aws-amplify/auth';
-import { BehaviorSubject, from, map, zip } from 'rxjs';
+import { BehaviorSubject, from, map } from 'rxjs';
 import { ImagemRemotaService, UsuarioPerfilRemotoService } from '../services';
 import { DIRETORIO_IMAGEM_USUARIO } from '../common';
 import { NzUploadFile } from 'ng-zorro-antd/upload';

@@ -1,25 +1,26 @@
-import { Inject, Injectable, inject } from '@angular/core';
-import { Observable, catchError, from, lastValueFrom, mergeMap } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { Observable, catchError, from, mergeMap } from 'rxjs';
 
 import {
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
-} from '@angular/common/http';
-import { APP_CONFIG, IConfigToken } from '../utils/app-config';
-import { fetchAuthSession } from 'aws-amplify/auth'; 
+} from '@angular/common/http'; 
+import { fetchAuthSession } from 'aws-amplify/auth';
 import { AutenticacaoStore } from '../stores';
+import { TOKEN_APP_CONFIG } from '../common';
 
 @Injectable()
 export class HttpsRequestInterceptor implements HttpInterceptor {
-  private readonly conf = inject<IConfigToken>(APP_CONFIG);
+  private readonly conf = inject(TOKEN_APP_CONFIG);
   private readonly authenticator = inject(AutenticacaoStore);
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    
     if (!this.authenticator.authenticated()) {
       return this.defaultClone(req, next);
     } else {

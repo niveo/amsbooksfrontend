@@ -1,8 +1,7 @@
-import { Component, Inject, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { LivroService } from 'src/app/services/livro.service';
-import { APP_CONFIG, IConfigToken } from 'src/app/utils/app-config';
 
 @Component({
   selector: 'app-livro-lista-component',
@@ -12,7 +11,7 @@ import { APP_CONFIG, IConfigToken } from 'src/app/utils/app-config';
 export class LivroListaComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
-  private readonly livroService = inject(LivroService); 
+  private readonly livroService = inject(LivroService);
 
   livros: any[] = [];
   count: number;

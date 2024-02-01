@@ -1,6 +1,6 @@
 import { LivroDetalheStore } from 'src/app/stores/livro-detalhe.store';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, finalize, map, forkJoin } from 'rxjs';
+import { BehaviorSubject, finalize, map } from 'rxjs';
 import { LivroComentarioService } from '../services/livro-comentario.service';
 import { BaseLoadingStore } from './base-loading.store';
 import { ImagemRemotaService } from '../services';
