@@ -9,14 +9,7 @@ import { LivroDetalheComponent } from './detalhe/livro-detalhe.component';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { DateDistancePipe, NivelLeituraPipe } from 'src/app/pipes';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import {
-  ArrowLeftOutline,
-  HeartTwoTone,
-  HeartOutline,
-  DeleteOutline,
-} from '@ant-design/icons-angular/icons';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll'; 
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { LivroLeituraComponent } from './leitura/livro-leitura.component';
 import { LivroComentarioComponent } from './comentarios/livro-comentario.component';
@@ -39,6 +32,7 @@ import { LivroHistoricoUsuarioService } from 'src/app/services';
 import { LivroDetalheStore } from 'src/app/stores/livro-detalhe.store';
 import { LivroHistoricoUsuarioStore } from 'src/app/stores';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.module';
 
 @NgModule({
   declarations: [
@@ -57,12 +51,7 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
     InfiniteScrollModule,
     LivroImagemComponent,
     LivroRoutingModule,
-    NzIconModule.forChild([
-      ArrowLeftOutline,
-      HeartTwoTone,
-      HeartOutline,
-      DeleteOutline,
-    ]),
+    IconsProviderUserModule,
     NivelLeituraPipe,
     NzPageHeaderModule,
     NzRateModule,

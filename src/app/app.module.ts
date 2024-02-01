@@ -29,33 +29,13 @@ import { LivroModule } from './pages/livro/livro.module';
 
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { TagModule } from './pages/tag/tag.module';
-import { CategoriaModule } from './pages/categoria/categoria.module';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-
+import { CategoriaModule } from './pages/categoria/categoria.module'; 
 import { OverlayModule } from '@angular/cdk/overlay';
 
-import {
-  BookOutline,
-  UnorderedListOutline,
-  TagsOutline,
-  MenuOutline,
-  HomeOutline,
-  UserOutline,
-  LogoutOutline,
-  WarningFill,
-  ProfileOutline,
-  SaveOutline,
-  PlusOutline,
-} from '@ant-design/icons-angular/icons';
-
-import { I18n } from 'aws-amplify/utils';
-import { translations } from '@aws-amplify/ui-angular';
+import { I18n } from 'aws-amplify/utils'; 
 import { AutenticacaoComponent } from './pages/autenticacao/autenticacao.component';
 import { CoreGlobalModule } from './common/core.global.module';
-import {
-  UsuarioMenuComponent,
-  PerfilUsuarioButtonComponent,
-} from './componentes';
+import { UsuarioPerfilLogarButtonComponent } from './componentes';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { UsuarioPerfilComponent } from './pages/usuario/perfil/usuario-perfil.component';
@@ -64,10 +44,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { UsuarioPerfilImagemComponent } from './pages/usuario/perfil/imagem/usuario-perfil-imagem.component';
 import { DefaultTexts } from '@aws-amplify/ui';
-import { Amplify } from 'aws-amplify';
+import { IconsProviderUserModule } from './modules/icons-provider-user.module';
 
-I18n.setLanguage('pt');
-I18n.putVocabularies(translations);
+I18n.setLanguage('pt'); 
 I18n.putVocabulariesForLanguage('pt', {
   [DefaultTexts.EMAIL_ADDRESS]: 'E-mail',
   [DefaultTexts.NAME]: 'Nome',
@@ -83,7 +62,6 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     AutenticacaoComponent,
-    PerfilUsuarioButtonComponent,
     UsuarioPerfilComponent,
     UsuarioPerfilImagemComponent,
   ],
@@ -95,22 +73,12 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     ErrorComponent,
     PageNotFoundComponent,
-    UsuarioMenuComponent,
-    CommonModule,
 
-    NzIconModule.forRoot([
-      BookOutline,
-      UnorderedListOutline,
-      TagsOutline,
-      MenuOutline,
-      HomeOutline,
-      UserOutline,
-      LogoutOutline,
-      WarningFill,
-      ProfileOutline,
-      SaveOutline,
-      PlusOutline,
-    ]),
+    CommonModule,
+    UsuarioPerfilLogarButtonComponent,
+
+    IconsProviderUserModule,
+
     NzMenuModule,
     NzButtonModule,
     NzAvatarModule,

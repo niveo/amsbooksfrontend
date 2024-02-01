@@ -1,10 +1,14 @@
 import { Component, inject } from '@angular/core';
-import { AutenticacaoStore } from '../stores';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { AutenticacaoStore } from 'src/app/stores';
+import { UsuarioMenuComponent } from './menu/usuario-menu.component';
+import { AsyncPipe } from '@angular/common';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.module';
 
 @Component({
-  selector: 'app-logar-button-component',
+  selector: 'app-usuario-perfil-logar-button-component',
   template: `@if(!(usuarioLogado$ | async)){
     <button
       nz-button
@@ -19,8 +23,10 @@ import { Router } from '@angular/router';
     } @else if(usuarioLogado$ | async){
     <app-usuario-menu-component />
     } `,
+  standalone: true,
+  imports: [UsuarioMenuComponent, IconsProviderUserModule, AsyncPipe, NzButtonModule],
 })
-export class PerfilUsuarioButtonComponent {
+export class UsuarioPerfilLogarButtonComponent {
   private router = inject(Router);
   private readonly autenticacaoStore = inject(AutenticacaoStore);
 

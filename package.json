@@ -7,7 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "i18n:extract": "ng extract-i18n"
+    "i18n:extract": "ng extract-i18n",
+    "analyze": "webpack-bundle-analyzer dist/amsbooksfrontend/stats.json",
+    "build:stats": "ng build --configuration production --stats-json",
+    "analyzeb": "yarn build:stats && yarn analyze"
   },
   "private": true,
   "dependencies": {
@@ -21,7 +24,7 @@
     "@angular/platform-browser-dynamic": "^17.1.0",
     "@angular/router": "^17.1.0",
     "@aws-amplify/ui": "^6.0.8",
-    "@aws-amplify/ui-angular": "^5.0.8", 
+    "@aws-amplify/ui-angular": "^5.0.8",
     "@tinkoff/ng-dompurify": "4.0.0",
     "aws-amplify": "^6.0.13",
     "dompurify": "3.0.6",
@@ -45,6 +48,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.2.2"
+    "typescript": "~5.2.2",
+    "webpack-bundle-analyzer": "^4.10.1"
   }
 }
