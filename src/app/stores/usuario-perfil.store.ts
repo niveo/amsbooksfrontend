@@ -32,15 +32,12 @@ export class UsuarioPerfilStore {
   }
 
   private atualizarPerfilUsuario() {
-    zip(
-      from(fetchUserAttributes()),
-      this._imagemRemotaService.getUrl(
-        DIRETORIO_IMAGEM_USUARIO + this.autenticacaoStore.getUserId
-      )
-    ).subscribe({
+    from(fetchUserAttributes()).subscribe({
       next: (value) => {
-        value[0]['picture'] = value[1];
-        this._usuarioPerfilSource.next(value[0] as any);
+        value['picture'] = this._imagemRemotaService.getUrlPublic(
+          DIRETORIO_IMAGEM_USUARIO + this.autenticacaoStore.getUserId
+        );
+        this._usuarioPerfilSource.next(value as PerfilUsuario);
       },
       error: (err) => {
         console.log(err);

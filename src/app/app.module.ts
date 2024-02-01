@@ -60,9 +60,18 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { UsuarioPerfilImagemComponent } from './pages/usuario/perfil/imagem/usuario-perfil-imagem.component';
+import { DefaultTexts } from '@aws-amplify/ui';
 
-I18n.putVocabularies(translations);
+
 I18n.setLanguage('pt');
+I18n.putVocabularies(translations); 
+I18n.putVocabulariesForLanguage('pt', { 
+  [DefaultTexts.EMAIL_ADDRESS]: 'E-mail',
+  [DefaultTexts.NAME]: 'Nome',
+  [DefaultTexts.ENTER_PASSWORD]: 'Digite sua senha',
+  [DefaultTexts.CONFIRM_PASSWORD]: 'Confirme sua senha',
+  [DefaultTexts.ENTER_NAME]: 'Digite seu nome',
+});
 
 registerLocaleData(pt);
 registerLocaleData(en);
