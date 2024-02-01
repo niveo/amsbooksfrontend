@@ -60,8 +60,6 @@
 </nz-list>
 
 <ng-template #tplautor>
-  @if(autenticacaoStore.authenticated()){
-  <app-menu-usuario-component  />
-  }
+  <app-usuario-perfil-avatar-component />
   <nz-rate [(ngModel)]="rate"></nz-rate>
 </ng-template>

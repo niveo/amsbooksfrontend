@@ -1,9 +1,6 @@
 @if(usuarioPerfil$ | async; as user){
 
-<nz-avatar
-  nz-comment-avatar
-  nzIcon="user"
-  [nzSrc]="user.picture"
+<app-usuario-perfil-avatar-component
   nz-tooltip
   nzTooltipTitle="Profile"
   class="profile-image"
@@ -13,7 +10,7 @@
   nzPopoverTrigger="click"
   [nzPopoverContent]="contentTemplate"
   nzPopoverPlacement="leftTop"
-></nz-avatar>
+/>
 
 <ng-template #contentTemplate>
   <div class="fx-column">
@@ -38,7 +35,7 @@
 <ng-template #contentTitle>
   <div class="fx-row profile-title-content">
     <div class="profile-image-avatar">
-      <nz-avatar nzIcon="user" [nzSrc]="user.picture"></nz-avatar>
+      <app-usuario-perfil-avatar-component />
     </div>
     <div class="fx-column">
       <p class="profile-name-user">{{ user.name }}</p>

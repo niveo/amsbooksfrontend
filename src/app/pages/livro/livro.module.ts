@@ -20,9 +20,8 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
-import {
-  UsuarioMenuComponent,
-  LivroImagemComponent,
+import { 
+  LivroImagemComponent, UsuarioPerfilAvatarComponent,
 } from 'src/app/componentes';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
@@ -66,8 +65,8 @@ import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.mod
     NzAvatarModule,
     DateDistancePipe,
     NzSpinModule,
-    NzSkeletonModule,
-    UsuarioMenuComponent,
+    NzSkeletonModule, 
+    UsuarioPerfilAvatarComponent
   ],
   providers: [
     LivroComentarioStore,

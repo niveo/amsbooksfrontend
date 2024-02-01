@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { PerfilUsuario } from 'src/app/model';
+import { UsuarioPerfilAvatarComponent } from '../usuario-perfil-avatar.component';
 
 @Component({
   selector: 'app-usuario-menu-component',
@@ -17,12 +18,12 @@ import { PerfilUsuario } from 'src/app/model';
   styleUrl: './usuario-menu.component.scss',
   standalone: true,
   imports: [
-    NzAvatarModule,
     NzPopoverModule,
     NzButtonModule,
     NzDividerModule,
     AsyncPipe,
     NzSpinModule,
+    UsuarioPerfilAvatarComponent,
   ],
 })
 export class UsuarioMenuComponent implements OnInit {
