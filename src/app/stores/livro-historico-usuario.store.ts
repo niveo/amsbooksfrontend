@@ -18,7 +18,8 @@ export class LivroHistoricoUsuarioStore {
       }
     });
   }
-  fetchData() {
+  
+  private fetchData() {
     this.livroHistoricoUsuarioService
       .obterLivroHistoricoUsuario(this.livroId)
       .subscribe({
