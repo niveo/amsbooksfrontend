@@ -4,7 +4,7 @@ import { Amplify } from 'aws-amplify';
 import awsExports from '../../aws-exports';
 
 @NgModule({
-  imports: [AmplifyAuthenticatorModule],
+  imports: [],
   exports: [AmplifyAuthenticatorModule],
 })
 export class CoreGlobalModule {

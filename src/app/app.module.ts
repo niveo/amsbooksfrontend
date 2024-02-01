@@ -29,11 +29,9 @@ import { LivroModule } from './pages/livro/livro.module';
 
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { TagModule } from './pages/tag/tag.module';
-import { CategoriaModule } from './pages/categoria/categoria.module'; 
+import { CategoriaModule } from './pages/categoria/categoria.module';
 import { OverlayModule } from '@angular/cdk/overlay';
 
-import { I18n } from 'aws-amplify/utils'; 
-import { AutenticacaoComponent } from './pages/autenticacao/autenticacao.component';
 import { CoreGlobalModule } from './common/core.global.module';
 import { UsuarioPerfilLogarButtonComponent } from './componentes';
 import { NzModalModule } from 'ng-zorro-antd/modal';
@@ -43,17 +41,9 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { UsuarioPerfilImagemComponent } from './pages/usuario/perfil/imagem/usuario-perfil-imagem.component';
-import { DefaultTexts } from '@aws-amplify/ui';
-import { IconsProviderUserModule } from './modules/icons-provider-user.module';
 
-I18n.setLanguage('pt'); 
-I18n.putVocabulariesForLanguage('pt', {
-  [DefaultTexts.EMAIL_ADDRESS]: 'E-mail',
-  [DefaultTexts.NAME]: 'Nome',
-  [DefaultTexts.ENTER_PASSWORD]: 'Digite sua senha',
-  [DefaultTexts.CONFIRM_PASSWORD]: 'Confirme sua senha',
-  [DefaultTexts.ENTER_NAME]: 'Digite seu nome',
-});
+import { IconsProviderUserModule } from './modules/icons-provider-user.module';
+import { AutenticacaoAmplifyComponent } from './pages/autenticacao/amplify/autenticacao-amplify.component';
 
 registerLocaleData(pt);
 registerLocaleData(en);
@@ -61,7 +51,7 @@ registerLocaleData(en);
 @NgModule({
   declarations: [
     AppComponent,
-    AutenticacaoComponent,
+    AutenticacaoAmplifyComponent,
     UsuarioPerfilComponent,
     UsuarioPerfilImagemComponent,
   ],
