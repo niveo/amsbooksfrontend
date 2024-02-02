@@ -1,6 +1,4 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core'; 
-import { Amplify } from 'aws-amplify';
-import awsExports from '../../aws-exports';
 
 @NgModule({
   imports: [],
