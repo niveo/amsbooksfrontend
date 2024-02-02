@@ -28,12 +28,11 @@ export class AutenticacaoStore {
 
   constructor() {
     const subs = interval(1000).subscribe(() => {
-      if (this.authenticatorService.authStatus !== 'configuring') {
-        setTimeout(() => {
-          if (this.authenticatorService.authStatus === 'authenticated') {
-            this.fetchDataAuthenticator(this.authenticatorService);
-          }
-        }, 300);
+      if (
+        this.authenticatorService.authStatus !== 'configuring' &&
+        this.authenticatorService.user?.userId
+      ) {
+        this.fetchDataAuthenticator();
         subs.unsubscribe();
       }
     });
@@ -47,11 +46,11 @@ export class AutenticacaoStore {
     return this._userIdSource.getValue();
   }
 
-  private fetchDataAuthenticator(
-    authenticatorService: AuthenticatorService
-  ): void {
-    this._userIdSource.next(authenticatorService.user.userId);
-    this.fetchData(authenticatorService.authStatus === 'authenticated');
+  private fetchDataAuthenticator(): void {
+    if (this.authenticatorService.authStatus === 'authenticated') {
+      this._userIdSource.next(this.authenticatorService.user.userId);
+      this.fetchData(true);
+    }
   }
 
   fetchData(usuarioLogado: boolean): void {

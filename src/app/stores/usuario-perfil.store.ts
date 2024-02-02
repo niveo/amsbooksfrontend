@@ -35,7 +35,7 @@ export class UsuarioPerfilStore {
     from(fetchUserAttributes()).subscribe({
       next: (value) => {
         value['picture'] = this._imagemRemotaService.getUrlPublic(
-          DIRETORIO_IMAGEM_USUARIO + this.autenticacaoStore.getUserId
+          DIRETORIO_IMAGEM_USUARIO + value.sub
         );
         this._usuarioPerfilSource.next(value as PerfilUsuario);
       },
