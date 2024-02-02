@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUri: 'config.apiUri', 
+  apiUri: 'https://amsbooksbackend.onrender.com', 
   carregarImagemRemota: true
 };
