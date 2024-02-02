@@ -7,9 +7,20 @@ I18n.setLanguage('pt');
 I18n.putVocabulariesForLanguage('pt', {
   [DefaultTexts.EMAIL_ADDRESS]: 'E-mail',
   [DefaultTexts.NAME]: 'Nome',
-  [DefaultTexts.ENTER_PASSWORD]: 'Digite sua senha',
-  [DefaultTexts.CONFIRM_PASSWORD]: 'Confirme sua senha',
+  [DefaultTexts.PASSWORD]: 'Senha',
+
+  [DefaultTexts.SIGN_IN]: 'Entrar',
+  [DefaultTexts.SIGN_IN_BUTTON]: 'Entrar',
+  [DefaultTexts.SIGN_IN_TAB]: 'Entrar',
+
+  [DefaultTexts.CREATE_ACCOUNT]: 'Criar Conta',
+
   [DefaultTexts.ENTER_NAME]: 'Digite seu nome',
+  [DefaultTexts.ENTER_EMAIL]: 'Digite seu e-mail',
+  [DefaultTexts.ENTER_PASSWORD]: 'Digite sua senha',
+
+  [DefaultTexts.CONFIRM_PASSWORD]: 'Confirme sua senha',
+  [DefaultTexts.CONFIRM_PASSWORD_PLACEHOLDER]: 'Por favor confirme sua senha',
 });
 
 @Component({
