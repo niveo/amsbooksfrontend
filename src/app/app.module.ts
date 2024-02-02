@@ -30,9 +30,7 @@ import { LivroModule } from './pages/livro/livro.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { TagModule } from './pages/tag/tag.module';
 import { CategoriaModule } from './pages/categoria/categoria.module';
-import { OverlayModule } from '@angular/cdk/overlay';
-
-import { CoreGlobalModule } from './common/core.global.module';
+import { OverlayModule } from '@angular/cdk/overlay'; 
 import { UsuarioPerfilLogarComponent } from './componentes';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
@@ -82,9 +80,7 @@ registerLocaleData(en);
     LivroModule,
     TagModule,
     CategoriaModule,
-
-    CoreGlobalModule,
-
+ 
     OverlayModule,
   ],
   providers: [
