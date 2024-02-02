@@ -1,5 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthenticatorService } from '@aws-amplify/ui-angular';
 import { Hub } from 'aws-amplify/utils';
 import { sessionStorage } from 'aws-amplify/utils';
@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly authenticator = inject(AuthenticatorService);
   private readonly autenticacaoStore = inject(AutenticacaoStore);
+  @ViewChild('outlet') outlet;
 
   constructor() {
     cognitoUserPoolsTokenProvider.setKeyValueStorage(sessionStorage);
@@ -41,6 +42,22 @@ export class AppComponent implements OnInit {
           break;
         case 'customOAuthState':
           break;
+      }
+    });
+  }
+
+
+  //https://stackoverflow.com/questions/63355407/angular-9-cannot-deactivate-router-outlet-on-lazy-loaded-module
+  onActiveOutlet(component: Component) {
+    let previousUrl = this.router.url;
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (
+          previousUrl != this.router.url &&
+          previousUrl.includes(this.router.url)
+        ) {
+          this.outlet.deactivate();
+        }
       }
     });
   }

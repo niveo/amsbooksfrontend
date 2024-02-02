@@ -43,7 +43,6 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { UsuarioPerfilImagemComponent } from './pages/usuario/perfil/imagem/usuario-perfil-imagem.component';
 
 import { IconsProviderUserModule } from './modules/icons-provider-user.module';
-import { AutenticacaoAmplifyComponent } from './pages/autenticacao/amplify/autenticacao-amplify.component';
 
 registerLocaleData(pt);
 registerLocaleData(en);
@@ -51,7 +50,6 @@ registerLocaleData(en);
 @NgModule({
   declarations: [
     AppComponent,
-    AutenticacaoAmplifyComponent,
     UsuarioPerfilComponent,
     UsuarioPerfilImagemComponent,
   ],

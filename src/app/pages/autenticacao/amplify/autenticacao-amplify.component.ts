@@ -2,6 +2,7 @@ import { Component, HostListener, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { I18n } from 'aws-amplify/utils';
 import { DefaultTexts } from '@aws-amplify/ui';
+import { Location } from '@angular/common';
 
 I18n.setLanguage('pt');
 I18n.putVocabulariesForLanguage('pt', {
@@ -33,12 +34,12 @@ export class AutenticacaoAmplifyComponent {
   private readonly route = inject(ActivatedRoute);
 
   @HostListener('document:keydown.escape', ['$event']) onKeydownHandler() {
-    this.closePopup();
+    this.back();
   }
 
-  closePopup() {
-    this.router.navigate([{ outlets: { autenticacaoPopup: null } }], {
-      relativeTo: this.route.parent,
-    });
+  constructor(private location: Location) {}
+
+  back() {
+    this.location.back();
   }
 }

@@ -57,4 +57,8 @@
   </ul>
 </ng-template>
 
-<router-outlet name="autenticacaoPopup"></router-outlet>
+<router-outlet
+  #outlet="outlet"
+  name="autenticacaoPopup"
+  (activate)="onActiveOutlet($event)"
+></router-outlet>
