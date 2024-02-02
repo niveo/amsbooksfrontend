@@ -10,7 +10,6 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 
 @NgModule({
   declarations: [CategoriaListaComponent],
-  exports: [],
   imports: [
     CommonModule,
     NzGridModule,
@@ -19,7 +18,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzBadgeModule,
     NzPageHeaderModule,
     CategoriaRoutingModule,
-    NgTemplateOutlet
+    NgTemplateOutlet,
   ],
 })
 export class CategoriaModule {}
