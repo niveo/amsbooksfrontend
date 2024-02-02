@@ -1,0 +1,47 @@
+@if(usuarioPerfil$ | async; as user){
+
+<app-usuario-perfil-avatar-component
+  nz-tooltip
+  nzTooltipTitle="Profile"
+  class="profile-image"
+  nz-popover
+  [nzPopoverTitle]="contentTitle"
+  [(nzPopoverVisible)]="visible"
+  nzPopoverTrigger="click"
+  [nzPopoverContent]="contentTemplate"
+  nzPopoverPlacement="leftTop"
+/>
+
+<ng-template #contentTemplate>
+  <div class="fx-column">
+    <button
+      nz-button
+      nzType="text"
+      style="text-align: left"
+      (click)="perfilUsuario()"
+    >
+      <span nz-icon nzType="profile" nzTheme="outline"></span>
+      Perfil
+      <div class="fx-flex"></div>
+    </button>
+    <nz-divider [style.margin]="'5px 0'"></nz-divider>
+    <button nz-button nzType="text" style="text-align: left" (click)="logOut()">
+      <span nz-icon nzType="logout" nzTheme="outline"></span>
+      Log out
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #contentTitle>
+  <div class="fx-row profile-title-content">
+    <div class="profile-image-avatar">
+      <app-usuario-perfil-avatar-component />
+    </div>
+    <div class="fx-column">
+      <p class="profile-name-user">{{ user.name }}</p>
+      <p class="profile-email-user">{{ user.email }}</p>
+    </div>
+  </div>
+</ng-template>
+
+} @else {<nz-spin nzSimple nzSize="large" />}

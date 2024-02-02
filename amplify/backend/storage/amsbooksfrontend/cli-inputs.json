@@ -1,0 +1,14 @@
+{
+  "resourceName": "amsbooksfrontend",
+  "policyUUID": "11a6076f",
+  "bucketName": "amsbooksfrontend54748e95b9aa476fbb1310110e89337",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

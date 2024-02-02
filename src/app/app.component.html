@@ -1,1 +1,64 @@
-<router-outlet></router-outlet>
+<nz-layout class="layout">
+  <nz-layout class="right-layout">
+    <nz-header>
+      <button
+        nz-button
+        [nzGhost]="true"
+        nzType="dashed"
+        nzShape="circle"
+        (click)="visualizarPage('')"
+      >
+        <span nz-icon nzType="home"></span>
+      </button>
+      <div class="fx-flex"></div>
+
+      <button
+        nz-button
+        [nzGhost]="true"
+        nzType="dashed"
+        nzShape="circle"
+        cdkOverlayOrigin
+        #trigger="cdkOverlayOrigin"
+        (click)="isOpen = !isOpen"
+      >
+        <span nz-icon nzType="menu"></span>
+      </button>
+
+      <app-usuario-perfil-logar-component />
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+    <nz-footer></nz-footer>
+  </nz-layout>
+</nz-layout>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="isOpen"
+  (overlayOutsideClick)="isOpen = false"
+>
+  <ul nz-menu nzTheme="dark" nzMode="inline">
+    <li nz-menu-item (click)="visualizarPage('livros')">
+      <span nz-icon nzType="book" nzTheme="outline"></span>
+      <span>Livros</span>
+    </li>
+    <li nz-menu-item (click)="visualizarPage('categorias')">
+      <span nz-icon nzType="unordered-list" nzTheme="outline"></span>
+      <span>Categorias</span>
+    </li>
+    <li nz-menu-item (click)="visualizarPage('tags')">
+      <span nz-icon nzType="tags" nzTheme="outline"></span>
+      <span>Tags</span>
+    </li>
+  </ul>
+</ng-template>
+
+<router-outlet
+  #outlet="outlet"
+  name="autenticacaoPopup"
+  (activate)="onActiveOutlet($event)"
+></router-outlet>

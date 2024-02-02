@@ -1,0 +1,34 @@
+<div class="ovh wf root">
+  @if(loading){
+  <nz-skeleton [nzActive]="true"></nz-skeleton>
+  }
+  <div
+    infinite-scroll
+    [infiniteScrollDistance]="scrollDistance"
+    [infiniteScrollUpDistance]="scrollUpDistance"
+    [infiniteScrollThrottle]="throttle"
+    (scrolled)="onScrollDown()"
+    class="content"
+  >
+    @for(livro of livros; track livro.id){
+    <div class="">
+      <nz-card
+        class="content-card"
+        nzHoverable
+        [nzCover]="coverTemplate"
+        (click)="detalharLivro(livro)"
+      >
+        <nz-card-meta
+          [nzTitle]="livro.titulo"
+          [nzDescription]="livro.autor.nome"
+        ></nz-card-meta>
+      </nz-card>
+      <ng-template #coverTemplate>
+        <div class="fx-w fx-d-flex" style="justify-content: center">
+          <livro-imagem-component [identificador]="livro.identificador" />
+        </div>
+      </ng-template>
+    </div>
+    }
+  </div>
+</div>

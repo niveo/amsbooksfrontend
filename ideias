@@ -1,0 +1,22 @@
+ler livro: 
+
+- autor pode liberar 
+ ninguem *padrao 
+ todos
+ amigos ?
+
+ quantos capitulos ?
+ cobrar ?
+
+- usuario pode
+fazer comentario
+dar nota
+5	402	97,1014492753623	97,1014
+4	12	2,89855072463768	2,657
+3	0	0	
+2	0	0	
+1	0	0	
+414
+ 
+Criar um opcao do usuario criar listas e adicionar o livro
+ex: LIDOS, LER, RUINS

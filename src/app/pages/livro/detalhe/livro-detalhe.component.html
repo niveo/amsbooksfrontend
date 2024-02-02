@@ -1,0 +1,48 @@
+<nz-spin [nzSpinning]="isLoading$ | async" />
+@if(livro$ | async; as livro){
+<div class="fx-column host pd-5">
+  <nz-page-header class="site-page-header" (nzBack)="onBack()" nzBackIcon>
+    <nz-page-header-title>{{ livro.titulo }}</nz-page-header-title>
+    <nz-page-header-subtitle>{{ livro.autor.nome }}</nz-page-header-subtitle>
+  </nz-page-header>
+  <div class="content">
+    <div>
+      <livro-imagem-component [identificador]="livro.identificador" />
+    </div>
+    <div class="fx-column fx-flex pd-10" style="flex-wrap: wrap">
+      <div class="fx-row" style="align-items: center; flex-wrap: wrap">
+        @if(livro.categoria){
+        <button
+          nz-button
+          nzSize="large"
+          nzType="dashed"
+          (click)="visualizarLivrosCategoria(livro.categoria)"
+        >
+          {{ livro.categoria.nome }}
+        </button>
+        }
+        <div class="fx-flex"></div>
+        <div class="fx-row gap-5">
+          <span>Idioma: </span>
+          {{ livro.idioma?.nome }}
+        </div>
+      </div>
+      <p>
+        {{ livro.descritivo }}
+      </p>
+      @if(livro.tags){
+      <div>
+        <div class="fx-row wf" style="flex-wrap: wrap">
+          @for(tag of livro.tags; track tag.id){
+          <nz-tag nzMode="checkable" (click)="visualizarLivrosTag(tag)">{{
+            tag.nome
+          }}</nz-tag>
+          }
+        </div>
+      </div>
+      }
+      <app-livro-comentario-component [livroId]="livro.id" />
+    </div>
+  </div>
+</div>
+}

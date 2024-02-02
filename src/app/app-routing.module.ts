@@ -1,25 +1,54 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
 import { PageNotFoundComponent } from './pages/notfound/page-not-found.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { AlertaComponent } from './pages/alerta/alerta.component';
+import { UsuarioPerfilComponent } from './pages/usuario/perfil/usuario-perfil.component';
+import { userGuard } from './guards/user.guard';
 
-/*
-{
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [AuthGuard],
-},
-*/
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
     pathMatch: 'full',
+    redirectTo: '/livros',
+  },
+  {
+    path: 'livros',
+    loadChildren: () =>
+      import('./pages/livro/livro.module').then((m) => m.LivroModule),
+  },
+  {
+    path: 'categorias',
+    loadChildren: () =>
+      import('./pages/categoria/categoria.module').then(
+        (m) => m.CategoriaModule
+      ),
+  },
+  {
+    path: 'perfil',
+    component: UsuarioPerfilComponent,
+    canActivate: [userGuard],
+  },
+  {
+    path: 'tags',
+    loadChildren: () =>
+      import('./pages/tag/tag.module').then((m) => m.TagModule),
   },
   {
     path: 'error',
     component: ErrorComponent,
+  },
+  {
+    path: 'alerta',
+    component: AlertaComponent,
+  },
+  {
+    path: 'autenticacao',
+    outlet: 'autenticacaoPopup',
+    loadChildren: () =>
+      import('./pages/autenticacao/amplify/autenticacao-amplify.module').then(
+        (m) => m.AutenticacaoAmplifyModule
+      ),
   },
   { path: '**', component: PageNotFoundComponent },
 ];
