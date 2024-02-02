@@ -12,7 +12,6 @@ export class CoreGlobalModule {
       throw new Error(
         'CoreDateModule is already loaded. Import only in AppModule'
       );
-    }
-    Amplify.configure(awsExports);
+    } 
   }
 }
