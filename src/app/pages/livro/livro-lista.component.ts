@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { LivroService } from 'src/app/services/livro.service';
+import { MonitorErroStore } from 'src/app/stores';
 
 @Component({
   selector: 'app-livro-lista-component',
@@ -12,6 +13,7 @@ export class LivroListaComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly livroService = inject(LivroService);
+  private readonly monitorErroStore = inject(MonitorErroStore);
 
   livros: any[] = [];
   count: number;
@@ -47,8 +49,8 @@ export class LivroListaComponent implements OnInit {
             this.livros = response.results;
             this.count = response.count;
           },
-          error: () => {
-            this.router.navigate(['alerta']);
+          error: (error) => {
+            this.monitorErroStore.notificar(error);
           },
         });
     });

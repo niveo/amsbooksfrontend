@@ -19,6 +19,7 @@ export class TimeoutInterceptor implements HttpInterceptor {
     const timeoutc: number =
       Number(req.headers.get('timeout')) || this.defaultTimeout;
     req.headers.delete('timeout');
+    
     return next.handle(req).pipe(timeout(timeoutc));
   }
 }
