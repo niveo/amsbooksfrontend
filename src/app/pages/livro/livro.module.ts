@@ -23,8 +23,7 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { 
   LivroImagemComponent, UsuarioPerfilAvatarComponent,
 } from 'src/app/componentes';
-import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar'; 
 import { LivroComentarioStore } from 'src/app/stores/livro-comentario.store';
 import { LivroComentarioService } from 'src/app/services/livro-comentario.service';
 import { LivroHistoricoUsuarioService } from 'src/app/services';
@@ -63,8 +62,7 @@ import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.mod
     CommonModule,
     NzAlertModule,
     NzAvatarModule,
-    DateDistancePipe,
-    NzSpinModule,
+    DateDistancePipe, 
     NzSkeletonModule, 
     UsuarioPerfilAvatarComponent
   ],
