@@ -41,6 +41,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { UsuarioPerfilImagemComponent } from './pages/usuario/perfil/imagem/usuario-perfil-imagem.component';
 
 import { IconsProviderUserModule } from './modules/icons-provider-user.module';
+import { VersaoSistemaDirective } from './directives/versao-sistema.directive';
 
 registerLocaleData(pt);
 registerLocaleData(en);
@@ -50,6 +51,7 @@ registerLocaleData(en);
     AppComponent,
     UsuarioPerfilComponent,
     UsuarioPerfilImagemComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -62,6 +64,7 @@ registerLocaleData(en);
 
     CommonModule,
     UsuarioPerfilLogarComponent,
+    VersaoSistemaDirective,
 
     IconsProviderUserModule,
 

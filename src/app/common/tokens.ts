@@ -18,4 +18,7 @@ export const TOKEN_STORAGE_S3 = new InjectionToken<{
 export const TOKEN_APP_CONFIG = new InjectionToken<{
   production: boolean;
   apiUri: string;
+  versaoSistemaVersao: string;
+  versaoSistemaCodigo: number;
+  versaoSistemaDescricao: string;
 }>('Application config');

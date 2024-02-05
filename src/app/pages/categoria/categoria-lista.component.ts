@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { CategoriaService } from '../../services';
 import { ROTA_LIVROS } from 'src/app/common/constantes';
 
@@ -12,14 +12,18 @@ import { ROTA_LIVROS } from 'src/app/common/constantes';
 export class CategoriaListaComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly categoriaService = inject(CategoriaService);
-
+  loading = true;
   categorias$!: Observable<any[]>;
 
   ngOnInit(): void {
-    this.categorias$ = this.categoriaService.getAll();
+    this.loading = true;
+    this.categorias$ = this.categoriaService
+      .getAll()
+      .pipe(finalize(() => (this.loading = false)));
   }
 
   visualizarLivrosCategoria(categoria) {
-    this.router.navigate([ROTA_LIVROS, { categoria: categoria.id }]);
+    if (categoria.contalivros)
+      this.router.navigate([ROTA_LIVROS, { categoria: categoria.id }]);
   }
 }

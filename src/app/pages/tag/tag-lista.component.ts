@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { TagService } from '../../services';
 import { ROTA_LIVROS } from 'src/app/common/constantes';
 
@@ -12,15 +12,18 @@ import { ROTA_LIVROS } from 'src/app/common/constantes';
 export class TagListaComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly tagService = inject(TagService);
-  
+  loading = true;
   categorias$!: Observable<any[]>;
   inputValue: string | null = null;
 
   ngOnInit(): void {
-    this.categorias$ = this.tagService.getAll();
+    this.loading = true;
+    this.categorias$ = this.tagService
+      .getAll()
+      .pipe(finalize(() => (this.loading = false)));
   }
 
   visualizarLivrosTag(tag) {
-    this.router.navigate([ROTA_LIVROS, { tag: tag.id }]);
+    if (tag.contalivros) this.router.navigate([ROTA_LIVROS, { tag: tag.id }]);
   }
 }

@@ -1,26 +1,28 @@
-<div class="fx-column">
-  <nz-list nzGrid style="width: 100%">
-    <div nz-row [nzGutter]="6" class="gutter-row">
-      @for(categoria of categorias$ | async; track categoria.id){
-      <div nz-col [nzSpan]="24 / 4">
-        <nz-list-item (click)="visualizarLivrosTag(categoria)">
-          @if(categoria.contalivros){
-          <nz-ribbon [nzText]="categoria.contalivros">
-            <ng-container
-              *ngTemplateOutlet="tplcorpo; context: { $implicit: categoria }"
-            />
-          </nz-ribbon>
-          } @else {
+@if(loading){
+  <nz-skeleton [nzLoading]="loading"></nz-skeleton>
+}
+
+<nz-list nzGrid style="width: 100%">
+  <div nz-row [nzGutter]="6" class="gutter-row">
+    @for(categoria of categorias$ | async; track categoria.id){
+    <div nz-col [nzSpan]="24 / 4">
+      <nz-list-item (click)="visualizarLivrosTag(categoria)">
+        @if(categoria.contalivros){
+        <nz-ribbon [nzText]="categoria.contalivros">
           <ng-container
             *ngTemplateOutlet="tplcorpo; context: { $implicit: categoria }"
           />
-          }
-        </nz-list-item>
-      </div>
-      }
+        </nz-ribbon>
+        } @else {
+        <ng-container
+          *ngTemplateOutlet="tplcorpo; context: { $implicit: categoria }"
+        />
+        }
+      </nz-list-item>
     </div>
-  </nz-list>
-</div>
+    }
+  </div>
+</nz-list>
 
 <ng-template #tplcorpo let-categoria>
   <nz-card [nzHoverable]="true">
