@@ -6,6 +6,7 @@ import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { TagListaComponent } from './tag-lista.component';
 import { TagRoutingModule } from './tag-routing.module';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 @NgModule({
   declarations: [TagListaComponent],
@@ -18,6 +19,7 @@ import { TagRoutingModule } from './tag-routing.module';
     NzBadgeModule,
     TagRoutingModule,
     NgTemplateOutlet,
+    NzSkeletonModule
   ],
 })
 export class TagModule {}

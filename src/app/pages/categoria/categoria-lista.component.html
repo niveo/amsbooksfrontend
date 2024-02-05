@@ -1,3 +1,7 @@
+@if(loading){
+  <nz-skeleton [nzLoading]="loading"></nz-skeleton>
+}
+
 <nz-list nzGrid style="width: 100%">
   <div nz-row [nzGutter]="6" class="gutter-row">
     @for(categoria of categorias$ | async; track categoria.id){

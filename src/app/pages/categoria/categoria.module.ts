@@ -7,6 +7,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { CategoriaRoutingModule } from './categoria-routing.module';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 @NgModule({
   declarations: [CategoriaListaComponent],
@@ -19,6 +20,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzPageHeaderModule,
     CategoriaRoutingModule,
     NgTemplateOutlet,
+    NzSkeletonModule
   ],
 })
 export class CategoriaModule {}
