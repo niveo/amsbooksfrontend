@@ -5,11 +5,11 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { MSG_SUCESSO_ATUALIZAR, MSG_ERRO_ATUALIZAR } from 'src/app/common';
 
 @Component({
-  selector: 'app-usuario-perfil-component',
-  templateUrl: './usuario-perfil.component.html',
-  styleUrl: './usuario-perfil.component.scss',
+  selector: 'app-usuario-centro-perfil-component',
+  templateUrl: './usuario-centro-perfil.component.html',
+  styleUrl: './usuario-centro-perfil.component.scss',
 })
-export class UsuarioPerfilComponent implements OnInit {
+export class UsuarioCentroPerfilComponent implements OnInit {
   private readonly _usuarioPerfilStore = inject(UsuarioPerfilStore);
   private readonly _nzMessageService = inject(NzMessageService);
   usuarioPerfil$: Observable<any>;

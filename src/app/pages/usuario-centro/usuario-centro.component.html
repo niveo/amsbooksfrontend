@@ -1,0 +1,35 @@
+<nz-layout>
+  <nz-sider nzWidth="200px" nzTheme="light">
+    <ul nz-menu nzMode="inline">
+      <li nz-submenu nzTitle="Usuário" nzIcon="user" nzOpen>
+        <ul>
+          <li nz-menu-item nzSelected nzMatchRouter>
+            <a [routerLink]="['/usuario/perfil']">Básico</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Autor" nzIcon="user">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['/usuario/autor']">Básico</a>
+          </li>
+          <li nz-submenu nzTitle="Submenu">
+            <ul>
+              <li nz-menu-item>Option 7</li>
+              <li nz-menu-item>Option 8</li>
+              <li nz-submenu nzTitle="Submenu">
+                <ul>
+                  <li nz-menu-item>Option 9</li>
+                  <li nz-menu-item>Option 10</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-content>
+    <router-outlet></router-outlet>
+  </nz-content>
+</nz-layout>

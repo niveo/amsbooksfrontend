@@ -1,16 +1,14 @@
 import { AutenticacaoStore } from 'src/app/stores';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, from, map, mergeMap } from 'rxjs';
-import { ImagemRemotaService, UsuarioPerfilRemotoService } from '../services';
+import { BehaviorSubject, map } from 'rxjs';
 import {
-  CognitoIdentityServiceProvider,
-  DIRETORIO_IMAGEM_USUARIO,
-  TOKEN_AWS_AUTH,
-} from '../common';
+  AutenticacaoService,
+  ImagemRemotaService,
+  UsuarioPerfilRemotoService,
+} from '../services';
+import { DIRETORIO_IMAGEM_USUARIO } from '../common';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { PerfilUsuario } from '../model';
-import { sessionStorage } from 'aws-amplify/utils';
-import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +26,7 @@ export class UsuarioPerfilStore {
   );
   private readonly autenticacaoStore = inject(AutenticacaoStore);
 
-  private readonly awsAuthConfig = inject(TOKEN_AWS_AUTH);
+  private readonly autenticacaoService = inject(AutenticacaoService);
 
   constructor() {
     this.autenticacaoStore.usuarioLogado$.subscribe((logado) => {
@@ -39,37 +37,20 @@ export class UsuarioPerfilStore {
   }
 
   private atualizarPerfilUsuario() {
-    from(
-      sessionStorage.getItem(
-        `${CognitoIdentityServiceProvider}.${this.awsAuthConfig.userPoolClientId}.LastAuthUser`
-      )
-    )
-      .pipe(
-        mergeMap((lastAuthUser) => {
-          return from(
-            sessionStorage.getItem(
-              `${CognitoIdentityServiceProvider}.${this.awsAuthConfig.userPoolClientId}.${lastAuthUser}.idToken`
-            )
-          );
-        }),
-        map((token: string) => {
-          return jwtDecode(token);
-        })
-      )
-      .subscribe({
-        next: (value: any) => {
-          value['picture'] = this._imagemRemotaService.getUrlPublic(
-            DIRETORIO_IMAGEM_USUARIO + value.sub
-          );
-          this._usuarioPerfilSource.next({
-            name: value.name,
-            email: value.email,
-          });
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
+    this.autenticacaoService.obterUsuarioSessaoDecode().subscribe({
+      next: (value: any) => {
+        value['picture'] = this._imagemRemotaService.getUrlPublic(
+          DIRETORIO_IMAGEM_USUARIO + value.sub
+        );
+        this._usuarioPerfilSource.next({
+          name: value.name,
+          email: value.email,
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   alterarNome() {

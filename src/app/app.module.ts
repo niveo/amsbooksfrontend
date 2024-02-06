@@ -30,15 +30,13 @@ import { LivroModule } from './pages/livro/livro.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { TagModule } from './pages/tag/tag.module';
 import { CategoriaModule } from './pages/categoria/categoria.module';
-import { OverlayModule } from '@angular/cdk/overlay'; 
+import { OverlayModule } from '@angular/cdk/overlay';
 import { UsuarioPerfilLogarComponent } from './componentes';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
-import { UsuarioPerfilComponent } from './pages/usuario/perfil/usuario-perfil.component';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
-import { UsuarioPerfilImagemComponent } from './pages/usuario/perfil/imagem/usuario-perfil-imagem.component';
 
 import { IconsProviderUserModule } from './modules/icons-provider-user.module';
 import { VersaoSistemaDirective } from './directives/versao-sistema.directive';
@@ -47,12 +45,7 @@ registerLocaleData(pt);
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    UsuarioPerfilComponent,
-    UsuarioPerfilImagemComponent,
-    
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -83,7 +76,7 @@ registerLocaleData(en);
     LivroModule,
     TagModule,
     CategoriaModule,
- 
+
     OverlayModule,
   ],
   providers: [
