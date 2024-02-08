@@ -30,9 +30,7 @@ export class UsuarioCentroAutorComponent implements OnInit {
         [Validators.required, Validators.max(300), Validators.maxLength(300)],
       ],
     });
-  }
 
-  ngOnInit(): void {
     this.usuarioAutorStore.data$.subscribe({
       next(value) {
         console.log(value);
@@ -41,6 +39,9 @@ export class UsuarioCentroAutorComponent implements OnInit {
         console.error(err);
       },
     });
+  }
+
+  ngOnInit(): void {
     this.usuarioAutorStore.carregarDados();
   }
 

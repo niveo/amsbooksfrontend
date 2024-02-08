@@ -24,7 +24,7 @@ export class UsuarioAutorStore extends BaseLoadingStore {
         },
       });
     } else {
-      this.autorService.create(nome, descricao, url).subscribe({
+      this.autorService.createWithUser(nome, descricao, url).subscribe({
         error(err) {
           console.error(err);
         },

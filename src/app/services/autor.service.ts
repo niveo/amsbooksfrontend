@@ -5,8 +5,8 @@ import { handleError } from '../common/handle-error';
 
 @Injectable()
 export class AutorService extends BaseHttpService {
-  create(nome: string, descricao: string, url: string) {
-    return this.http.post('/autor', {
+  createWithUser(nome: string, descricao: string, url: string) {
+    return this.http.post('/autor/createWithUser', {
       nome,
       descricao,
       url,

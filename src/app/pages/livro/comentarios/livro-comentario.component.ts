@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { AutenticacaoStore } from 'src/app/stores';
-import { LivroComentarioStore } from 'src/app/stores/livro-comentario.store'; 
+import { LivroComentarioStore } from 'src/app/stores/livro-comentario.store';
 
 @Component({
   selector: 'app-livro-comentario-component',
@@ -23,15 +23,17 @@ export class LivroComentarioComponent implements OnInit {
   storeLoadingSub: Subscription;
   comentarioIdHistorico$: Observable<any>;
 
+  constructor() {
+    this.storeLoadingSub = this.livroComentarioStore.loading$.subscribe(
+      (loading) => (this.loading = loading)
+    );
+  }
+
   ngOnInit(): void {
     this.data$ = this.livroComentarioStore.data$;
     this.usuarioLogado$ = this.autenticacaoStore.usuarioLogado$;
     this.comentarioIdHistorico$ =
       this.livroComentarioStore.comentarioIdHistorico$;
-
-    this.storeLoadingSub = this.livroComentarioStore.loading$.subscribe(
-      (loading) => (this.loading = loading)
-    );
   }
 
   ngOnDestroy() {
