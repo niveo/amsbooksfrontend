@@ -40,6 +40,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 import { IconsProviderUserModule } from './modules/icons-provider-user.module';
 import { VersaoSistemaDirective } from './directives/versao-sistema.directive';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 registerLocaleData(pt);
 registerLocaleData(en);
@@ -68,6 +69,7 @@ registerLocaleData(en);
     NzLayoutModule,
     NzToolTipModule,
     NzModalModule,
+    NzMessageModule,
     NzUploadModule,
     NzSpaceModule,
     NzInputModule,

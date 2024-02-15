@@ -1,39 +1,49 @@
 import { Injectable, inject } from '@angular/core';
 import { AutorService } from '../services/autor.service';
-import { BehaviorSubject, finalize } from 'rxjs';
-import { BaseLoadingStore } from './base-loading.store';
-import { skipNull } from '../common/rxjs.utils';
+import { BehaviorSubject, finalize, iif, mergeMap, of, tap } from 'rxjs';
+import { BaseStore } from './base-store.store';
+import { catchErrorForMessage, skipNull } from '../common/rxjs.utils';
+import { UsuarioPerfilStore } from './usuario-perfil.store';
 
 @Injectable()
-export class UsuarioAutorStore extends BaseLoadingStore {
-  private readonly _dataSource = new BehaviorSubject<any>(null);
+export class UsuarioAutorStore extends BaseStore {
+  private readonly _dataSource = new BehaviorSubject<{
+    id?: number;
+    nome?: string;
+    descricao?: string;
+    url?: string;
+  }>(null);
+
   readonly data$ = this._dataSource.asObservable();
 
   private readonly autorService = inject(AutorService);
+  private readonly usuarioPerfilStore = inject(UsuarioPerfilStore);
 
   salvar(nome: string, descricao: string, url: string) {
-    if (this._dataSource.getValue()?.id) {
-      this.autorService
-      .update(this._dataSource.getValue().id, nome, descricao, url)
+    this.iniciarLoading();
+
+    of(this._dataSource.getValue()?.id)
+      .pipe(
+        tap((v) => {
+          console.log(v);
+        })
+      )
+      .pipe(
+        mergeMap((v) =>
+          iif(
+            () => !v,
+            this.autorService.createWithUser(nome, descricao, url),
+            this.autorService.update(v, nome, descricao, url)
+          )
+        )
+      )
+      .pipe(finalize(() => this.finalizarLoading()))
+      .pipe(catchErrorForMessage())
       .subscribe({
-        error(err) {
-          console.error(err);
-        },
-        next(value) {
-          console.log(value);
+        next: () => {
+          this.enviarMensagemSucessoAtualizar();
         },
       });
-    } else {
-      this.autorService.createWithUser(nome, descricao, url).subscribe({
-        error(err) {
-          console.error(err);
-        },
-        next(value) {
-          console.log(value);
-        },
-      });
-     
-    }
   }
 
   carregarDados() {
@@ -42,17 +52,25 @@ export class UsuarioAutorStore extends BaseLoadingStore {
       .obterAutorUsuario()
       .pipe(finalize(() => this.finalizarLoading()))
       .pipe(skipNull())
-      .subscribe({
-        next: (value) => {
-          this._dataSource.next(value);
-        },
-        error(err) {
-          console.log(err);
-        },
-      });
+      //.pipe(catchErrorForMessage())
+      .subscribe((value) => this._dataSource.next(value));
   }
 
   copiarNomeDoUsuario() {
-    throw new Error('Method not implemented.');
+    if (!this._dataSource.value) {
+      console.log('A');
+      
+      this._dataSource.next({
+        nome: this.usuarioPerfilStore.name,
+      });
+      console.log(this._dataSource.getValue());
+      
+    } else {
+      console.log('A');
+      this._dataSource.next({
+        ...this._dataSource.getValue(),
+        nome: this.usuarioPerfilStore.name,
+      });
+    }
   }
 }

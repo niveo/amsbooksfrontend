@@ -2,12 +2,12 @@ import { LivroDetalheStore } from 'src/app/stores/livro-detalhe.store';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, finalize, map } from 'rxjs';
 import { LivroComentarioService } from '../services/livro-comentario.service';
-import { BaseLoadingStore } from './base-loading.store';
+import { BaseStore } from './base-store.store';
 import { ImagemRemotaService } from '../services';
 import { DIRETORIO_IMAGEM_USUARIO } from '../common/constantes';
 
 @Injectable()
-export class LivroComentarioStore extends BaseLoadingStore {
+export class LivroComentarioStore extends BaseStore {
   private readonly livroComentarioService = inject(LivroComentarioService);
   private readonly livroDetalheStore = inject(LivroDetalheStore);
   private readonly imagemRemotaService = inject(ImagemRemotaService);

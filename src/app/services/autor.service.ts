@@ -14,7 +14,7 @@ export class AutorService extends BaseHttpService {
   }
 
   update(id: number, nome: string, descricao: string, url: string) {
-    return this.http.post('/autor/' + id, {
+    return this.http.put('/autor/' + id, {
       nome,
       descricao,
       url,

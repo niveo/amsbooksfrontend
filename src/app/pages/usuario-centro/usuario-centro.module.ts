@@ -16,6 +16,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { UsuarioCentroAutorComponent } from './autor/usuario-centro-autor.component';
 import { UsuarioAutorStore } from 'src/app/stores';
 import { AutorService } from 'src/app/services/autor.service';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AutorService } from 'src/app/services/autor.service';
     NzLayoutModule,
     NzFormModule,
     NzToolTipModule,
+    NzSpinModule,
 
     FormsModule,
     CommonModule,

@@ -1,12 +1,12 @@
 import { LivroService } from 'src/app/services/livro.service';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, finalize, map, throwError } from 'rxjs';
-import { BaseLoadingStore } from './base-loading.store';
+import { BaseStore } from './base-store.store';
 import { skipNull } from '../common/rxjs.utils';
 import { MonitorErroStore } from './monitor-erro.store';
 
 @Injectable()
-export class LivroDetalheStore extends BaseLoadingStore {
+export class LivroDetalheStore extends BaseStore {
   private readonly _dataSource = new BehaviorSubject<any>(null);
   readonly data$ = this._dataSource.asObservable();
 

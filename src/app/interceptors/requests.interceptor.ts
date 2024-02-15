@@ -1,38 +1,40 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, catchError, from, mergeMap } from 'rxjs';
+import { Observable, catchError, mergeMap } from 'rxjs';
 
 import {
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
-} from '@angular/common/http'; 
-import { fetchAuthSession } from 'aws-amplify/auth';
+} from '@angular/common/http';
 import { AutenticacaoStore } from '../stores';
 import { TOKEN_APP_CONFIG } from '../common';
+import { AutenticacaoService } from '../services';
 
 @Injectable()
 export class HttpsRequestInterceptor implements HttpInterceptor {
   private readonly conf = inject(TOKEN_APP_CONFIG);
   private readonly authenticator = inject(AutenticacaoStore);
+  private readonly autenticacaoService = inject(AutenticacaoService);
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    
     if (!this.authenticator.authenticated()) {
       return this.defaultClone(req, next);
     } else {
-      return from(fetchAuthSession()).pipe(
-        mergeMap(({ tokens }) => {
-          if (tokens.idToken) {
+      return this.autenticacaoService.obterUsuarioSessao().pipe(
+        mergeMap((token) => {
+          console.log(token);
+
+          if (token) {
             const authReq = req.clone({
               url: this.conf.apiUri + req.url,
               //Passado para pegar sessão
               withCredentials: true,
               setHeaders: {
-                Authorization: 'Bearer ' + tokens.idToken.toString(),
+                Authorization: 'Bearer ' + token,
               },
             });
             return next.handle(authReq);

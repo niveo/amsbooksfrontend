@@ -1,6 +1,6 @@
 import { AutenticacaoStore } from 'src/app/stores';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, finalize, map } from 'rxjs';
 import {
   AutenticacaoService,
   ImagemRemotaService,
@@ -9,11 +9,13 @@ import {
 import { DIRETORIO_IMAGEM_USUARIO } from '../common';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { PerfilUsuario } from '../model';
+import { BaseStore } from './base-store.store';
+import { catchErrorForMessage } from '../common/rxjs.utils';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UsuarioPerfilStore {
+export class UsuarioPerfilStore extends BaseStore {
   private readonly _usuarioPerfilSource = new BehaviorSubject<PerfilUsuario>(
     null
   );
@@ -29,6 +31,7 @@ export class UsuarioPerfilStore {
   private readonly autenticacaoService = inject(AutenticacaoService);
 
   constructor() {
+    super();
     this.autenticacaoStore.usuarioLogado$.subscribe((logado) => {
       if (logado) {
         this.atualizarPerfilUsuario();
@@ -53,9 +56,21 @@ export class UsuarioPerfilStore {
     });
   }
 
-  alterarNome() {
-    const value = this._usuarioPerfilSource.getValue();
-    return this._usuarioPerfilRemotoService.atualizarNome(value.name);
+  get name(): string {
+    return this._usuarioPerfilSource.getValue().name;
+  }
+
+  salvar(name: string) {
+    this.iniciarLoading();
+    this._usuarioPerfilRemotoService
+      .atualizarNome(name)
+      .pipe(catchErrorForMessage())
+      .pipe(finalize(() => this.finalizarLoading()))
+      .subscribe({
+        next: () => {
+          this.enviarMensagemSucessoAtualizar();
+        },
+      });
   }
 
   alterarImagem(file: NzUploadFile) {
@@ -63,8 +78,6 @@ export class UsuarioPerfilStore {
       .upload(DIRETORIO_IMAGEM_USUARIO + this.autenticacaoStore.getUserId, file)
       .pipe(
         map((atualizado) => {
-          console.log(atualizado);
-
           if (atualizado) {
             this.atualizarPerfilUsuario();
           }

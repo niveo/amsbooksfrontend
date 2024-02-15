@@ -5,6 +5,8 @@ import {
   NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { skipNull } from 'src/app/common/rxjs.utils';
 import { UsuarioAutorStore } from 'src/app/stores';
 
 @Component({
@@ -14,6 +16,7 @@ import { UsuarioAutorStore } from 'src/app/stores';
 })
 export class UsuarioCentroAutorComponent implements OnInit {
   private readonly usuarioAutorStore = inject(UsuarioAutorStore);
+  loading$: Observable<boolean>;
 
   validateForm: FormGroup<{
     nome: FormControl<string>;
@@ -31,9 +34,14 @@ export class UsuarioCentroAutorComponent implements OnInit {
       ],
     });
 
-    this.usuarioAutorStore.data$.subscribe({
-      next(value) {
-        console.log(value);
+    this.loading$ = this.usuarioAutorStore.loading$;
+
+    this.usuarioAutorStore.data$.pipe(skipNull()).subscribe({
+      next: (value) => {
+        if (value.nome) this.validateForm.get('nome').setValue(value.nome);
+        if (value.descricao)
+          this.validateForm.get('descricao').setValue(value.descricao);
+        if (value.url) this.validateForm.get('url').setValue(value.url);
       },
       error(err) {
         console.error(err);

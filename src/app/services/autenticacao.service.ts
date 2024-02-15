@@ -11,6 +11,14 @@ export class AutenticacaoService {
   private readonly awsAuthConfig = inject(TOKEN_AWS_AUTH);
 
   obterUsuarioSessaoDecode() {
+    return this.obterUsuarioSessao().pipe(
+      map((token: string) => {
+        return jwtDecode(token);
+      })
+    );
+  }
+
+  obterUsuarioSessao() {
     return from(
       sessionStorage.getItem(
         `${CognitoIdentityServiceProvider}.${this.awsAuthConfig.userPoolClientId}.LastAuthUser`
@@ -22,9 +30,6 @@ export class AutenticacaoService {
             `${CognitoIdentityServiceProvider}.${this.awsAuthConfig.userPoolClientId}.${lastAuthUser}.idToken`
           )
         );
-      }),
-      map((token: string) => {
-        return jwtDecode(token);
       })
     );
   }

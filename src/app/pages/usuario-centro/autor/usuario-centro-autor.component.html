@@ -1,38 +1,47 @@
-<form nz-form nzLayout="vertical" [formGroup]="validateForm">
-  <nz-form-item>
-    <nz-form-label [nzSpan]="6" nzRequired>Nome</nz-form-label>
-    <nz-form-control [nzSpan]="14">
-      <nz-input-group [nzSuffix]="tplsave">
-        <input nz-input formControlName="nome" type="text" />
-      </nz-input-group>
-    </nz-form-control>
-  </nz-form-item>
-  <ng-template #tplsave>
+<nz-spin [nzSpinning]="loading$ | async">
+  <form nz-form nzLayout="vertical" [formGroup]="validateForm">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired>Nome</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-input-group [nzSuffix]="tplsave">
+          <input nz-input formControlName="nome" type="text" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <ng-template #tplsave>
+      <button
+        nz-button
+        nzShape="circle"
+        nz-tooltip="Copiar do Usuário"
+        (click)="copiarNomeDoUsuario()"
+      >
+        <span nz-icon nzType="copy" nzTheme="outline"></span>
+      </button>
+    </ng-template>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">Url</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input formControlName="url" type="text" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired>Descrição</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-textarea-count [nzMaxCharacterCount]="300">
+          <textarea formControlName="descricao" nz-input rows="2"></textarea>
+        </nz-textarea-count>
+      </nz-form-control>
+    </nz-form-item>
+
     <button
       nz-button
-      nzShape="circle"
-      nz-tooltip="Copiar do Usuário"
-      (click)="copiarNomeDoUsuario()"
+      nzType="primary"
+      (click)="salvar()"
+      [disabled]="!validateForm.valid"
     >
-      <span nz-icon nzType="copy" nzTheme="outline"></span>
+      Salvar
     </button>
-  </ng-template>
-
-  <nz-form-item>
-    <nz-form-label [nzSpan]="6" nzRequired>Descrição</nz-form-label>
-    <nz-form-control [nzSpan]="14">
-      <nz-textarea-count [nzMaxCharacterCount]="300">
-        <textarea formControlName="descricao" nz-input rows="2"></textarea>
-      </nz-textarea-count>
-    </nz-form-control>
-  </nz-form-item>
-
-  <nz-form-item>
-    <nz-form-label [nzSpan]="6">Url</nz-form-label>
-    <nz-form-control [nzSpan]="14">
-      <input nz-input formControlName="url" type="text" />
-    </nz-form-control>
-  </nz-form-item>
-
-  <button nz-button nzType="primary" (click)="salvar()">Salvar</button>
-</form>
+  </form>
+</nz-spin>
