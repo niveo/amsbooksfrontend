@@ -52,21 +52,15 @@ export class UsuarioAutorStore extends BaseStore {
       .obterAutorUsuario()
       .pipe(finalize(() => this.finalizarLoading()))
       .pipe(skipNull())
-      //.pipe(catchErrorForMessage())
       .subscribe((value) => this._dataSource.next(value));
   }
 
   copiarNomeDoUsuario() {
     if (!this._dataSource.value) {
-      console.log('A');
-      
       this._dataSource.next({
         nome: this.usuarioPerfilStore.name,
       });
-      console.log(this._dataSource.getValue());
-      
     } else {
-      console.log('A');
       this._dataSource.next({
         ...this._dataSource.getValue(),
         nome: this.usuarioPerfilStore.name,

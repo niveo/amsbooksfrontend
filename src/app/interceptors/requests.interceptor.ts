@@ -26,8 +26,6 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     } else {
       return this.autenticacaoService.obterUsuarioSessao().pipe(
         mergeMap((token) => {
-          console.log(token);
-
           if (token) {
             const authReq = req.clone({
               url: this.conf.apiUri + req.url,
