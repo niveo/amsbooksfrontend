@@ -6,6 +6,15 @@
           <li nz-menu-item nzSelected nzMatchRouter>
             <a [routerLink]="['/usuario/perfil']">Básico</a>
           </li>
+          <li nz-submenu nzTitle="Livros">
+            <ul>
+              <li nz-menu-item [routerLink]="['/usuario/colecao']">Lidos</li>
+              <li nz-menu-item [routerLink]="['/usuario/colecao']">Ler</li>
+              <li nz-menu-item [routerLink]="['/usuario/colecao']">
+                Coleções / Listas
+              </li>
+            </ul>
+          </li>
         </ul>
       </li>
       <li nz-submenu nzTitle="Autor" nzIcon="user">
@@ -13,16 +22,9 @@
           <li nz-menu-item nzMatchRouter>
             <a [routerLink]="['/usuario/autor']">Básico</a>
           </li>
-          <li nz-submenu nzTitle="Submenu">
+          <li nz-submenu nzTitle="Livros">
             <ul>
-              <li nz-menu-item>Option 7</li>
-              <li nz-menu-item>Option 8</li>
-              <li nz-submenu nzTitle="Submenu">
-                <ul>
-                  <li nz-menu-item>Option 9</li>
-                  <li nz-menu-item>Option 10</li>
-                </ul>
-              </li>
+              <li nz-menu-item>Meu Livros</li>
             </ul>
           </li>
         </ul>

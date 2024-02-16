@@ -4,6 +4,7 @@ import { BehaviorSubject, finalize, iif, mergeMap, of, tap } from 'rxjs';
 import { BaseStore } from './base-store.store';
 import { catchErrorForMessage, skipNull } from '../common/rxjs.utils';
 import { UsuarioPerfilStore } from './usuario-perfil.store';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Injectable()
 export class UsuarioAutorStore extends BaseStore {
@@ -15,7 +16,7 @@ export class UsuarioAutorStore extends BaseStore {
   }>(null);
 
   readonly data$ = this._dataSource.asObservable();
-
+  private readonly nzMessageService = inject(NzMessageService);
   private readonly autorService = inject(AutorService);
   private readonly usuarioPerfilStore = inject(UsuarioPerfilStore);
 
@@ -23,11 +24,6 @@ export class UsuarioAutorStore extends BaseStore {
     this.iniciarLoading();
 
     of(this._dataSource.getValue()?.id)
-      .pipe(
-        tap((v) => {
-          console.log(v);
-        })
-      )
       .pipe(
         mergeMap((v) =>
           iif(
@@ -38,7 +34,7 @@ export class UsuarioAutorStore extends BaseStore {
         )
       )
       .pipe(finalize(() => this.finalizarLoading()))
-      .pipe(catchErrorForMessage())
+      .pipe(catchErrorForMessage(this.nzMessageService))
       .subscribe({
         next: () => {
           this.enviarMensagemSucessoAtualizar();

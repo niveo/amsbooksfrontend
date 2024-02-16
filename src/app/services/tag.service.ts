@@ -6,9 +6,9 @@ import { BaseHttpService } from './base-http.service';
 @Injectable({
   providedIn: 'root',
 })
-export class TagService extends BaseHttpService { 
-
+export class TagService extends BaseHttpService {
+  override path: string = '/tags';
   getAll() {
-    return this.http.get<any[]>('/tags').pipe(catchError(handleError));
+    return this.http.get<any[]>(this.path).pipe(catchError(handleError));
   }
 }

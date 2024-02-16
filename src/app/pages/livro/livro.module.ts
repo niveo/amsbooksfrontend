@@ -31,6 +31,8 @@ import { LivroDetalheStore } from 'src/app/stores/livro-detalhe.store';
 import { LivroHistoricoUsuarioStore } from 'src/app/stores';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.module';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { LivroUsuarioComponent } from 'src/app/componentes/usuario/livro/usuario-livro.component';
 
 @NgModule({
   declarations: [
@@ -62,9 +64,11 @@ import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.mod
     CommonModule,
     NzAlertModule,
     NzAvatarModule,
+    NzSpaceModule,
     DateDistancePipe, 
     NzSkeletonModule, 
-    UsuarioPerfilAvatarComponent
+    UsuarioPerfilAvatarComponent,
+    LivroUsuarioComponent
   ],
   providers: [
     LivroComentarioStore,

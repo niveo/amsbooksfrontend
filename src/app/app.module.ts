@@ -40,7 +40,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 import { IconsProviderUserModule } from './modules/icons-provider-user.module';
 import { VersaoSistemaDirective } from './directives/versao-sistema.directive';
-import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
 registerLocaleData(pt);
 registerLocaleData(en);
@@ -74,6 +75,7 @@ registerLocaleData(en);
     NzSpaceModule,
     NzInputModule,
     NzSpinModule,
+    NzDrawerModule,
 
     LivroModule,
     TagModule,
@@ -82,6 +84,7 @@ registerLocaleData(en);
     OverlayModule,
   ],
   providers: [
+    NzMessageService,
     { provide: TOKEN_APP_CONFIG, useValue: environment },
     {
       provide: TOKEN_CARREGAR_IMAGEM_REMOTA,

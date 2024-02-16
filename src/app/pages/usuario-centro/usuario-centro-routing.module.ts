@@ -4,6 +4,7 @@ import { userGuard } from 'src/app/guards/user.guard';
 import { UsuarioCentroComponent } from './usuario-centro.component';
 import { UsuarioCentroPerfilComponent } from './perfil/usuario-centro-perfil.component';
 import { UsuarioCentroAutorComponent } from './autor/usuario-centro-autor.component';
+import { UsuarioColecaoComponent } from './colecao/usuario-colecao.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: 'autor',
         component: UsuarioCentroAutorComponent,
+      },
+      {
+        path: 'colecao',
+        component: UsuarioColecaoComponent,
       },
     ],
   },

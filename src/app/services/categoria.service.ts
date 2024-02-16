@@ -7,7 +7,8 @@ import { BaseHttpService } from './base-http.service';
   providedIn: 'root',
 })
 export class CategoriaService extends BaseHttpService {
+  override path: string = '/categorias';
   getAll() {
-    return this.http.get<any[]>('/categorias').pipe(catchError(handleError));
+    return this.http.get<any[]>(this.path).pipe(catchError(handleError));
   }
 }

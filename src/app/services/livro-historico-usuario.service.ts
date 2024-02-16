@@ -5,9 +5,10 @@ import { BaseHttpService } from './base-http.service';
 
 @Injectable()
 export class LivroHistoricoUsuarioService extends BaseHttpService {
+  override path: string = '/livro_historico_usuario';
   obterLivroHistoricoUsuario(livroId: number) {
     return this.http
-      .get<any>('/livro-historico-usuario', {
+      .get<any>(this.path, {
         params: {
           livroId: livroId,
         },

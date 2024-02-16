@@ -1,4 +1,8 @@
-import { HttpParams } from "@angular/common/http";
+import { HttpParams } from '@angular/common/http';
+import { catchError, finalize, of, pipe } from 'rxjs';
+import { catchErrorForMessage } from './rxjs.utils';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { MSG_ERRO_PROCESSAR } from './messages';
 
 export function formatFileSize(bytes: any, si = false, dp = 2) {
   const thresh = si ? 1000 : 1024;
@@ -43,3 +47,5 @@ export function carregarParametros(paramsObject: any): HttpParams | any {
     }
   }
 }
+
+ 

@@ -11,9 +11,11 @@ export class LivroComentarioInputDto {
 
 @Injectable()
 export class LivroComentarioService extends BaseHttpService {
+  override path: string = '/livros_comentarios';
+
   getAll(livroId: number) {
     return this.http
-      .get<any>('/livros_comentarios', {
+      .get<any>(this.path, {
         params: {
           livroId: livroId,
         },
@@ -23,7 +25,7 @@ export class LivroComentarioService extends BaseHttpService {
 
   getComentarioIdLivroUsuario(livroId: number) {
     return this.http
-      .get<any>('/livros_comentarios/comentarioidusuario', {
+      .get<any>(this.path + '/comentarioidusuario', {
         params: {
           livroId: livroId,
         },
@@ -33,13 +35,13 @@ export class LivroComentarioService extends BaseHttpService {
 
   create(livroComentarioInputDto: LivroComentarioInputDto) {
     return this.http
-      .post<any>('/livros_comentarios', livroComentarioInputDto)
+      .post<any>(this.path, livroComentarioInputDto)
       .pipe(catchError(handleError));
   }
 
   delete(comentarioId: number) {
     return this.http
-      .delete<any>('/livros_comentarios/' + comentarioId)
+      .delete<any>(this.path + '/' + comentarioId)
       .pipe(catchError(handleError));
   }
 }

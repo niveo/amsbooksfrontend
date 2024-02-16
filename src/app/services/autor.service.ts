@@ -5,8 +5,9 @@ import { handleError } from '../common/handle-error';
 
 @Injectable()
 export class AutorService extends BaseHttpService {
+  override path: string = '/autor';
   createWithUser(nome: string, descricao: string, url: string) {
-    return this.http.post('/autor/createWithUser', {
+    return this.http.post(this.path + '/createWithUser', {
       nome,
       descricao,
       url,
@@ -14,7 +15,7 @@ export class AutorService extends BaseHttpService {
   }
 
   update(id: number, nome: string, descricao: string, url: string) {
-    return this.http.put('/autor/' + id, {
+    return this.http.put(this.path + '/' + id, {
       nome,
       descricao,
       url,
@@ -23,7 +24,7 @@ export class AutorService extends BaseHttpService {
 
   obterAutorUsuario() {
     return this.http
-      .get<any>('/autor/autorusuario')
+      .get<any>(this.path + '/autorusuario')
       .pipe(catchError(handleError));
   }
 }

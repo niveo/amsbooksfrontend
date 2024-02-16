@@ -1,0 +1,27 @@
+@if(usuarioPerfil$ | async;){
+<button
+  nz-button
+  nzType="dashed"
+  nzShape="circle"
+  (click)="abrirMenu()"
+  nz-tooltip="Menu Usuário"
+>
+  <span nz-icon nzType="menu-fold"></span>
+</button>
+}
+
+<ng-template #drawerTemplate let-data let-drawerRef="drawerRef">
+  value: {{ data?.livroId }}
+  <br />
+  <br />
+
+  <nz-radio-group [(ngModel)]="situacaoLeitura">
+    <label nz-radio-button nzValue="0">
+      Ler <span nz-icon nzType="clock-circle"></span
+    ></label>
+    <label nz-radio-button nzValue="1">
+      Lido <span nz-icon nzType="check"></span
+    ></label>
+  </nz-radio-group>
+ 
+</ng-template>

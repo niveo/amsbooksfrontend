@@ -11,6 +11,7 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { PerfilUsuario } from '../model';
 import { BaseStore } from './base-store.store';
 import { catchErrorForMessage } from '../common/rxjs.utils';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,8 @@ export class UsuarioPerfilStore extends BaseStore {
 
   private readonly autenticacaoService = inject(AutenticacaoService);
 
+  private readonly nzMessageService = inject(NzMessageService);
+
   constructor() {
     super();
     this.autenticacaoStore.usuarioLogado$.subscribe((logado) => {
@@ -46,6 +49,7 @@ export class UsuarioPerfilStore extends BaseStore {
           DIRETORIO_IMAGEM_USUARIO + value.sub
         );
         this._usuarioPerfilSource.next({
+          userId: value.sub,
           name: value.name,
           email: value.email,
         });
@@ -64,7 +68,7 @@ export class UsuarioPerfilStore extends BaseStore {
     this.iniciarLoading();
     this._usuarioPerfilRemotoService
       .atualizarNome(name)
-      .pipe(catchErrorForMessage())
+      .pipe(catchErrorForMessage(this.nzMessageService))
       .pipe(finalize(() => this.finalizarLoading()))
       .subscribe({
         next: () => {

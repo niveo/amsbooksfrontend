@@ -16,7 +16,7 @@ import { skipNull } from 'src/app/common/rxjs.utils';
 })
 export class UsuarioCentroPerfilComponent {
   private readonly _usuarioPerfilStore = inject(UsuarioPerfilStore);
-  usuarioPerfil$: Observable<any>;
+
   loading$: Observable<boolean>;
 
   validateForm: FormGroup<{
@@ -30,7 +30,6 @@ export class UsuarioCentroPerfilComponent {
       email: ['', [Validators.required, Validators.email]],
     });
     this.loading$ = this._usuarioPerfilStore.loading$;
-    this.usuarioPerfil$ = this._usuarioPerfilStore.usuarioPerfil$;
 
     this._usuarioPerfilStore.usuarioPerfil$.pipe(skipNull()).subscribe({
       next: (value) => {
