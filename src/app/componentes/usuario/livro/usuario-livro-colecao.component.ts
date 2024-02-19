@@ -61,7 +61,6 @@ export class UsuarioLivroColecaoComponent implements OnInit {
     });
   }
 
-  testar update
   salvarDescricao() {
     if (this.descricao) {
       if (!this.idEdicao) {
@@ -82,10 +81,9 @@ export class UsuarioLivroColecaoComponent implements OnInit {
         this.carregarObservable(
           this.colecaoLivroService.update(this.idEdicao, this.descricao)
         ).subscribe({
-          next: (value) => {
-            console.log(value);
-            const index = this.registros.findIndex((f) => (f.id = value));
-            this.registros[index].descricao = this.descricao;
+          next: () => {
+            const registro = this.registros.find((f) => (f.id === this.idEdicao));
+            registro.descricao = this.descricao;
             this.descricao = '';
             this.idEdicao = null;
             this.nzMessageService.success(MSG_SUCESSO_PROCESSAR);
