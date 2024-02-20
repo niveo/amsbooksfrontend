@@ -1,0 +1,12 @@
+<span>Coleção</span>
+<br />
+<nz-select
+  nzMode="multiple"
+  nzPlaceHolder="Please select"
+  [(ngModel)]="listOfSelectedValue"
+  (ngModelChange)="change($event)"
+>
+  @for(item of listOfOption; track item.id){
+  <nz-option [nzLabel]="item.descricao" [nzValue]="item.id" />
+  }
+</nz-select>

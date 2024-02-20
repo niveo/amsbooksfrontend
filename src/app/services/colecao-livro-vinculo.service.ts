@@ -4,23 +4,21 @@ import { catchError } from 'rxjs';
 import { handleError } from '../common/handle-error';
 
 @Injectable()
-export class ColecaoLivroService extends BaseHttpService {
-  override path: string = '/colecoes_livros';
+export class ColecaoLivroVinculoService extends BaseHttpService {
+  override path: string = '/colecoes_livros_vinculos';
 
-  getAll() {
-    return this.http.get<any[]>(this.path).pipe(catchError(handleError));
+  getAll(livroId: number) {
+    return this.http
+      .get<any[]>(this.path, {
+        params: {
+          livroId: livroId,
+        },
+      })
+      .pipe(catchError(handleError));
   }
-
-
 
   create(descricao: string) {
     return this.http.post(this.path, {
-      descricao,
-    });
-  }
-
-  update(id: number, descricao: string) {
-    return this.http.put(`${this.path}/${id}`, {
       descricao,
     });
   }

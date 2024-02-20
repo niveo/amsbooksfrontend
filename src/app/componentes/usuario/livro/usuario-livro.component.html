@@ -23,5 +23,9 @@
       Lido <span nz-icon nzType="check"></span
     ></label>
   </nz-radio-group>
- 
+  <br />
+  <br />
+  @if(data?.livroId){
+  <usuario-livro-colecao-selecao-component [livroId]="data?.livroId" />
+  }
 </ng-template>

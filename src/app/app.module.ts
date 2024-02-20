@@ -46,6 +46,21 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 registerLocaleData(pt);
 registerLocaleData(en);
 
+const NZ_MODULES = [
+  NzMenuModule,
+  NzButtonModule,
+  NzAvatarModule,
+  NzToolTipModule,
+  NzLayoutModule, 
+  NzModalModule,
+  NzMessageModule,
+  NzUploadModule,
+  NzSpaceModule,
+  NzInputModule,
+  NzSpinModule,
+  NzDrawerModule,
+];
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -63,19 +78,7 @@ registerLocaleData(en);
 
     IconsProviderUserModule,
 
-    NzMenuModule,
-    NzButtonModule,
-    NzAvatarModule,
-    NzToolTipModule,
-    NzLayoutModule,
-    NzToolTipModule,
-    NzModalModule,
-    NzMessageModule,
-    NzUploadModule,
-    NzSpaceModule,
-    NzInputModule,
-    NzSpinModule,
-    NzDrawerModule,
+    ...NZ_MODULES,
 
     LivroModule,
     TagModule,

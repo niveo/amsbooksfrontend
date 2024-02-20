@@ -15,6 +15,7 @@ import { UsuarioPerfilStore } from 'src/app/stores/usuario-perfil.store';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { FormsModule } from '@angular/forms';
 import { UsuarioLivroColecaoComponent } from './usuario-livro-colecao.component';
+import { UsuarioLivroColecaoSelecaoComponent } from './usuario-livro-colecao-selecao.component';
 
 @Component({
   selector: 'app-usuario-livro-component',
@@ -28,6 +29,7 @@ import { UsuarioLivroColecaoComponent } from './usuario-livro-colecao.component'
     IconsProviderUserModule,
     FormsModule,
     UsuarioLivroColecaoComponent,
+    UsuarioLivroColecaoSelecaoComponent
   ],
 })
 export class LivroUsuarioComponent {

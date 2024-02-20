@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { AutenticacaoStore } from 'src/app/stores';
 import { LivroComentarioStore } from 'src/app/stores/livro-comentario.store';
@@ -8,7 +8,7 @@ import { LivroComentarioStore } from 'src/app/stores/livro-comentario.store';
   templateUrl: './livro-comentario.component.html',
   styleUrl: './livro-comentario.component.scss',
 })
-export class LivroComentarioComponent implements OnInit {
+export class LivroComentarioComponent {
   public readonly autenticacaoStore = inject(AutenticacaoStore);
   private readonly livroComentarioStore = inject(LivroComentarioStore);
 
@@ -27,9 +27,7 @@ export class LivroComentarioComponent implements OnInit {
     this.storeLoadingSub = this.livroComentarioStore.loading$.subscribe(
       (loading) => (this.loading = loading)
     );
-  }
 
-  ngOnInit(): void {
     this.data$ = this.livroComentarioStore.data$;
     this.usuarioLogado$ = this.autenticacaoStore.usuarioLogado$;
     this.comentarioIdHistorico$ =
