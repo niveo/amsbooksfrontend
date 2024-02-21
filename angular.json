@@ -32,7 +32,11 @@
                 "output": "./"
               }
             ],
-            "styles": ["src/theme.less", "src/styles.scss"],
+            "styles": [
+              "src/theme.less",
+              "src/styles.scss",
+              "node_modules/ng-devui/devui.min.css"
+            ],
             "scripts": []
           },
           "configurations": {

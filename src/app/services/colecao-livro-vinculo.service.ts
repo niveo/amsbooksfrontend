@@ -17,13 +17,13 @@ export class ColecaoLivroVinculoService extends BaseHttpService {
       .pipe(catchError(handleError));
   }
 
-  create(descricao: string) {
-    return this.http.post(this.path, {
-      descricao,
-    });
+  create(body: { colecaoId: number; livroId: number }) {
+    return this.http.post(this.path, body);
   }
 
-  delete(id: any) {
-    return this.http.delete(`${this.path}/${id}`);
+  delete(body: { colecaoId: number; livroId: number }) {
+    return this.http.delete(`${this.path}`, {
+      body: body,
+    });
   }
 }

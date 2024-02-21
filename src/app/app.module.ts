@@ -45,6 +45,8 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
 registerLocaleData(pt);
 registerLocaleData(en);
+ 
+import { DevUIModule } from 'ng-devui';
 
 const NZ_MODULES = [
   NzMenuModule,
@@ -79,6 +81,8 @@ const NZ_MODULES = [
     IconsProviderUserModule,
 
     ...NZ_MODULES,
+
+    DevUIModule.forRoot(),
 
     LivroModule,
     TagModule,

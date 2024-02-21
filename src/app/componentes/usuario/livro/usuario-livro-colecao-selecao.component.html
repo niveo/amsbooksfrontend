@@ -1,12 +1,31 @@
-<span>Coleção</span>
-<br />
-<nz-select
-  nzMode="multiple"
-  nzPlaceHolder="Please select"
-  [(ngModel)]="listOfSelectedValue"
-  (ngModelChange)="change($event)"
->
-  @for(item of listOfOption; track item.id){
-  <nz-option [nzLabel]="item.descricao" [nzValue]="item.id" />
-  }
-</nz-select>
+<section>
+  <h4>Coleção</h4>
+  <div class="row">
+    <div class="col-md-5">
+      <d-select
+      #networkSearchSelect
+        [overview]="'underlined'"
+        [placeholder]="'Selecione suas coleções'"
+        [options]="options"
+        [isSearch]="true"
+        [readonly]="true"
+        [multiple]="true"
+        [(ngModel)]="select1"
+        filterKey="name"
+        [extraConfig]="{
+          labelization: { enable: true, overflow: 'multiple-line' }
+        }"
+        (valueChange)="change($event)"
+      ></d-select>
+    </div>
+  </div>
+</section>
+<section>
+  <div
+    dLoading
+    [loading]="loading"
+    [backdrop]="true"
+    [message]="'One moment please...'"
+    [style.height.px]="80"
+  ></div>
+</section>
