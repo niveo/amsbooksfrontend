@@ -23,7 +23,7 @@ export class CategoriaListaComponent implements OnInit {
   }
 
   visualizarLivrosCategoria(categoria) {
-    if (categoria.contalivros)
+    if (categoria.contaLivros)
       this.router.navigate([ROTA_LIVROS, { categoria: categoria.id }]);
   }
 }

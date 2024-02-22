@@ -24,6 +24,6 @@ export class TagListaComponent implements OnInit {
   }
 
   visualizarLivrosTag(tag) {
-    if (tag.contalivros) this.router.navigate([ROTA_LIVROS, { tag: tag.id }]);
+    if (tag.contaLivros) this.router.navigate([ROTA_LIVROS, { tag: tag.id }]);
   }
 }

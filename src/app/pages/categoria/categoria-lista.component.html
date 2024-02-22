@@ -1,5 +1,5 @@
 @if(loading){
-  <nz-skeleton [nzLoading]="loading"></nz-skeleton>
+<nz-skeleton [nzLoading]="loading"></nz-skeleton>
 }
 
 <nz-list nzGrid style="width: 100%">
@@ -7,8 +7,8 @@
     @for(categoria of categorias$ | async; track categoria.id){
     <div nz-col [nzSpan]="24 / 4">
       <nz-list-item (click)="visualizarLivrosCategoria(categoria)">
-        @if(categoria.contalivros){
-        <nz-ribbon [nzText]="categoria.contalivros">
+        @if(categoria.contaLivros){
+        <nz-ribbon [nzText]="categoria.contaLivros">
           <ng-container
             *ngTemplateOutlet="tplcorpo; context: { $implicit: categoria }"
           />
