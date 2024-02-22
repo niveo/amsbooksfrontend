@@ -2,14 +2,7 @@
   @if(loading){
   <nz-skeleton [nzActive]="true"></nz-skeleton>
   }
-  <div
-    infinite-scroll
-    [infiniteScrollDistance]="scrollDistance"
-    [infiniteScrollUpDistance]="scrollUpDistance"
-    [infiniteScrollThrottle]="throttle"
-    (scrolled)="onScrollDown()"
-    class="content"
-  >
+  <div class="content">
     @for(livro of livros; track livro.id){
     <div class="">
       <nz-card

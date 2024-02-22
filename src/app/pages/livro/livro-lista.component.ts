@@ -20,9 +20,6 @@ export class LivroListaComponent implements OnInit {
   page: number = 0;
   pageSize: number = 10;
 
-  scrollDistance = 1;
-  scrollUpDistance = 2;
-  throttle = 300;
   loading = true;
 
   get pageLimit() {
