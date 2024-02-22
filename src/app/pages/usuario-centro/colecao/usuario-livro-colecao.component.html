@@ -56,7 +56,7 @@
               ></a>
             </nz-list-item-action>
           </ul>
-          {{ item.descricao }} ({{ item.vinculados }})
+          {{ item.descricao }} @if(item.vinculados){ ({{ item.vinculados }}) }
         </li>
         }
       </ul>
