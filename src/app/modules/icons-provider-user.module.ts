@@ -23,6 +23,7 @@ import {
   CheckOutline,
   DeleteFill,
   EditOutline,
+  BookFill
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
@@ -46,7 +47,8 @@ const icons = [
   ClockCircleOutline,
   CheckOutline,
   DeleteFill,
-  EditOutline
+  EditOutline,
+  BookFill
 ];
 
 @NgModule({

@@ -3,5 +3,5 @@ import { inject } from '@angular/core';
 
 export abstract class BaseHttpService {
   protected readonly http = inject(HttpClient);
-  abstract path: string;
+  protected abstract path: string;
 }

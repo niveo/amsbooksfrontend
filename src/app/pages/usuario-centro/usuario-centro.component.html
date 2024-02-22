@@ -8,8 +8,18 @@
           </li>
           <li nz-submenu nzTitle="Livros">
             <ul>
-              <li nz-menu-item [routerLink]="['/usuario/colecao']">Lidos</li>
-              <li nz-menu-item [routerLink]="['/usuario/colecao']">Ler</li>
+              <li
+                nz-menu-item
+                [routerLink]="['/usuario/livros', { leitura: 1 }]"
+              >
+                Lidos
+              </li>
+              <li
+                nz-menu-item
+                [routerLink]="['/usuario/livros', { leitura: 0 }]"
+              >
+                Ler
+              </li>
               <li nz-menu-item [routerLink]="['/usuario/colecao']">
                 Coleções / Listas
               </li>

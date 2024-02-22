@@ -60,6 +60,10 @@ export class UsuarioPerfilStore extends BaseStore {
     });
   }
 
+  get isUsuarioLogado(): boolean {
+    return this.autenticacaoStore.isUsuarioLogado;
+  }
+
   get name(): string {
     return this._usuarioPerfilSource.getValue().name;
   }

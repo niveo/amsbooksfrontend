@@ -11,11 +11,13 @@
 }
 
 <ng-template #drawerTemplate let-data let-drawerRef="drawerRef">
-  value: {{ data?.livroId }}
-  <br />
   <br />
 
-  <nz-radio-group [(ngModel)]="situacaoLeitura">
+  <nz-radio-group
+    [(ngModel)]="situacaoLeitura"
+    (ngModelChange)="change()"
+    nzSize="small"
+  >
     <label nz-radio-button nzValue="0">
       Ler <span nz-icon nzType="clock-circle"></span
     ></label>

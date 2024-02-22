@@ -24,6 +24,11 @@ const routes: Routes = [
         path: 'colecao',
         component: UsuarioColecaoComponent,
       },
+      {
+        path: 'livros',
+        loadChildren: () =>
+          import('../../pages/livro/livro.module').then((m) => m.LivroModule),
+      },
     ],
   },
 ];

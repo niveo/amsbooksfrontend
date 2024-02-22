@@ -5,12 +5,13 @@ import { pipe, tap } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { MSG_ERRO_PROCESSAR } from 'src/app/common';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.module';
 
 @Component({
   selector: 'app-usuario-livro-colecao-tag-component',
   templateUrl: './usuario-livro-colecao-tag.component.html',
   standalone: true,
-  imports: [FormsModule, NzTagModule],
+  imports: [FormsModule, NzTagModule, IconsProviderUserModule],
   providers: [ColecaoLivroVinculoService],
 })
 export class UsuarioLivroColecaoTagComponent implements OnInit {
@@ -25,13 +26,13 @@ export class UsuarioLivroColecaoTagComponent implements OnInit {
 
   private readonly nzMessageService = inject(NzMessageService);
 
-  private pipeTapError = (id: number) =>
+  private pipeTapError = () =>
     pipe(
       tap({
         error: (err) => {
           console.error('error', err);
           setTimeout(() => {
-            this.msgErroReset();
+            this.nzMessageService.error(MSG_ERRO_PROCESSAR);
           }, 300);
         },
       })
@@ -60,7 +61,7 @@ export class UsuarioLivroColecaoTagComponent implements OnInit {
           colecaoId: colecaoId,
           livroId: this.livroId,
         })
-        .pipe(this.pipeTapError(colecaoId))
+        .pipe(this.pipeTapError())
         .subscribe({
           error: () => {
             const index = this.listOfSelectedValue.findIndex(
@@ -75,16 +76,12 @@ export class UsuarioLivroColecaoTagComponent implements OnInit {
           colecaoId: colecaoId,
           livroId: this.livroId,
         })
-        .pipe(this.pipeTapError(colecaoId))
+        .pipe(this.pipeTapError())
         .subscribe({
           error: () => {
             this.listOfSelectedValue.push(colecaoId);
           },
         });
     }
-  }
-
-  msgErroReset() {
-    this.nzMessageService.error(MSG_ERRO_PROCESSAR);
   }
 }

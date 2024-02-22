@@ -9,12 +9,15 @@ import {
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDrawerRef, NzDrawerService } from 'ng-zorro-antd/drawer';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
-import { Observable } from 'rxjs';
+import { Observable, pipe, tap } from 'rxjs';
 import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.module';
 import { UsuarioPerfilStore } from 'src/app/stores/usuario-perfil.store';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 import { UsuarioLivroColecaoTagComponent } from './usuario-livro-colecao-tag.component';
+import { LivroPerfiloUsuarioService } from 'src/app/services';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { MSG_ERRO_ATUALIZAR, MSG_ERRO_CARREGAR } from 'src/app/common';
 
 @Component({
   selector: 'app-usuario-livro-component',
@@ -26,9 +29,10 @@ import { UsuarioLivroColecaoTagComponent } from './usuario-livro-colecao-tag.com
     NzRadioModule,
     AsyncPipe,
     IconsProviderUserModule,
-    FormsModule, 
-    UsuarioLivroColecaoTagComponent
+    FormsModule,
+    UsuarioLivroColecaoTagComponent,
   ],
+  providers: [LivroPerfiloUsuarioService],
 })
 export class LivroUsuarioComponent {
   @Input({ required: true })
@@ -43,9 +47,45 @@ export class LivroUsuarioComponent {
 
   private readonly usuarioPerfilStore = inject(UsuarioPerfilStore);
   private readonly drawerService = inject(NzDrawerService);
+  private readonly livroPerfiloUsuarioService = inject(
+    LivroPerfiloUsuarioService
+  );
+
+  private readonly nzMessageService = inject(NzMessageService);
 
   constructor() {
     this.usuarioPerfil$ = this.usuarioPerfilStore.usuarioPerfil$;
+  }
+
+  private pipeTapError = (msg: string) =>
+    pipe(
+      tap({
+        error: (err) => {
+          console.error('error', err);
+          setTimeout(() => {
+            this.nzMessageService.error(msg);
+          }, 300);
+        },
+      })
+    );
+
+  carregar() {
+    if (!this.livroId && !this.usuarioPerfilStore.isUsuarioLogado) return;
+    this.livroPerfiloUsuarioService
+      .get(this.livroId)
+      .pipe(this.pipeTapError(MSG_ERRO_CARREGAR))
+      .subscribe({
+        next: (value: any) => {
+          this.situacaoLeitura = String(value.situacaoLeitura);
+        },
+      });
+  }
+
+  change() {
+    this.livroPerfiloUsuarioService
+      .upsert(this.livroId, Number(this.situacaoLeitura))
+      .pipe(this.pipeTapError(MSG_ERRO_ATUALIZAR))
+      .subscribe();
   }
 
   abrirMenu() {
@@ -54,6 +94,9 @@ export class LivroUsuarioComponent {
       nzContentParams: {
         livroId: this.livroId,
       },
+    });
+    drawerRef.afterOpen.subscribe(() => {
+      this.carregar();
     });
   }
 }
