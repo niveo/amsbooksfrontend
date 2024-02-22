@@ -5,13 +5,14 @@ import { LivroComentarioService } from '../services/livro-comentario.service';
 import { BaseStore } from './base-store.store';
 import { ImagemRemotaService } from '../services';
 import { DIRETORIO_IMAGEM_USUARIO } from '../common/constantes';
+import { AutenticacaoStore } from './autenticacao.store';
 
 @Injectable()
 export class LivroComentarioStore extends BaseStore {
   private readonly livroComentarioService = inject(LivroComentarioService);
   private readonly livroDetalheStore = inject(LivroDetalheStore);
   private readonly imagemRemotaService = inject(ImagemRemotaService);
-
+  public readonly autenticacaoStore = inject(AutenticacaoStore);
   private readonly _dataSource = new BehaviorSubject<any[]>([]);
   readonly data$ = this._dataSource.asObservable();
   private readonly _comentarioIdHistoricoSource = new BehaviorSubject<any[]>(
@@ -25,16 +26,20 @@ export class LivroComentarioStore extends BaseStore {
   constructor() {
     super();
     this.livroDetalheStore.livroId$.subscribe((livroId) => {
-      if (livroId) {
-        this.livroId = livroId;
-        this.fetchData();
-      }
+      this.livroId = livroId;
+      this.fetchData();
     });
 
     this._dataSource.subscribe(() => {
+      if (!this.autenticacaoStore.authenticated() || !this.livroId) return;
+
       this.livroComentarioService
         .getComentarioIdLivroUsuario(this.livroId)
         .subscribe((data) => this._comentarioIdHistoricoSource.next(data));
+    });
+
+    this.autenticacaoStore.usuarioLogado$.subscribe(() => {
+      this.fetchData();
     });
   }
 
@@ -57,6 +62,7 @@ export class LivroComentarioStore extends BaseStore {
   }
 
   fetchData(): void {
+    if (!this.autenticacaoStore.authenticated() || !this.livroId) return;
     this.iniciarLoading();
     this.livroComentarioService
       .getAll(this.livroId)

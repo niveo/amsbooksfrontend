@@ -20,14 +20,13 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> { 
+  ): Observable<HttpEvent<any>> {
     if (!this.authenticator.authenticated()) {
       console.log('Not authenticated');
-      
       return this.defaultClone(req, next);
     } else {
       return this.autenticacaoService.obterUsuarioSessao().pipe(
-        mergeMap((token) => { 
+        mergeMap((token) => {
           if (token) {
             const authReq = req.clone({
               url: this.conf.apiUri + req.url,

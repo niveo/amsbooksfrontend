@@ -7,13 +7,13 @@ import { MSG_ERRO_PROCESSAR } from 'src/app/common';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 
 @Component({
-  selector: 'usuario-livro-colecao-selecao-component',
-  templateUrl: './usuario-livro-colecao-selecao.component.html',
+  selector: 'app-usuario-livro-colecao-tag-component',
+  templateUrl: './usuario-livro-colecao-tag.component.html',
   standalone: true,
   imports: [FormsModule, NzTagModule],
   providers: [ColecaoLivroVinculoService],
 })
-export class UsuarioLivroColecaoSelecaoComponent implements OnInit {
+export class UsuarioLivroColecaoTagComponent implements OnInit {
   @Input({ required: true })
   livroId: number;
 

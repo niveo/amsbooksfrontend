@@ -22,10 +22,6 @@ export class AutenticacaoStore {
 
   authenticated = signal(false);
 
-  initialState = {
-    usuarioLogado: false,
-  };
-
   constructor() {
     const subs = interval(1000).subscribe(() => {
       if (
@@ -54,8 +50,8 @@ export class AutenticacaoStore {
   }
 
   fetchData(usuarioLogado: boolean): void {
-    this._usuarioLogadoSource.next(usuarioLogado);
     this.authenticated.set(usuarioLogado);
+    this._usuarioLogadoSource.next(usuarioLogado);
     if (!usuarioLogado) {
       this._userIdSource.next(null);
       this.router.navigate(['/']);

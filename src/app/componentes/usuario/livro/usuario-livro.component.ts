@@ -13,9 +13,8 @@ import { Observable } from 'rxjs';
 import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.module';
 import { UsuarioPerfilStore } from 'src/app/stores/usuario-perfil.store';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
-import { FormsModule } from '@angular/forms';
-import { UsuarioLivroColecaoComponent } from './usuario-livro-colecao.component';
-import { UsuarioLivroColecaoSelecaoComponent } from './usuario-livro-colecao-selecao.component';
+import { FormsModule } from '@angular/forms'; 
+import { UsuarioLivroColecaoTagComponent } from './usuario-livro-colecao-tag.component';
 
 @Component({
   selector: 'app-usuario-livro-component',
@@ -27,9 +26,8 @@ import { UsuarioLivroColecaoSelecaoComponent } from './usuario-livro-colecao-sel
     NzRadioModule,
     AsyncPipe,
     IconsProviderUserModule,
-    FormsModule,
-    UsuarioLivroColecaoComponent,
-    UsuarioLivroColecaoSelecaoComponent
+    FormsModule, 
+    UsuarioLivroColecaoTagComponent
   ],
 })
 export class LivroUsuarioComponent {

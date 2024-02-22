@@ -16,9 +16,9 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { UsuarioCentroAutorComponent } from './autor/usuario-centro-autor.component';
 import { UsuarioAutorStore } from 'src/app/stores';
 import { AutorService } from 'src/app/services/autor.service';
-import { NzSpinModule } from 'ng-zorro-antd/spin'; 
-import { UsuarioLivroColecaoComponent } from 'src/app/componentes/usuario/livro/usuario-livro-colecao.component';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { UsuarioColecaoComponent } from './colecao/usuario-colecao.component';
+import { UsuarioLivroColecaoComponent } from './colecao/usuario-livro-colecao.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { UsuarioColecaoComponent } from './colecao/usuario-colecao.component';
     UsuarioCentroPerfilComponent,
     UsuarioPerfilImagemComponent,
     UsuarioCentroAutorComponent,
-    UsuarioColecaoComponent
+    UsuarioColecaoComponent,
   ],
   exports: [],
   imports: [
