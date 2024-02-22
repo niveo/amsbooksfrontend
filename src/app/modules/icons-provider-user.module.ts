@@ -23,7 +23,8 @@ import {
   CheckOutline,
   DeleteFill,
   EditOutline,
-  BookFill
+  BookFill,
+  SettingOutline
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
@@ -48,7 +49,8 @@ const icons = [
   CheckOutline,
   DeleteFill,
   EditOutline,
-  BookFill
+  BookFill,
+  SettingOutline
 ];
 
 @NgModule({

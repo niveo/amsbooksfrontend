@@ -20,8 +20,28 @@
               >
                 Ler
               </li>
-              <li nz-menu-item [routerLink]="['/usuario/colecao']">
-                Coleções / Listas
+
+              <li nz-menu-group nzTitle="Coleções">
+                <ul>
+                  <li nz-menu-item [routerLink]="['/usuario/colecao']">
+                    <span>
+                      <span nz-icon nzType="setting" nzTheme="outline"></span>
+                      Manutenção
+                    </span>
+                  </li>
+
+                  @for(item of data$ | async; track item.id){
+                  <li
+                    nz-menu-item
+                    [routerLink]="['/usuario/livros', { colecao: item.id }]"
+                  >
+                    <span>
+                      <span nz-icon nzType="book" nzTheme="outline"></span>
+                      {{ item.descricao }}
+                    </span>
+                  </li>
+                  }
+                </ul>
               </li>
             </ul>
           </li>

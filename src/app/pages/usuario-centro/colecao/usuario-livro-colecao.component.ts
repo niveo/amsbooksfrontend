@@ -19,6 +19,8 @@ import { catchErrorForMessage } from 'src/app/common/rxjs.utils';
 import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.module';
 import { ColecaoLivroService } from 'src/app/services/colecao-livro.service';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { ColecaoLivroStore } from 'src/app/stores';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-usuario-livro-colecao-component',
@@ -33,91 +35,55 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
     IconsProviderUserModule,
     FormsModule,
     NzPopconfirmModule,
+    AsyncPipe,
   ],
-  providers: [ColecaoLivroService],
 })
-export class UsuarioLivroColecaoComponent implements OnInit {
+export class UsuarioLivroColecaoComponent {
   @Input({ required: true })
   livroId: number;
   descricao: string;
-  idEdicao: number;
-  registros = [];
+  colecaoId: number;
+  data$: Observable<any>;
   maxlengthDescricao = 25;
   loading = false;
 
   @ViewChild('input', { static: false })
   public txtInputDescricao: ElementRef;
 
-  private readonly colecaoLivroService = inject(ColecaoLivroService);
-  private readonly nzMessageService = inject(NzMessageService);
+  private readonly colecaoLivroStore = inject(ColecaoLivroStore);
 
-  ngOnInit(): void {
-    this.carregarObservable(this.colecaoLivroService.getAll()).subscribe({
-      next: (response) => {
-        if (response) {
-          this.registros = response;
-        }
-      },
-    });
+  constructor() {
+    this.data$ = this.colecaoLivroStore.data$;
+    this.colecaoLivroStore.loading$.subscribe(
+      (value) => (this.loading = value)
+    );
   }
 
   salvarDescricao() {
     if (this.descricao) {
-      if (!this.idEdicao) {
-        this.carregarObservable(
-          this.colecaoLivroService.create(this.descricao)
-        ).subscribe({
-          next: (value) => {
-            this.registros.push({
-              id: value,
-              descricao: this.descricao,
-            });
-            this.descricao = '';
-            this.idEdicao = null;
-            this.nzMessageService.success(MSG_SUCESSO_PROCESSAR);
-          },
+      if (!this.colecaoId) {
+        this.colecaoLivroStore.salvar(this.descricao).subscribe(() => {
+          this.descricao = '';
         });
       } else {
-        this.carregarObservable(
-          this.colecaoLivroService.update(this.idEdicao, this.descricao)
-        ).subscribe({
-          next: () => {
-            const registro = this.registros.find((f) => (f.id === this.idEdicao));
-            registro.descricao = this.descricao;
+        this.colecaoLivroStore
+          .atualizar(this.colecaoId, this.descricao)
+          .subscribe(() => {
+            this.colecaoId = null;
             this.descricao = '';
-            this.idEdicao = null;
-            this.nzMessageService.success(MSG_SUCESSO_PROCESSAR);
-          },
-        });
+          });
       }
     }
   }
 
   editarDescricao(item: any) {
     this.descricao = item.descricao;
-    this.idEdicao = item.id;
+    this.colecaoId = item.id;
     this.txtInputDescricao.nativeElement.focus();
     this.txtInputDescricao.nativeElement.select();
   }
 
   removerDescricao(item: any, idx: number) {
-    this.carregarObservable(this.colecaoLivroService.delete(item.id)).subscribe(
-      {
-        next: () => {
-          this.registros.splice(idx, 1);
-          this.nzMessageService.success(MSG_SUCESSO_PROCESSAR);
-        },
-      }
-    );
-  }
-
-  carregarObservable(observable: Observable<any>) {
-    this.loading = true;
-    return from(observable).pipe(
-      finalize(() => {
-        this.loading = false;
-      }),
-      catchErrorForMessage(this.nzMessageService)
-    );
+    this.colecaoLivroStore.remover(item, idx);
   }
 }
