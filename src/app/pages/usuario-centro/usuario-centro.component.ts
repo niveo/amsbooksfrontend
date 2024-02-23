@@ -1,4 +1,6 @@
 import { Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EventType, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ColecaoLivroStore } from 'src/app/stores';
 
@@ -9,17 +11,19 @@ import { ColecaoLivroStore } from 'src/app/stores';
 })
 export class UsuarioCentroComponent {
   private readonly colecaoLivroStore = inject(ColecaoLivroStore);
+  private readonly router = inject(Router);
   data$: Observable<any>;
   visible = true;
   constructor() {
     this.data$ = this.colecaoLivroStore.data$;
-  } 
-
-  open(): void {
-    this.visible = true;
+    this.router.events.pipe(takeUntilDestroyed()).subscribe((value) => {
+      if (value.type === EventType.NavigationStart) {
+        this.toogle();
+      }
+    });
   }
 
-  close(): void {
-    this.visible = false;
+  toogle(): void {
+    this.visible = !this.visible;
   }
 }

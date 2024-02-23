@@ -1,10 +1,12 @@
-<nz-drawer
-  [nzClosable]="false"
-  [nzVisible]="visible"
-  nzPlacement="left"
-  (nzOnClose)="close()"
->
-  <ng-container *nzDrawerContent>
+<nz-layout class="layout">
+  <nz-sider
+    nzCollapsible
+    nzBreakpoint="lg"
+    [nzCollapsedWidth]="0"
+    [nzTheme]="'light'"
+    [(nzCollapsed)]="visible"
+    [nzTrigger]="null"
+  >
     <ul nz-menu nzMode="inline">
       <li nz-submenu nzTitle="Usuário" nzIcon="user" nzOpen>
         <ul>
@@ -65,12 +67,21 @@
         </ul>
       </li>
     </ul>
-  </ng-container>
-</nz-drawer>
+  </nz-sider>
 
-<div class="fx-row">
-  <div style="background-color: red; width: 10px"></div>
-  <div class="fx-flex">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+  <button nz-button nzType="primary" (click)="toogle()">
+    <span
+      class="trigger"
+      nz-icon
+      [nzType]="visible ? 'menu-unfold' : 'menu-fold'"
+    ></span>
+  </button>
+
+  <nz-layout>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
