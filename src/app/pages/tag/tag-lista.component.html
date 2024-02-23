@@ -5,7 +5,7 @@
 <nz-list nzGrid style="width: 100%">
   <div nz-row [nzGutter]="6" class="gutter-row">
     @for(categoria of categorias$ | async; track categoria.id){
-    <div nz-col [nzSpan]="24 / 4">
+    <div nz-col [nzXs]="24 / 1" [nzSm]="24/4">
       <nz-list-item (click)="visualizarLivrosTag(categoria)">
         @if(categoria.contaLivros){
         <nz-ribbon [nzText]="categoria.contaLivros">

@@ -8,12 +8,15 @@ import { CategoriaRoutingModule } from './categoria-routing.module';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzFlexModule } from 'ng-zorro-antd/flex';
+
 
 @NgModule({
   declarations: [CategoriaListaComponent],
   imports: [
     CommonModule,
     NzGridModule,
+    NzFlexModule,
     NzListModule,
     NzCardModule,
     NzBadgeModule,
