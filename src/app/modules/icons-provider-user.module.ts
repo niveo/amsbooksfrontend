@@ -25,7 +25,9 @@ import {
   EditOutline,
   BookFill,
   SettingOutline,
-  MenuUnfoldOutline
+  MenuUnfoldOutline,
+  CloseCircleFill,
+  SearchOutline,
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
@@ -52,7 +54,9 @@ const icons = [
   EditOutline,
   BookFill,
   SettingOutline,
-  MenuUnfoldOutline
+  MenuUnfoldOutline,
+  CloseCircleFill,
+  SearchOutline,
 ];
 
 @NgModule({

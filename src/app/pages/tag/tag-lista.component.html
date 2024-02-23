@@ -1,11 +1,13 @@
 @if(loading){
-  <nz-skeleton [nzLoading]="loading"></nz-skeleton>
-}
+<nz-skeleton [nzLoading]="loading"></nz-skeleton>
+} @else {<app-input-pesquisa-component
+  (eventSearch)="onSearchUpdated($event)"
+/>}
 
 <nz-list nzGrid style="width: 100%">
   <div nz-row [nzGutter]="6" class="gutter-row">
-    @for(categoria of categorias$ | async; track categoria.id){
-    <div nz-col [nzXs]="24 / 1" [nzSm]="24/4">
+    @for(categoria of registros$ | async; track categoria.id){
+    <div nz-col [nzXs]="24 / 1" [nzSm]="24 / 4">
       <nz-list-item (click)="visualizarLivrosTag(categoria)">
         @if(categoria.contaLivros){
         <nz-ribbon [nzText]="categoria.contaLivros">
