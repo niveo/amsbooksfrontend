@@ -64,6 +64,7 @@ export class UsuarioPerfilStore extends BaseStore {
             userId: value.sub,
             name: value.name,
             email: value.email,
+            picture: value.picture
           });
         },
       });
