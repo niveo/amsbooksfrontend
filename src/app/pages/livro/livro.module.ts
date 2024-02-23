@@ -29,10 +29,10 @@ import { LivroComentarioService } from 'src/app/services/livro-comentario.servic
 import { LivroHistoricoUsuarioService } from 'src/app/services';
 import { LivroDetalheStore } from 'src/app/stores/livro-detalhe.store';
 import { LivroHistoricoUsuarioStore } from 'src/app/stores';
-import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
-import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.module';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton'; 
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { LivroUsuarioComponent } from 'src/app/componentes/usuario/livro/usuario-livro.component';
+import { NzCoreGlobalModule } from 'src/app/modules/nzcore.global.module';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,7 @@ import { LivroUsuarioComponent } from 'src/app/componentes/usuario/livro/usuario
     LivroComentarioComponent,
   ],
   imports: [
+    NzCoreGlobalModule,
     CommonModule,
     NzCardModule,
     NzTagModule,
@@ -49,8 +50,7 @@ import { LivroUsuarioComponent } from 'src/app/componentes/usuario/livro/usuario
     NzEmptyModule,
     NzButtonModule,
     LivroImagemComponent,
-    LivroRoutingModule,
-    IconsProviderUserModule,
+    LivroRoutingModule, 
     NivelLeituraPipe,
     NzPageHeaderModule,
     NzRateModule,

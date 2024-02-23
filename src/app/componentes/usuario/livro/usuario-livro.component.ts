@@ -21,6 +21,7 @@ import { LivroPerfiloUsuarioService } from 'src/app/services';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { MSG_ERRO_ATUALIZAR, MSG_ERRO_CARREGAR } from 'src/app/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NzSegmentedModule } from 'ng-zorro-antd/segmented';
 
 @Component({
   selector: 'app-usuario-livro-component',
@@ -35,6 +36,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     FormsModule,
     UsuarioLivroColecaoTagComponent,
     JsonPipe,
+    NzSegmentedModule,
   ],
   providers: [LivroPerfiloUsuarioService],
 })
@@ -42,7 +44,12 @@ export class LivroUsuarioComponent {
   @Input({ required: true })
   livroId: number;
   usuarioPerfil$: Observable<any>;
-  situacaoLeitura: string;
+  situacaoLeitura: number;
+
+  options = [
+    { label: 'Para Ler', value: 0, icon: 'clock-circle' },
+    { label: 'Lido', value: 1, icon: 'check' },
+  ];
 
   @ViewChild('drawerTemplate', { static: false }) drawerTemplate?: TemplateRef<{
     $implicit: { value: string };
@@ -82,14 +89,14 @@ export class LivroUsuarioComponent {
       .pipe(this.pipeTapError(MSG_ERRO_CARREGAR))
       .subscribe({
         next: (value: any) => {
-          this.situacaoLeitura = String(value.situacaoLeitura);
+          this.situacaoLeitura = value.situacaoLeitura;
         },
       });
   }
 
   change() {
     this.livroPerfiloUsuarioService
-      .upsert(this.livroId, Number(this.situacaoLeitura))
+      .upsert(this.livroId, this.situacaoLeitura)
       .pipe(this.pipeTapError(MSG_ERRO_ATUALIZAR))
       .subscribe();
   }

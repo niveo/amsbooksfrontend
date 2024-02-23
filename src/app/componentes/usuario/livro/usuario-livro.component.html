@@ -13,18 +13,12 @@
 <ng-template #drawerTemplate let-data let-drawerRef="drawerRef">
   <br />
 
-  <nz-radio-group
+  <nz-segmented
     [(ngModel)]="situacaoLeitura"
-    (ngModelChange)="change()"
-    nzSize="small"
-  >
-    <label nz-radio-button nzValue="0">
-      Ler <span nz-icon nzType="clock-circle"></span
-    ></label>
-    <label nz-radio-button nzValue="1">
-      Lido <span nz-icon nzType="check"></span
-    ></label>
-  </nz-radio-group>
+    [nzOptions]="options"
+    nzSize="large"
+  ></nz-segmented>
+
   <br />
   <br />
   @if(data?.livroId){

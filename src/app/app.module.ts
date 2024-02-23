@@ -40,8 +40,9 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 import { IconsProviderUserModule } from './modules/icons-provider-user.module';
 import { VersaoSistemaDirective } from './directives/versao-sistema.directive';
-import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
+
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzCoreGlobalModule } from './modules/nzcore.global.module';
 
 registerLocaleData(pt);
 registerLocaleData(en);
@@ -52,8 +53,6 @@ const NZ_MODULES = [
   NzAvatarModule,
   NzToolTipModule,
   NzLayoutModule,
-  NzModalModule,
-  NzMessageModule,
   NzUploadModule,
   NzSpaceModule,
   NzInputModule,
@@ -64,6 +63,8 @@ const NZ_MODULES = [
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    NzCoreGlobalModule,
+
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -76,8 +77,6 @@ const NZ_MODULES = [
     UsuarioPerfilLogarComponent,
     VersaoSistemaDirective,
 
-    IconsProviderUserModule,
-
     ...NZ_MODULES,
 
     LivroModule,
@@ -87,7 +86,6 @@ const NZ_MODULES = [
     OverlayModule,
   ],
   providers: [
-    NzMessageService,
     { provide: TOKEN_APP_CONFIG, useValue: environment },
     {
       provide: TOKEN_CARREGAR_IMAGEM_REMOTA,
