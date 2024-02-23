@@ -13,6 +13,7 @@
 @media only screen and (max-width: 600px) {
   .content {
     flex-direction: column;
+    align-items: center;
   }
 
   .ant-page-header {

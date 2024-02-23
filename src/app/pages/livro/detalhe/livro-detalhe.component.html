@@ -19,9 +19,7 @@
   <nz-page-header-content>
     <span nz-typography nzType="secondary"> {{ livro.autor.nome }}</span>
     <div class="content">
-      <div>
-        <livro-imagem-component [identificador]="livro.identificador" />
-      </div>
+      <livro-imagem-component [identificador]="livro.identificador" /> 
       <div class="fx-column fx-flex pd-10" style="flex-wrap: wrap">
         <div class="fx-row" style="align-items: center; flex-wrap: wrap">
           @if(livro.categoria){
@@ -39,15 +37,15 @@
             <span>Idioma: </span>
             {{ livro.idioma?.nome }}
           </div>
-        </div>
+        </div> 
         <p>
           {{ livro.descritivo }}
         </p>
         @if(livro.tags){
         <div>
-          <div class="fx-row wf" style="flex-wrap: wrap">
+          <div class="fx-row wf gap-2" style="flex-wrap: wrap">
             @for(tag of livro.tags; track tag.id){
-            <nz-tag nzMode="checkable" (click)="visualizarLivrosTag(tag)">{{
+            <nz-tag nzMode="checkable" (click)="visualizarLivrosTag(tag)" nzColor="purple" [nzBordered]="false">{{
               tag.nome
             }}</nz-tag>
             }

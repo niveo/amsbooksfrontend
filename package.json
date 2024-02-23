@@ -11,7 +11,7 @@
     "build:dev": "yarn prebuild.prod && ng build --configuration development",
     "test": "ng test",
     "i18n:extract": "ng extract-i18n",
-    "analyze": "webpack-bundle-analyzer dist/amsbooksfrontend/stats.json",
+    "analyze": "webpack-bundle-analyzer dist/stats.json",
     "build:stats": "ng build --configuration production --stats-json",
     "analyzeb": "yarn build:stats && yarn analyze"
   },
