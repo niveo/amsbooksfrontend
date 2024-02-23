@@ -1,7 +1,9 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import {
   Component,
+  DestroyRef,
   Input,
+  OnDestroy,
   TemplateRef,
   ViewChild,
   inject,
@@ -18,6 +20,7 @@ import { UsuarioLivroColecaoTagComponent } from './usuario-livro-colecao-tag.com
 import { LivroPerfiloUsuarioService } from 'src/app/services';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { MSG_ERRO_ATUALIZAR, MSG_ERRO_CARREGAR } from 'src/app/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-usuario-livro-component',
@@ -31,6 +34,7 @@ import { MSG_ERRO_ATUALIZAR, MSG_ERRO_CARREGAR } from 'src/app/common';
     IconsProviderUserModule,
     FormsModule,
     UsuarioLivroColecaoTagComponent,
+    JsonPipe,
   ],
   providers: [LivroPerfiloUsuarioService],
 })
@@ -52,6 +56,7 @@ export class LivroUsuarioComponent {
   );
 
   private readonly nzMessageService = inject(NzMessageService);
+  protected readonly destroyRef = inject(DestroyRef);
 
   constructor() {
     this.usuarioPerfil$ = this.usuarioPerfilStore.usuarioPerfil$;
@@ -59,6 +64,7 @@ export class LivroUsuarioComponent {
 
   private pipeTapError = (msg: string) =>
     pipe(
+      takeUntilDestroyed(this.destroyRef),
       tap({
         error: (err) => {
           console.error('error', err);

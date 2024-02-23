@@ -10,7 +10,16 @@ import { ColecaoLivroStore } from 'src/app/stores';
 export class UsuarioCentroComponent {
   private readonly colecaoLivroStore = inject(ColecaoLivroStore);
   data$: Observable<any>;
+  visible = true;
   constructor() {
     this.data$ = this.colecaoLivroStore.data$;
   } 
+
+  open(): void {
+    this.visible = true;
+  }
+
+  close(): void {
+    this.visible = false;
+  }
 }

@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { skipNull } from 'src/app/common/rxjs.utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-usuario-centro-perfil-component',
@@ -31,17 +32,19 @@ export class UsuarioCentroPerfilComponent {
     });
     this.loading$ = this._usuarioPerfilStore.loading$;
 
-    this._usuarioPerfilStore.usuarioPerfil$.pipe(skipNull()).subscribe({
-      next: (value) => {
-        this.validateForm.setValue({
-          name: value.name,
-          email: value.email,
-        });
-      },
-      error(err) {
-        console.error(err);
-      },
-    });
+    this._usuarioPerfilStore.usuarioPerfil$
+      .pipe(takeUntilDestroyed(), skipNull())
+      .subscribe({
+        next: (value) => {
+          this.validateForm.setValue({
+            name: value.name,
+            email: value.email,
+          });
+        },
+        error(err) {
+          console.error(err);
+        },
+      });
   }
 
   salvar() {

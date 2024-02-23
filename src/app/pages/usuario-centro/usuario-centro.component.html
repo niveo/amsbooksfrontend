@@ -1,5 +1,10 @@
-<nz-layout>
-  <nz-sider nzWidth="200px" nzTheme="light">
+<nz-drawer
+  [nzClosable]="false"
+  [nzVisible]="visible"
+  nzPlacement="left"
+  (nzOnClose)="close()"
+>
+  <ng-container *nzDrawerContent>
     <ul nz-menu nzMode="inline">
       <li nz-submenu nzTitle="Usuário" nzIcon="user" nzOpen>
         <ul>
@@ -60,8 +65,12 @@
         </ul>
       </li>
     </ul>
-  </nz-sider>
-  <nz-content>
+  </ng-container>
+</nz-drawer>
+
+<div class="fx-row">
+  <div style="background-color: red; width: 10px"></div>
+  <div class="fx-flex">
     <router-outlet></router-outlet>
-  </nz-content>
-</nz-layout>
+  </div>
+</div>

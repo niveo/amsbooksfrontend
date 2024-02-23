@@ -1,6 +1,6 @@
 import { AutenticacaoStore } from 'src/app/stores';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, finalize, map } from 'rxjs';
+import { BehaviorSubject, finalize, map, pipe } from 'rxjs';
 import {
   AutenticacaoService,
   ImagemRemotaService,
@@ -12,6 +12,7 @@ import { PerfilUsuario } from '../model';
 import { BaseStore } from './base-store.store';
 import { catchErrorForMessage } from '../common/rxjs.utils';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -42,22 +43,30 @@ export class UsuarioPerfilStore extends BaseStore {
     });
   }
 
+  private takePipeError = () =>
+    pipe(
+      catchErrorForMessage(this.nzMessageService),
+      finalize(() => this.finalizarLoading()),
+      takeUntilDestroyed(this.destroyRef)
+    );
+
   private atualizarPerfilUsuario() {
-    this.autenticacaoService.obterUsuarioSessaoDecode().subscribe({
-      next: (value: any) => {
-        value['picture'] = this._imagemRemotaService.getUrlPublic(
-          DIRETORIO_IMAGEM_USUARIO + value.sub
-        );
-        this._usuarioPerfilSource.next({
-          userId: value.sub,
-          name: value.name,
-          email: value.email,
-        });
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.iniciarLoading();
+    this.autenticacaoService
+      .obterUsuarioSessaoDecode()
+      .pipe(this.takePipeError())
+      .subscribe({
+        next: (value: any) => {
+          value['picture'] = this._imagemRemotaService.getUrlPublic(
+            DIRETORIO_IMAGEM_USUARIO + value.sub
+          );
+          this._usuarioPerfilSource.next({
+            userId: value.sub,
+            name: value.name,
+            email: value.email,
+          });
+        },
+      });
   }
 
   get isUsuarioLogado(): boolean {
@@ -72,8 +81,7 @@ export class UsuarioPerfilStore extends BaseStore {
     this.iniciarLoading();
     this._usuarioPerfilRemotoService
       .atualizarNome(name)
-      .pipe(catchErrorForMessage(this.nzMessageService))
-      .pipe(finalize(() => this.finalizarLoading()))
+      .pipe(this.takePipeError())
       .subscribe({
         next: () => {
           this.enviarMensagemSucessoAtualizar();
@@ -84,6 +92,7 @@ export class UsuarioPerfilStore extends BaseStore {
   alterarImagem(file: NzUploadFile) {
     return this._imagemRemotaService
       .upload(DIRETORIO_IMAGEM_USUARIO + this.autenticacaoStore.getUserId, file)
+      .pipe(this.takePipeError())
       .pipe(
         map((atualizado) => {
           if (atualizado) {

@@ -19,6 +19,7 @@ import { AutorService } from 'src/app/services/autor.service';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { UsuarioColecaoComponent } from './colecao/usuario-colecao.component';
 import { UsuarioLivroColecaoComponent } from './colecao/usuario-livro-colecao.component';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { UsuarioLivroColecaoComponent } from './colecao/usuario-livro-colecao.co
     NzFormModule,
     NzToolTipModule,
     NzSpinModule,
+    NzDrawerModule,
 
     FormsModule,
     CommonModule,

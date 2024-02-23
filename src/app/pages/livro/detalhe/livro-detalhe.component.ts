@@ -30,9 +30,10 @@ export class LivroDetalheComponent {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
-      this.livroDetalheStore.fetchData(Number(params.get('id')));
-    });
+    this.route.paramMap
+      .subscribe((params) => {
+        this.livroDetalheStore.fetchData(Number(params.get('id')));
+      }) ;
   }
 
   visualizarLivrosTag(tag: any) {

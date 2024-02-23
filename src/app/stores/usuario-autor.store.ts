@@ -1,10 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { AutorService } from '../services/autor.service';
-import { BehaviorSubject, finalize, iif, mergeMap, of, tap } from 'rxjs';
+import { BehaviorSubject, finalize, iif, mergeMap, of, pipe, tap } from 'rxjs';
 import { BaseStore } from './base-store.store';
 import { catchErrorForMessage, skipNull } from '../common/rxjs.utils';
 import { UsuarioPerfilStore } from './usuario-perfil.store';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable()
 export class UsuarioAutorStore extends BaseStore {
@@ -20,6 +21,13 @@ export class UsuarioAutorStore extends BaseStore {
   private readonly autorService = inject(AutorService);
   private readonly usuarioPerfilStore = inject(UsuarioPerfilStore);
 
+  private pipeTapError = () =>
+    pipe(
+      finalize(() => this.finalizarLoading()),
+      catchErrorForMessage(this.nzMessageService),
+      takeUntilDestroyed(this.destroyRef)
+    );
+
   salvar(nome: string, descricao: string, url: string) {
     this.iniciarLoading();
 
@@ -33,8 +41,7 @@ export class UsuarioAutorStore extends BaseStore {
           )
         )
       )
-      .pipe(finalize(() => this.finalizarLoading()))
-      .pipe(catchErrorForMessage(this.nzMessageService))
+      .pipe(this.pipeTapError()) 
       .subscribe({
         next: () => {
           this.enviarMensagemSucessoAtualizar();
@@ -45,9 +52,9 @@ export class UsuarioAutorStore extends BaseStore {
   carregarDados() {
     this.iniciarLoading();
     this.autorService
-      .obterAutorUsuario()
-      .pipe(finalize(() => this.finalizarLoading()))
-      .pipe(skipNull())
+      .obterAutorUsuario() 
+      .pipe(this.pipeTapError()) 
+      .pipe(skipNull()) 
       .subscribe((value) => this._dataSource.next(value));
   }
 

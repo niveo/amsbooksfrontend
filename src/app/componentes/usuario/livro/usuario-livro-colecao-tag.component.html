@@ -1,10 +1,9 @@
-<span>Coleção</span>
+<span>Coleção {{livroId}}</span>
 <br />
 @for(item of listOfOption; track item.id){
 <nz-tag
   nzMode="checkable"
-  [nzBordered]="true"
-  [nzColor]="'green'"
+  [nzBordered]="true" 
   [nzChecked]="item.vinculado === 1"
   (nzCheckedChange)="checkChange($event, item)"
   >{{ item.descricao }}

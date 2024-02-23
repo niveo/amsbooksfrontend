@@ -1,7 +1,8 @@
 import { Component, Input, inject } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AutenticacaoStore } from 'src/app/stores';
 import { LivroComentarioStore } from 'src/app/stores/livro-comentario.store';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-livro-comentario-component',
@@ -20,24 +21,17 @@ export class LivroComentarioComponent {
   usuarioLogado$: Observable<boolean>;
   loading = false;
   inputValue = '';
-  storeLoadingSub: Subscription;
   comentarioIdHistorico$: Observable<any>;
 
   constructor() {
-    this.storeLoadingSub = this.livroComentarioStore.loading$.subscribe(
-      (loading) => (this.loading = loading)
-    );
+    this.livroComentarioStore.loading$
+      .pipe(takeUntilDestroyed())
+      .subscribe((loading) => (this.loading = loading));
 
     this.data$ = this.livroComentarioStore.data$;
     this.usuarioLogado$ = this.autenticacaoStore.usuarioLogado$;
     this.comentarioIdHistorico$ =
       this.livroComentarioStore.comentarioIdHistorico$;
-  }
-
-  ngOnDestroy() {
-    if (this.storeLoadingSub) {
-      this.storeLoadingSub.unsubscribe();
-    }
   }
 
   handleSubmit(): void {

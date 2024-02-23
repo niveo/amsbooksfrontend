@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { DestroyRef, Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, finalize, from, tap } from 'rxjs';
 import { catchErrorForMessage, skipNull } from '../common/rxjs.utils';
@@ -6,6 +6,7 @@ import { ColecaoLivroService } from '../services/colecao-livro.service';
 import { BaseStore } from './base-store.store';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { MSG_SUCESSO_PROCESSAR } from '../common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -24,12 +25,14 @@ export class ColecaoLivroStore extends BaseStore {
 
   carregarObservable(observable: Observable<any>) {
     this.iniciarLoading();
-    return from(observable).pipe(
-      finalize(() => {
-        this.finalizarLoading();
-      }),
-      catchErrorForMessage(this.nzMessageService)
-    );
+    return from(observable)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        finalize(() => {
+          this.finalizarLoading();
+        }),
+        catchErrorForMessage(this.nzMessageService)
+      );
   }
 
   private carregarData() {
