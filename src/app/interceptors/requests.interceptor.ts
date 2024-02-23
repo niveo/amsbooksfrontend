@@ -20,7 +20,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<any>> { 
     if (!this.authenticator.authenticated()) {
       console.log('Not authenticated');
       return this.defaultClone(req, next);

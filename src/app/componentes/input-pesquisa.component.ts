@@ -15,7 +15,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
       <input
         type="text"
         nz-input
-        placeholder="Informe aqui sua pesquisa"
+        placeholder="Informe aqui sua pesquisa..."
         [(ngModel)]="searchValue"
         (ngModelChange)="onSearchUpdated($event)"
       />
