@@ -23,6 +23,6 @@ export class MonitorErroStore {
 
   notificar(erro: any) {
     console.error(erro);
-    this._dataSource.next(erro);
+    this._dataSource.next(erro.message);
   }
 }
