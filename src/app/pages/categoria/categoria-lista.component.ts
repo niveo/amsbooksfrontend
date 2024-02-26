@@ -20,6 +20,7 @@ import { ROTA_LIVROS } from 'src/app/common/constantes';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BaseStore } from 'src/app/stores/base-store.store';
 import { Categoria } from 'src/app/entities/categoria';
+import { MSG_ERRO_CARREGAR } from 'src/app/common';
 
 @Component({
   selector: 'app-categoria-lista-component',
@@ -32,32 +33,38 @@ export class CategoriaListaComponent extends BaseStore implements OnInit {
   registros$!: Observable<Categoria[]>;
   searchQuery$ = new BehaviorSubject<string>('');
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.iniciarLoading();
-    this.registros$ = combineLatest([
-      this.searchQuery$.pipe(debounce(() => timer(1000))),
-      of(this.categoriaService.getAll())
-        .pipe(delay(300))
-        .pipe(finalize(() => this.finalizarLoading())),
-    ])
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .pipe(
-        mergeMap(([searchQuery, data]) => {
-          return iif(
-            () => searchQuery === '',
-            data,
-            data.pipe(
-              map((m) => {
-                return m.filter(
-                  (x) =>
-                    x.nome.toLowerCase().indexOf(searchQuery.toLowerCase()) !==
-                    -1
+
+    this.categoriaService
+      .getAll()
+      .pipe(finalize(() => this.finalizarLoading()))
+      .subscribe({
+        next: (registros) => {
+          this.registros$ = this.searchQuery$
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .pipe(
+              mergeMap((searchQuery) => {
+                return iif(
+                  () => searchQuery === '',
+                  of(registros),
+                  of(
+                    registros.filter(
+                      (x) =>
+                        x.nome
+                          .toLowerCase()
+                          .indexOf(searchQuery.toLowerCase()) !== -1
+                    )
+                  )
                 );
               })
-            )
-          );
-        })
-      );
+            );
+        },
+        error: (err) => {
+          console.error(err);
+          this.enviarMensagem('error', MSG_ERRO_CARREGAR);
+        },
+      });
   }
 
   visualizarLivrosCategoria(categoria: Categoria) {

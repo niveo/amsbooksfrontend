@@ -7,6 +7,7 @@ import {
   debounce,
   delay,
   finalize,
+  from,
   iif,
   map,
   mergeMap,
@@ -18,6 +19,7 @@ import { ROTA_LIVROS } from 'src/app/common/constantes';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BaseStore } from 'src/app/stores/base-store.store';
 import { Tag } from 'src/app/entities/tag';
+import { MSG_ERRO_CARREGAR } from 'src/app/common';
 
 @Component({
   selector: 'app-tag-tag-component',
@@ -32,30 +34,36 @@ export class TagListaComponent extends BaseStore implements OnInit {
 
   ngOnInit() {
     this.iniciarLoading();
-    this.registros$ = combineLatest([
-      this.searchQuery$.pipe(debounce(() => timer(1000))),
-      of(this.tagService.getAll())
-        .pipe(delay(300))
-        .pipe(finalize(() => this.finalizarLoading())),
-    ])
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .pipe(
-        mergeMap(([searchQuery, data]) => {
-          return iif(
-            () => searchQuery === '',
-            data,
-            data.pipe(
-              map((m) => {
-                return m.filter(
-                  (x) =>
-                    x.nome.toLowerCase().indexOf(searchQuery.toLowerCase()) !==
-                    -1
+
+    this.tagService
+      .getAll()
+      .pipe(finalize(() => this.finalizarLoading()))
+      .subscribe({
+        next: (registros) => {
+          this.registros$ = this.searchQuery$
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .pipe(
+              mergeMap((searchQuery) => {
+                return iif(
+                  () => searchQuery === '',
+                  of(registros),
+                  of(
+                    registros.filter(
+                      (x) =>
+                        x.nome
+                          .toLowerCase()
+                          .indexOf(searchQuery.toLowerCase()) !== -1
+                    )
+                  )
                 );
               })
-            )
-          );
-        })
-      );
+            );
+        },
+        error: (err) => {
+          console.error(err);
+          this.enviarMensagem('error', MSG_ERRO_CARREGAR);
+        },
+      });
   }
 
   visualizarLivrosTag(tag: Tag) {
