@@ -9,8 +9,8 @@
     @for(categoria of registros$ | async; track categoria.id){
     <div nz-col [nzXs]="24 / 1" [nzSm]="24 / 4">
       <nz-list-item (click)="visualizarLivrosCategoria(categoria)">
-        @if(categoria.contaLivros){
-        <nz-ribbon [nzText]="categoria.contaLivros">
+        @if(categoria.contalivros){
+        <nz-ribbon [nzText]="categoria.contalivros">
           <ng-container
             *ngTemplateOutlet="tplcorpo; context: { $implicit: categoria }"
           />
