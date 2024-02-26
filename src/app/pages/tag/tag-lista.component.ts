@@ -17,20 +17,20 @@ import { TagService } from '../../services';
 import { ROTA_LIVROS } from 'src/app/common/constantes';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BaseStore } from 'src/app/stores/base-store.store';
+import { Tag } from 'src/app/entities/tag';
 
 @Component({
   selector: 'app-tag-tag-component',
   templateUrl: './tag-lista.component.html',
   styleUrls: ['./tag-lista.component.scss'],
 })
-export class TagListaComponent extends BaseStore {
+export class TagListaComponent extends BaseStore implements OnInit {
   private readonly router = inject(Router);
   private readonly tagService = inject(TagService);
-  registros$!: Observable<any[]>;
+  registros$!: Observable<Tag[]>;
   searchQuery$ = new BehaviorSubject<string>('');
 
-  constructor() {
-    super();
+  ngOnInit() {
     this.iniciarLoading();
     this.registros$ = combineLatest([
       this.searchQuery$.pipe(debounce(() => timer(1000))),
@@ -58,8 +58,8 @@ export class TagListaComponent extends BaseStore {
       );
   }
 
-  visualizarLivrosTag(tag) {
-    if (tag.contaLivros) this.router.navigate([ROTA_LIVROS, { tag: tag.id }]);
+  visualizarLivrosTag(tag: Tag) {
+    if (tag.contalivros) this.router.navigate([ROTA_LIVROS, { tag: tag.id }]);
   }
 
   onSearchUpdated(searchQuery: string) {

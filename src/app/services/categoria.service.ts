@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError } from 'rxjs';
 import { handleError } from '../common/handle-error';
 import { BaseHttpService } from './base-http.service';
+import { Categoria } from '../entities/categoria';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,8 @@ import { BaseHttpService } from './base-http.service';
 export class CategoriaService extends BaseHttpService {
   override path: string = '/categorias';
   getAll() {
-    return this.http.get<any[]>(this.path).pipe(catchError(handleError));
+    return this.http
+      .get<Categoria[]>(this.path)
+      .pipe(catchError(handleError));
   }
 }
