@@ -70,27 +70,27 @@ export class AutenticacaoStore {
       this._usuarioLogadoSource.next(usuarioLogado);
       this._userIdSource.next(null);
       this.router.navigate(['/']);
+    } else {
+      this.autenticacaoService
+        .obterUsuarioSessao()
+        .pipe(
+          mergeMap((token) => {
+            return from(
+              this.http.post<boolean>('/autenticacao/registrar', {
+                token: token,
+              })
+            );
+          })
+        )
+        .subscribe({
+          next: (value: boolean) => {
+            this.authenticated.set(value);
+            this._usuarioLogadoSource.next(value);
+          },
+          error: (err) => {
+            this.monitorErroStore.notificar(err);
+          },
+        });
     }
-
-    this.autenticacaoService
-      .obterUsuarioSessao()
-      .pipe(
-        mergeMap((token) => {
-          return from(
-            this.http.post<boolean>('/autenticacao/registrar', {
-              token: token,
-            })
-          );
-        })
-      )
-      .subscribe({
-        next: (value: boolean) => {
-          this.authenticated.set(value);
-          this._usuarioLogadoSource.next(value);
-        },
-        error: (err) => {
-          this.monitorErroStore.notificar(err);
-        },
-      });
   }
 }
