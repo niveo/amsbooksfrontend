@@ -3,7 +3,7 @@
   <nz-skeleton [nzActive]="true"></nz-skeleton>
   }
   <div class="content">
-    @for(livro of livros; track livro.id){
+    @for(livro of registros$ | async; track livro.id){
     <div class="">
       <nz-card
         class="content-card"
