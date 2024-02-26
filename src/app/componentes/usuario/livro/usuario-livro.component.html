@@ -1,0 +1,27 @@
+@if(usuarioPerfil$ | async;){
+<button
+  nz-button
+  nzType="dashed"
+  nzShape="circle"
+  (click)="abrirMenu()"
+  nz-tooltip="Menu Usuário"
+>
+  <span nz-icon nzType="menu-fold"></span>
+</button>
+}
+
+<ng-template #drawerTemplate let-data let-drawerRef="drawerRef">
+  <br />
+  <nz-segmented
+    [(ngModel)]="situacaoLeitura"
+    [nzOptions]="options"
+    nzSize="large"
+    (nzValueChange)="change($event)"
+  ></nz-segmented>
+
+  <br />
+  <br />
+  @if(data?.livroId){
+  <app-usuario-livro-colecao-tag-component [livroId]="data?.livroId" />
+  }
+</ng-template>

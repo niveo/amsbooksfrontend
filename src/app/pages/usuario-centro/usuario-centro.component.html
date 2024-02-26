@@ -1,0 +1,87 @@
+<nz-layout class="layout">
+  <nz-sider
+    nzCollapsible
+    nzBreakpoint="lg"
+    [nzCollapsedWidth]="0"
+    [nzTheme]="'light'"
+    [(nzCollapsed)]="visible"
+    [nzTrigger]="null"
+  >
+    <ul nz-menu nzMode="inline">
+      <li nz-submenu nzTitle="Usuário" nzIcon="user" nzOpen>
+        <ul>
+          <li nz-menu-item nzSelected nzMatchRouter>
+            <a [routerLink]="['/usuario/perfil']">Básico</a>
+          </li>
+          <li nz-submenu nzTitle="Livros">
+            <ul>
+              <li
+                nz-menu-item
+                [routerLink]="['/usuario/livros', { leitura: 2 }]"
+              >
+                Lidos
+              </li>
+              <li
+                nz-menu-item
+                [routerLink]="['/usuario/livros', { leitura: 1 }]"
+              >
+                Ler
+              </li>
+
+              <li nz-menu-group nzTitle="Coleções">
+                <ul>
+                  <li nz-menu-item [routerLink]="['/usuario/colecao']">
+                    <span>
+                      <span nz-icon nzType="setting" nzTheme="outline"></span>
+                      Manutenção
+                    </span>
+                  </li>
+
+                  @for(item of data$ | async; track item.id){
+                  <li
+                    nz-menu-item
+                    [routerLink]="['/usuario/livros', { colecao: item.id }]"
+                  >
+                    <span>
+                      <span nz-icon nzType="book" nzTheme="outline"></span>
+                      {{ item.descricao }}
+                    </span>
+                  </li>
+                  }
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Autor" nzIcon="user">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="['/usuario/autor']">Básico</a>
+          </li>
+          <li nz-submenu nzTitle="Livros">
+            <ul>
+              <li nz-menu-item>Meu Livros</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nz-sider>
+
+  <button nz-button nzType="primary" (click)="toogle()">
+    <span
+      class="trigger"
+      nz-icon
+      [nzType]="visible ? 'menu-unfold' : 'menu-fold'"
+    ></span>
+  </button>
+
+  <nz-layout>
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

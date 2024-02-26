@@ -8,8 +8,7 @@ import { LivroRoutingModule } from './livro-routing.module';
 import { LivroDetalheComponent } from './detalhe/livro-detalhe.component';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { DateDistancePipe, NivelLeituraPipe } from 'src/app/pipes';
-import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll'; 
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header'; 
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { LivroLeituraComponent } from './leitura/livro-leitura.component';
 import { LivroComentarioComponent } from './comentarios/livro-comentario.component';
@@ -20,17 +19,20 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
-import { 
-  LivroImagemComponent, UsuarioPerfilAvatarComponent,
+import {
+  LivroImagemComponent,
+  UsuarioPerfilAvatarComponent,
 } from 'src/app/componentes';
-import { NzAvatarModule } from 'ng-zorro-antd/avatar'; 
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { LivroComentarioStore } from 'src/app/stores/livro-comentario.store';
 import { LivroComentarioService } from 'src/app/services/livro-comentario.service';
 import { LivroHistoricoUsuarioService } from 'src/app/services';
 import { LivroDetalheStore } from 'src/app/stores/livro-detalhe.store';
 import { LivroHistoricoUsuarioStore } from 'src/app/stores';
-import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
-import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.module';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton'; 
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { LivroUsuarioComponent } from 'src/app/componentes/usuario/livro/usuario-livro.component';
+import { NzCoreGlobalModule } from 'src/app/modules/nzcore.global.module';
 
 @NgModule({
   declarations: [
@@ -40,16 +42,15 @@ import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.mod
     LivroComentarioComponent,
   ],
   imports: [
+    NzCoreGlobalModule,
     CommonModule,
     NzCardModule,
     NzTagModule,
     NzToolTipModule,
     NzEmptyModule,
     NzButtonModule,
-    InfiniteScrollModule,
     LivroImagemComponent,
-    LivroRoutingModule,
-    IconsProviderUserModule,
+    LivroRoutingModule, 
     NivelLeituraPipe,
     NzPageHeaderModule,
     NzRateModule,
@@ -62,9 +63,11 @@ import { IconsProviderUserModule } from 'src/app/modules/icons-provider-user.mod
     CommonModule,
     NzAlertModule,
     NzAvatarModule,
-    DateDistancePipe, 
-    NzSkeletonModule, 
-    UsuarioPerfilAvatarComponent
+    NzSpaceModule,
+    DateDistancePipe,
+    NzSkeletonModule,
+    UsuarioPerfilAvatarComponent,
+    LivroUsuarioComponent,
   ],
   providers: [
     LivroComentarioStore,

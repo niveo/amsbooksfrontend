@@ -18,8 +18,9 @@ export class ErrorComponent implements OnInit {
   content: string;
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((msg) => {
-      this.content = msg.get('erro');
-    });
+    this.route.paramMap
+      .subscribe((msg) => {
+        this.content = msg.get('erro');
+      }) ;
   }
 }

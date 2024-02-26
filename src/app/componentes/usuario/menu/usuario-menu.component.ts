@@ -40,7 +40,7 @@ export class UsuarioMenuComponent implements OnInit {
 
   perfilUsuario() {
     this.visible = false;
-    this.router.navigate(['perfil']);
+    this.router.navigate(['usuario/perfil']);
   }
 
   logOut() {

@@ -21,12 +21,12 @@ nz-header {
 }
 
 nz-content {
-  padding: 0 50px;
+  // padding: 0 50px;
   margin-top: 64px;
 }
 
 .inner-content {
-  padding: 24px;
+  padding: 5px;
   min-height: 380px;
 }
 
@@ -49,5 +49,8 @@ fa-icon {
   }
   .inner-content {
     padding: 5px;
+  }
+  .ant-layout-header {
+    padding: 0 10px;
   }
 }

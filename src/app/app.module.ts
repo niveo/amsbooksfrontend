@@ -30,30 +30,41 @@ import { LivroModule } from './pages/livro/livro.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { TagModule } from './pages/tag/tag.module';
 import { CategoriaModule } from './pages/categoria/categoria.module';
-import { OverlayModule } from '@angular/cdk/overlay'; 
+import { OverlayModule } from '@angular/cdk/overlay';
 import { UsuarioPerfilLogarComponent } from './componentes';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
-import { UsuarioPerfilComponent } from './pages/usuario/perfil/usuario-perfil.component';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
-import { UsuarioPerfilImagemComponent } from './pages/usuario/perfil/imagem/usuario-perfil-imagem.component';
 
 import { IconsProviderUserModule } from './modules/icons-provider-user.module';
 import { VersaoSistemaDirective } from './directives/versao-sistema.directive';
 
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzCoreGlobalModule } from './modules/nzcore.global.module';
+
 registerLocaleData(pt);
 registerLocaleData(en);
 
+const NZ_MODULES = [
+  NzMenuModule,
+  NzButtonModule,
+  NzAvatarModule,
+  NzToolTipModule,
+  NzLayoutModule,
+  NzUploadModule,
+  NzSpaceModule,
+  NzInputModule,
+  NzSpinModule,
+  NzDrawerModule,
+];
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    UsuarioPerfilComponent,
-    UsuarioPerfilImagemComponent,
-    
-  ],
+  declarations: [AppComponent],
   imports: [
+    NzCoreGlobalModule,
+
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -66,24 +77,12 @@ registerLocaleData(en);
     UsuarioPerfilLogarComponent,
     VersaoSistemaDirective,
 
-    IconsProviderUserModule,
-
-    NzMenuModule,
-    NzButtonModule,
-    NzAvatarModule,
-    NzToolTipModule,
-    NzLayoutModule,
-    NzToolTipModule,
-    NzModalModule,
-    NzUploadModule,
-    NzSpaceModule,
-    NzInputModule,
-    NzSpinModule,
+    ...NZ_MODULES,
 
     LivroModule,
     TagModule,
     CategoriaModule,
- 
+
     OverlayModule,
   ],
   providers: [

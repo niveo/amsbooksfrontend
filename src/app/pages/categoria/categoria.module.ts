@@ -8,19 +8,27 @@ import { CategoriaRoutingModule } from './categoria-routing.module';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzFlexModule } from 'ng-zorro-antd/flex'; 
+import { NzButtonModule } from 'ng-zorro-antd/button'; 
+import { InputPesquisaComponent } from 'src/app/componentes';
 
 @NgModule({
   declarations: [CategoriaListaComponent],
   imports: [
     CommonModule,
     NzGridModule,
+    NzFlexModule,
     NzListModule,
     NzCardModule,
     NzBadgeModule,
+
+    NzButtonModule,
     NzPageHeaderModule,
     CategoriaRoutingModule,
     NgTemplateOutlet,
-    NzSkeletonModule
+    NzSkeletonModule,
+
+    InputPesquisaComponent,
   ],
 })
 export class CategoriaModule {}

@@ -1,10 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { MSG_ERRO_ATUALIZAR } from 'src/app/common';
 import { UsuarioPerfilStore } from 'src/app/stores/usuario-perfil.store';
 import { PerfilUsuario } from 'src/app/model';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-usuario-perfil-imagem-component',
@@ -19,14 +20,15 @@ import { PerfilUsuario } from 'src/app/model';
     `,
   ],
 })
-export class UsuarioPerfilImagemComponent implements OnInit {
+export class UsuarioPerfilImagemComponent {
   private readonly msg = inject(NzMessageService);
   private readonly _usuarioPerfilStore = inject(UsuarioPerfilStore);
 
   loading = false;
   usuarioPerfil$: Observable<PerfilUsuario>;
+  protected readonly destroyRef = inject(DestroyRef);
 
-  ngOnInit(): void {
+  constructor() {
     this.usuarioPerfil$ = this._usuarioPerfilStore.usuarioPerfil$;
   }
 
@@ -42,12 +44,15 @@ export class UsuarioPerfilImagemComponent implements OnInit {
       return false;
     }
 
-    this._usuarioPerfilStore.alterarImagem(file).subscribe({
-      error: (err) => {
-        console.error(err);
-        this.msg.error(MSG_ERRO_ATUALIZAR);
-      },
-    });
+    this._usuarioPerfilStore
+      .alterarImagem(file)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        error: (err) => {
+          console.error(err);
+          this.msg.error(MSG_ERRO_ATUALIZAR);
+        },
+      });
 
     return false;
   };

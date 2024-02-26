@@ -1,0 +1,66 @@
+<div class="fw fx-row">
+  <div>
+    <nz-spin spin [nzSpinning]="loading">
+      <ul nz-list nzBordered nzSize="small">
+        <nz-list-header>
+          <nz-input-group [nzSuffix]="suffixIconSearch">
+            <input
+              type="text"
+              nz-input
+              placeholder="Informe uma nova descrição"
+              [(ngModel)]="descricao"
+              (keydown.enter)="salvarDescricao()"
+              [maxlength]="maxlengthDescricao"
+              [disabled]="loading"
+              #input
+            />
+          </nz-input-group>
+          <ng-template #suffixIconSearch>
+            <button
+              nz-button
+              nzType="dashed"
+              nzShape="circle"
+              nz-tooltip="Salvar"
+              (click)="salvarDescricao()"
+              [nzLoading]="loading"
+            >
+              <span nz-icon nzType="save"></span>
+            </button>
+          </ng-template>
+        </nz-list-header>
+        @for(item of data$ | async; track item.id; let idx = $index){
+        <li nz-list-item nzNoFlex>
+          <ul nz-list-item-actions>
+            <nz-list-item-action>
+              <a
+                nz-button
+                nzType="link"
+                nz-tooltip="Editar"
+                (click)="editarDescricao(item)"
+              >
+                <span nz-icon nzType="edit" nzTheme="outline"></span
+              ></a>
+            </nz-list-item-action>
+            <nz-list-item-action>
+              <a
+                nz-button
+                nzType="link"
+                nzDanger
+                nz-tooltip="Remover"
+                nz-popconfirm
+                nzPopconfirmTitle="Deseja remover esse registro?"
+                nzPopconfirmPlacement="bottom"
+                (nzOnConfirm)="removerDescricao(item, idx)"
+              >
+                <span nz-icon nzType="delete" nzTheme="outline"></span
+              ></a>
+            </nz-list-item-action>
+          </ul>
+          {{ item.descricao }} @if(item.vinculados){ ({{ item.vinculados }}) }
+        </li>
+        }
+      </ul>
+    </nz-spin>
+  </div>
+  <div class="fx-flex"></div>
+</div>

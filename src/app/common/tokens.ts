@@ -7,7 +7,15 @@ export const TOKEN_CARREGAR_IMAGEM_REMOTA = new InjectionToken<boolean>(
   'Token carregar imagem remota'
 );
 
-export const TOKEN_STORAGE_S3 = new InjectionToken<{
+export const TOKEN_AWS_AUTH = new InjectionToken<{ userPoolClientId?: string }>(
+  'Token aws auth',
+  {
+    providedIn: 'root',
+    factory: () => Amplify.getConfig().Auth.Cognito,
+  }
+);
+
+export const TOKEN_AWS_STORAGE_S3 = new InjectionToken<{
   bucket?: string;
   region?: string;
 }>('Token storage s3', {

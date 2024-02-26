@@ -30,9 +30,6 @@ I18n.putVocabulariesForLanguage('pt', {
   styleUrl: './autenticacao-amplify.component.scss',
 })
 export class AutenticacaoAmplifyComponent {
-  private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
-
   @HostListener('document:keydown.escape', ['$event']) onKeydownHandler() {
     this.back();
   }

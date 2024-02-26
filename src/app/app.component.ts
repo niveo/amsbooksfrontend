@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
   constructor() {
     cognitoUserPoolsTokenProvider.setKeyValueStorage(sessionStorage);
-
+ 
     Hub.listen('auth', ({ payload }) => {
       switch (payload.event) {
         case 'signedIn':

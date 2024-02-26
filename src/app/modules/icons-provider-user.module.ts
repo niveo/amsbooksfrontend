@@ -17,6 +17,17 @@ import {
   HeartTwoTone,
   HeartOutline,
   DeleteOutline,
+  CopyOutline,
+  MenuFoldOutline,
+  ClockCircleOutline,
+  CheckOutline,
+  DeleteFill,
+  EditOutline,
+  BookFill,
+  SettingOutline,
+  MenuUnfoldOutline,
+  CloseCircleFill,
+  SearchOutline,
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
@@ -35,6 +46,17 @@ const icons = [
   HeartTwoTone,
   HeartOutline,
   DeleteOutline,
+  CopyOutline,
+  MenuFoldOutline,
+  ClockCircleOutline,
+  CheckOutline,
+  DeleteFill,
+  EditOutline,
+  BookFill,
+  SettingOutline,
+  MenuUnfoldOutline,
+  CloseCircleFill,
+  SearchOutline,
 ];
 
 @NgModule({

@@ -1,0 +1,35 @@
+<div class="fx-row gap-5 wf" style="flex-wrap: wrap">
+  <div>
+    <app-usuario-perfil-imagem-component />
+  </div>
+  <nz-spin [nzSpinning]="loading$ | async" class="wf">
+    <form nz-form nzLayout="vertical" [formGroup]="validateForm">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired>E-mail</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-input-group>
+            <input nz-input formControlName="email" type="email" readonly />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired>Nome</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+          <nz-input-group>
+            <input nz-input formControlName="name" type="text" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <button
+        nz-button
+        nzType="primary"
+        (click)="salvar()"
+        [disabled]="!validateForm.valid"
+      >
+        Salvar
+      </button>
+    </form>
+  </nz-spin>
+</div>
