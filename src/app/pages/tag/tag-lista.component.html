@@ -1,5 +1,5 @@
-@if(loading){
-<nz-skeleton [nzLoading]="loading"></nz-skeleton>
+@if(loading$ | async; as loading){
+<nz-skeleton [nzLoading]="loading" />
 } @else {<app-input-pesquisa-component
   (eventSearch)="onSearchUpdated($event)"
 />}

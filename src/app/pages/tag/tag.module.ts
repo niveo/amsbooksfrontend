@@ -1,4 +1,4 @@
-import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, CommonModule, NgTemplateOutlet } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -16,7 +16,7 @@ import { InputPesquisaComponent } from 'src/app/componentes';
     CommonModule,
     NzGridModule,
     NzListModule,
-    NzCardModule,
+    NzCardModule, 
     NzBadgeModule,
     TagRoutingModule,
     NgTemplateOutlet,

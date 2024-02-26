@@ -1,4 +1,4 @@
-@if(loading){
+@if(loading$ | async; as loading){
 <nz-skeleton [nzLoading]="loading"></nz-skeleton>
 } @else {
 <app-input-pesquisa-component (eventSearch)="onSearchUpdated($event)" />

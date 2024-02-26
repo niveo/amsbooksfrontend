@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   BehaviorSubject,
   Observable,
   combineLatest,
   debounce,
+  delay,
   finalize,
   iif,
   map,
@@ -15,25 +16,29 @@ import {
 import { TagService } from '../../services';
 import { ROTA_LIVROS } from 'src/app/common/constantes';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BaseStore } from 'src/app/stores/base-store.store';
 
 @Component({
   selector: 'app-tag-tag-component',
   templateUrl: './tag-lista.component.html',
   styleUrls: ['./tag-lista.component.scss'],
 })
-export class TagListaComponent {
+export class TagListaComponent extends BaseStore {
   private readonly router = inject(Router);
   private readonly tagService = inject(TagService);
-  loading = true;
   registros$!: Observable<any[]>;
   searchQuery$ = new BehaviorSubject<string>('');
 
   constructor() {
+    super();
+    this.iniciarLoading();
     this.registros$ = combineLatest([
       this.searchQuery$.pipe(debounce(() => timer(1000))),
-      of(this.tagService.getAll()).pipe(finalize(() => (this.loading = false))),
+      of(this.tagService.getAll())
+        .pipe(delay(300))
+        .pipe(finalize(() => this.finalizarLoading())),
     ])
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .pipe(
         mergeMap(([searchQuery, data]) => {
           return iif(

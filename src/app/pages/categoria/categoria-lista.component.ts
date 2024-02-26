@@ -5,6 +5,7 @@ import {
   Observable,
   combineLatest,
   debounce,
+  delay,
   filter,
   finalize,
   from,
@@ -17,31 +18,31 @@ import {
 import { CategoriaService } from '../../services';
 import { ROTA_LIVROS } from 'src/app/common/constantes';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BaseStore } from 'src/app/stores/base-store.store';
 
 @Component({
   selector: 'app-categoria-lista-component',
   templateUrl: './categoria-lista.component.html',
   styleUrls: ['./categoria-lista.component.scss'],
 })
-export class CategoriaListaComponent {
+export class CategoriaListaComponent extends BaseStore {
   private readonly router = inject(Router);
   private readonly categoriaService = inject(CategoriaService);
-  loading = true;
   registros$!: Observable<any[]>;
   searchQuery$ = new BehaviorSubject<string>('');
 
   constructor() {
+    super();
+    this.iniciarLoading();
     this.registros$ = combineLatest([
       this.searchQuery$.pipe(debounce(() => timer(1000))),
-      of(this.categoriaService.getAll()).pipe(
-        finalize(() => (this.loading = false))
-      ),
+      of(this.categoriaService.getAll())
+        .pipe(delay(300))
+        .pipe(finalize(() => this.finalizarLoading())),
     ])
-      .pipe(takeUntilDestroyed())
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .pipe(
         mergeMap(([searchQuery, data]) => {
-          console.log(searchQuery);
-
           return iif(
             () => searchQuery === '',
             data,
