@@ -12,11 +12,11 @@
 
 <ng-template #drawerTemplate let-data let-drawerRef="drawerRef">
   <br />
-
   <nz-segmented
     [(ngModel)]="situacaoLeitura"
     [nzOptions]="options"
     nzSize="large"
+    (nzValueChange)="change($event)"
   ></nz-segmented>
 
   <br />

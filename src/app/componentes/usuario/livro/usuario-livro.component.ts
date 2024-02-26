@@ -19,7 +19,11 @@ import { FormsModule } from '@angular/forms';
 import { UsuarioLivroColecaoTagComponent } from './usuario-livro-colecao-tag.component';
 import { LivroPerfiloUsuarioService } from 'src/app/services';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { MSG_ERRO_ATUALIZAR, MSG_ERRO_CARREGAR } from 'src/app/common';
+import {
+  MSG_ERRO_ATUALIZAR,
+  MSG_ERRO_CARREGAR,
+  MSG_ERRO_PROCESSAR,
+} from 'src/app/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NzSegmentedModule } from 'ng-zorro-antd/segmented';
 
@@ -47,8 +51,9 @@ export class LivroUsuarioComponent {
   situacaoLeitura: number;
 
   options = [
-    { label: 'Para Ler', value: 0, icon: 'clock-circle' },
-    { label: 'Lido', value: 1, icon: 'check' },
+    { label: '...', value: 0 },
+    { label: 'Para Ler', value: 1, icon: 'clock-circle' },
+    { label: 'Lido', value: 2, icon: 'check' },
   ];
 
   @ViewChild('drawerTemplate', { static: false }) drawerTemplate?: TemplateRef<{
@@ -89,16 +94,25 @@ export class LivroUsuarioComponent {
       .pipe(this.pipeTapError(MSG_ERRO_CARREGAR))
       .subscribe({
         next: (value: any) => {
-          this.situacaoLeitura = value.situacaoLeitura;
+          this.situacaoLeitura = value?.situacaoLeitura;
+        },
+        error: (erro) => {
+          console.error(erro);
+          this.nzMessageService.error(MSG_ERRO_CARREGAR);
         },
       });
   }
 
-  change() {
+  change(index: number) {
     this.livroPerfiloUsuarioService
-      .upsert(this.livroId, this.situacaoLeitura)
+      .upsert(this.livroId, this.options[index].value)
       .pipe(this.pipeTapError(MSG_ERRO_ATUALIZAR))
-      .subscribe();
+      .subscribe({
+        error: (erro) => {
+          console.error(erro);
+          this.nzMessageService.error(MSG_ERRO_PROCESSAR);
+        },
+      });
   }
 
   abrirMenu() {
