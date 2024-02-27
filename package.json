@@ -1,12 +1,12 @@
 {
   "name": "amsbooksfrontend",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "prebuild.prod": "node git.version.js",
+    "prebuild.prod": "node git.version.js && node amplify.js",
     "build:prod": "yarn prebuild.prod && ng build --configuration production",
     "build:dev": "yarn prebuild.prod && ng build --configuration development",
     "test": "ng test",
