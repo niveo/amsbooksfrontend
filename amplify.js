@@ -1,2 +1,5 @@
 const { writeFileSync } = require('fs');
-writeFileSync('./dist/amplifyconfiguration.json', process.env[ 'AMPLIFY_CONFIGURATION' ]);
+console.log('Iniciado AMPLIFY_CONFIGURATION')
+console.log(process.env[ 'AMPLIFY_CONFIGURATION' ])
+writeFileSync('./dist/amplifyconfiguration.json', process.env[ 'AMPLIFY_CONFIGURATION']);
+console.log('Finalizado AMPLIFY_CONFIGURATION')
