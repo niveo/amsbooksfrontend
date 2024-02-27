@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "prebuild.prod": "node git.version.js",
-    "build:prod": "yarn prebuild.prod && ng build --configuration production && node amplify.js",
+    "build:prod": "yarn prebuild.prod && ng build --configuration production && ls -la && node amplify.js && ls -la dist",
     "build:dev": "yarn prebuild.prod && ng build --configuration development",
     "test": "ng test",
     "i18n:extract": "ng extract-i18n",
