@@ -1,7 +1,3 @@
-import { Amplify } from 'aws-amplify';
-import config from '../amplifyconfiguration.json';
-Amplify.configure(config);
-
 import { environment } from './../environments/environment';
 import { LOCALE_ID, NgModule, inject } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -36,13 +32,10 @@ import { TagModule } from './pages/tag/tag.module';
 import { CategoriaModule } from './pages/categoria/categoria.module';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { UsuarioPerfilLogarComponent } from './componentes';
-import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
-
-import { IconsProviderUserModule } from './modules/icons-provider-user.module';
 import { VersaoSistemaDirective } from './directives/versao-sistema.directive';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
