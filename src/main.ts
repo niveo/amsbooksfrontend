@@ -6,6 +6,9 @@ import { AppModule } from './app/app.module';
 
 import { Amplify } from 'aws-amplify';
 import { environment } from './environments/environment';
+
+console.log('Produção', environment.production);
+
 if (environment.production) {
   Amplify.configure(JSON.parse(process.env['AMPLIFY_CONFIGURATION']));
 } else {

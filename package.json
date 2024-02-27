@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "prebuild.prod": "node git.version.js && node amplify.js",
+    "prebuild.prod": "node git.version.js",
     "build:prod": "yarn prebuild.prod && ng build --configuration production",
     "build:dev": "yarn prebuild.prod && ng build --configuration development",
     "test": "ng test",
