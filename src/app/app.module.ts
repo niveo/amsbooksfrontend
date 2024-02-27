@@ -1,3 +1,7 @@
+import { Amplify } from 'aws-amplify';
+import config from '../amplifyconfiguration.json';
+Amplify.configure(config);
+
 import { environment } from './../environments/environment';
 import { LOCALE_ID, NgModule, inject } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
